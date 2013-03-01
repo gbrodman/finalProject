@@ -1,6 +1,8 @@
-import java.security.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
+
 import database.MyDB;
-import java.sql.*;
 
 
 public class Util_Login {
@@ -53,4 +55,6 @@ public class Util_Login {
 		MyDB.updateDatabase(update);
 		return true;
 	}
+	
+
 }
