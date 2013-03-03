@@ -1,7 +1,11 @@
 package objects;
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+
+import database.AchievementUtils;
+import database.QuizUtils;
 
 public class User {
 
@@ -16,17 +20,22 @@ public class User {
 	private int privacySetting;
 	
 	public User() {
-		this("", new ArrayList<Message>(), new ArrayList<User>(), new ArrayList<Quiz>(), new ArrayList<Achievement>(), false, 0);
+		this(null);
 	}
 
-	public User(String name, List<Message> inbox, List<User> friends, List<Quiz> ownedQuizzes, List<Achievement> achievements, boolean isAdmin, int privacySetting) {
-		this.name = name;
-		this.inbox = inbox;
-		this.friends = friends;
-		this.ownedQuizzes = ownedQuizzes;
-		this.achievements = achievements;
-		this.privacySetting = privacySetting;
-		this.isAdmin = isAdmin;
+	public User(ResultSet rs) {
+		if (rs != null) {
+			try {
+				name = rs.getString("username");
+				privacySetting = rs.getInt("privacySetting");
+				isAdmin = rs.getInt("isAdmin") == 1;
+				String achievementIDs = rs.getString("achievementIDs");
+				achievements = AchievementUtils.getAchievements(achievementIDs);
+				ownedQuizzes = QuizUtils.getQuizzesByUser(name);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public String getName() {

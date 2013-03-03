@@ -1,8 +1,8 @@
+package database;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 
-import database.MyDB;
 
 
 public class Util_Login {

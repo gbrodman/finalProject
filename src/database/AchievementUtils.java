@@ -1,3 +1,4 @@
+package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -5,7 +6,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import objects.Achievement;
-import database.MyDB;
 
 
 public class AchievementUtils {
@@ -28,9 +28,8 @@ public class AchievementUtils {
 		String query = "SELECT * FROM achievements WHERE achievementID=\"" + achievementID + "\";";
 		ResultSet result = MyDB.queryDatabase(query);
 		try {
-			String name = result.getString("name");
-			String text = result.getString("text");
-			return new Achievement(achievementID, name, text);
+			result.next();
+			return new Achievement(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return new Achievement();
