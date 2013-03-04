@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 
 
 
-public class Util_Login {
+public class LoginUtils {
 	
 	public static String encrypt(String password) {
 		MessageDigest md;

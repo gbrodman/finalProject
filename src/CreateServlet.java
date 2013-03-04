@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.Util_Login;
+import database.LoginUtils;
 
 
 
@@ -43,7 +43,7 @@ public class CreateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if (Util_Login.addLogin(username, password)) {
+		if (LoginUtils.addLogin(username, password)) {
 			// Take to profile
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
