@@ -19,5 +19,9 @@ public abstract class Question {
 	public int getQuizID() {
 		return quizID;
 	}
+	
+	protected void setQuizID(int quizID) {
+		this.quizID = quizID;
+	}
 
 }

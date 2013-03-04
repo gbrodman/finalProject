@@ -34,7 +34,7 @@ public class QuizUtils {
 	}
 	
 	public static int getNextId() {
-		String query = "SELECT * FROM quizzes ORDER BY id DESC;";
+		String query = "SELECT id FROM quizzes ORDER BY id DESC;";
 		ResultSet rs = MyDB.queryDatabase(query);
 		if (MyDB.resultIsEmpty(rs)) return 0;
 		try {
