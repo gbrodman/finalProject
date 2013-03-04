@@ -5,11 +5,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import database.AchievementUtils;
+import database.MessageUtils;
 import database.QuizUtils;
 
 public class User {
 
 	private String name;
+	private String photoURL;
 	private List<Message> inbox;
 	private List<User> friends;
 	private List<Quiz> ownedQuizzes;
@@ -26,12 +28,15 @@ public class User {
 	public User(ResultSet rs) {
 		if (rs != null) {
 			try {
+				friends = null;
 				name = rs.getString("username");
+				photoURL = rs.getString("photoURL");
 				privacySetting = rs.getInt("privacySetting");
 				isAdmin = rs.getInt("isAdmin") == 1;
 				String achievementIDs = rs.getString("achievementIDs");
 				achievements = AchievementUtils.getAchievements(achievementIDs);
 				ownedQuizzes = QuizUtils.getQuizzesByUser(name);
+				inbox = MessageUtils.getMessagesByUserTo(name);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -64,6 +69,10 @@ public class User {
 
 	public int getPrivacyLevel() {
 		return privacySetting;
+	}
+	
+	public String getPhotoURL() {
+		return photoURL;
 	}
 	
 
