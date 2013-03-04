@@ -51,7 +51,7 @@ public class Util_Login {
 		if (!MyDB.resultIsEmpty(result)) return false;
 		
 		String hashed_password = encrypt(password);
-		String update = "INSERT INTO users VALUES(\"" + username + "\",\"" + hashed_password + "\",\"\",0, 0)";
+		String update = "INSERT INTO users VALUES(\"" + username + "\",\"" + hashed_password + "\",\"\",0, 0, \"http://www.bottomlinebusinessinsights.com/uploads/image/Facebook%20Blank%20Photo.jpg\")";
 		MyDB.updateDatabase(update);
 		return true;
 	}
