@@ -39,7 +39,7 @@ public class User {
 				photoURL = rs.getString("photoURL");
 				friends = FriendUtils.getFriends(name);
 				friendRequestsSent = FriendUtils.getSentRequests(name);
-				friendRequestsRecieved = FriendUtils.getRecievedRequests(name);
+				friendRequestsRecieved = FriendUtils.getReceivedRequests(name);
 				String achievementIDs = rs.getString("achievementIDs");
 				achievements = AchievementUtils.getAchievements(achievementIDs);
 				ownedQuizzes = QuizUtils.getQuizzesByUser(name);

@@ -37,7 +37,7 @@ public class FriendUtils {
 		return requests;
 	}
 
-	public static List<String> getRecievedRequests(String username) {
+	public static List<String> getReceivedRequests(String username) {
 		List<String> requests = new ArrayList<String>();
 		ResultSet rs = MyDB.queryDatabase("SELECT sender FROM friendsPending WHERE recipient = \"" + username + "\";");
 		try {

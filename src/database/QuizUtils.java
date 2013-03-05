@@ -86,6 +86,21 @@ public class QuizUtils {
 		}
 		return result;
 	}
+	
+	public static List<Quiz> getAllQuizzes() {
+		List<Quiz> result = new ArrayList<Quiz>();
+		String query = "SELECT * FROM quizzes;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		try {
+			while (rs.next()) {
+				result.add(new Quiz(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 
 	public QuizUtils() {
 		// TODO Auto-generated constructor stub

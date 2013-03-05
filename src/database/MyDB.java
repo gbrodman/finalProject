@@ -81,4 +81,14 @@ public class MyDB {
 		}
 	}
 	
+	public static int numberEntries(ResultSet result) {
+		try {
+			result.last();
+			return result.getRow();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 }
