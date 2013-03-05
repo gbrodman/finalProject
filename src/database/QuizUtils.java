@@ -2,7 +2,9 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import objects.Quiz;
 
@@ -45,6 +47,44 @@ public class QuizUtils {
 			e.printStackTrace();
 			return -1;
 		}
+	}
+	
+	public static List<Quiz> getQuizzesByTag(String tag) {
+		List<Quiz> result = new ArrayList<Quiz>();
+		String query = "SELECT * FROM quizzes WHERE tags LIKE '%" + tag + "%';";
+		ResultSet rs = MyDB.queryDatabase(query);
+		try {
+			while (rs.next()) {
+				Quiz quiz = new Quiz(rs);
+				result.add(quiz);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static Map<String, List<Quiz>> getQuizzesByCategory() {
+		Map<String, List<Quiz>> result = new HashMap<String, List<Quiz>>();
+		String query = "SELECT * FROM quizzes ORDER BY category;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		String category = "";
+		List<Quiz> currentList = null; // will be initialized before we do anything with it
+		try {
+			while (rs.next()) {
+				Quiz quiz = new Quiz(rs);
+				if (category.isEmpty() || !category.equals(quiz.getCategory())) {
+					if (!category.isEmpty()) {
+						result.put(category, currentList);
+					}
+					currentList = new ArrayList<Quiz>();
+				}
+				currentList.add(quiz);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public QuizUtils() {
