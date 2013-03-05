@@ -55,5 +55,12 @@ public class FriendUtils {
 		MyDB.updateDatabase("INSERT INTO friendsPending VALUES (\"" + sender + "\",\"" + reciever + "\");");
 	}
 
+	public static void acceptFriendRequest(String sender, String recipient) {
+		String remove = "DELETE FROM friendsPending WHERE sender=\"" + sender
+				+ "\" AND recipient=\"" + recipient + "\";";
+		String add = "INSERT INTO friends VALUES(\"" + sender + "\", \"" + recipient + "\");";
+		MyDB.updateDatabase(remove);
+		MyDB.updateDatabase(add);
+	}
 
 }

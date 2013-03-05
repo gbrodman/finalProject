@@ -24,6 +24,24 @@ public class UserUtils {
 		return new User(result);
 	}
 	
+	public void makeAdmin(User toBeAdmin, User authorizer) {
+		if (authorizer.isAdmin()) {
+			toBeAdmin.setAdmin(true);
+		}
+	}
+	
+	public static int getNumberTotalUsers() {
+		String query = "SELECT username FROM users;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		try {
+			rs.last();
+			return rs.getRow();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 
 
 	public UserUtils() {
