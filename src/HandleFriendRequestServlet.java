@@ -1,32 +1,29 @@
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.*;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.UserUtils;
-import database.Util_Login;
+import objects.*;
 
-
+import database.*;
 
 /**
- * Servlet implementation class CreateServlet
+ * Servlet implementation class HandleFriendRequestServlet
  */
-@WebServlet("/CreateServlet")
-public class CreateServlet extends HttpServlet {
+@WebServlet("/HandleFriendRequestServlet")
+public class HandleFriendRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateServlet() {
+    public HandleFriendRequestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,16 +39,13 @@ public class CreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		if (Util_Login.addLogin(username, password)) {
-			request.getSession().setAttribute("user", UserUtils.getUser(username));
-			RequestDispatcher dispatch = request.getRequestDispatcher("Homepage.jsp");
-			dispatch.forward(request, response);
-		} else {
-			// Implement this
+		String friend_response = request.getParameter("status");
+		Message message = (Message)request.getSession().getAttribute("currentMessage");
+		if (friend_response.equals("accept")) {
+			FriendUtils.addFriend(message.getUserFrom(), message.getUserTo());
 		}
+		FriendUtils.removeFromFriendsPending(message.getUserFrom(), message.getUserTo());
+		MessageUtils.removeMessage(message);
 	}
-	
 
 }

@@ -7,8 +7,8 @@ import database.UserUtils;
 
 public class Message {
 	
-	private User userTo;
-	private User userFrom;
+	private String userTo; //changed from User type
+	private String userFrom; //changed from User type
 	private boolean isViewed;
 	private boolean isChallenge;
 	private boolean isFriendRequest;
@@ -17,12 +17,15 @@ public class Message {
 	private int quizID;
 	private int bestScore;
 	private String note;
+	private int messageID;
 
 	public Message(ResultSet rs) {
 		if (rs != null) {
 			try {
-				userTo = UserUtils.getUser(rs.getString("userTo"));
-				userFrom = UserUtils.getUser(rs.getString("userFrom"));
+				//userTo = UserUtils.getUser(rs.getString("userTo"));
+				//userFrom = UserUtils.getUser(rs.getString("userFrom"));
+				userTo = rs.getString("userTo");
+				userFrom = rs.getString("userFrom");
 				isViewed = rs.getInt("isViewed") == 1;
 				isChallenge = rs.getInt("isChallenge") == 1;
 				isFriendRequest = rs.getInt("isFriendRequest") == 1;
@@ -30,20 +33,21 @@ public class Message {
 				quizID = rs.getInt("quizID");
 				bestScore = rs.getInt("bestScore");
 				note = rs.getString("note");
+				messageID = rs.getInt("messageID");
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
-	public User getUserTo() {
+	
+	public String getUserTo() {
 		return userTo;
 	}
-
-	public User getUserFrom() {
+	
+	public String getUserFrom() {
 		return userFrom;
 	}
-
 	public boolean isViewed() {
 		return isViewed;
 	}
@@ -70,6 +74,10 @@ public class Message {
 
 	public String getNote() {
 		return note;
+	}
+	
+	public int getMessageID() {
+		return messageID;
 	}
 
 }

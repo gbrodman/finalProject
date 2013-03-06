@@ -54,5 +54,12 @@ public class FriendUtils {
 		MyDB.updateDatabase("INSERT INTO friendsPending VALUES (\"" + sender + "\",\"" + reciever + "\");");
 	}
 
+	public static void addFriend(String user1, String user2) {
+		MyDB.updateDatabase("INSERT INTO friends VALUES (\"" + user1 + "\",\"" + user2 + "\");");		
+	}
 
+	public static void removeFromFriendsPending(String user1, String user2) {
+		MyDB.updateDatabase("REMOVE FROM friendsPending WHERE sender = \"" + user1 + "\" AND recipient=\"" + user2 +"\";");
+	}
+	
 }

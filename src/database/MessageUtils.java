@@ -23,6 +23,18 @@ public class MessageUtils {
 		}
 		return result;
 	}
+	
+	public static void markAsRead(Message message) { //should be messageID field in case identical messages are sent?
+		if (message.isViewed()) return;
+		String update= "UPDATE messages SET isViewed=1 WHERE messageID = " + message.getMessageID() + ";";
+		MyDB.updateDatabase(update);
+	}
+	
+	public static void removeMessage(Message message) {
+		String update = "DELETE FROM messages WHERE messageID = " + message.getMessageID() + ";";
+		MyDB.updateDatabase(update);
+	}
+	
 	public MessageUtils() {
 	}
 
