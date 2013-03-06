@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import objects.Message;
-import objects.User;
 
 public class MessageUtils {
 
