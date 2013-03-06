@@ -23,6 +23,14 @@ if (note.length() != 0) out.println(note + "<br>");
 out.println(message.getUserFrom() + "'s High Score: " + message.getBestScore());
 out.println("TODO: quizid: " + message.getQuizID());
 
+out.println("<form name = 'form3' action=\"DeleteMessageServlet\" method=\"post\">");
+out.println("<input type=\"submit\" value=\"Delete Message\">");
+out.println("</form>");
+
+out.println("<form name = 'form2' action=\"Messages.jsp\">");
+out.println("<input type=\"submit\" value=\"Go back to messages.\">");
+out.println("</form");
+
 out.println("</body>");
 
 %>
