@@ -2,6 +2,7 @@ package objects;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,11 +43,16 @@ public class Quiz {
 			}
 		}
 	}
+	
+	// defaults, only really need title, instructions, and owner
+	public Quiz(String title, String instructions, User owner) {
+		this(title, instructions, owner, false, false, false, "No Category", new ArrayList<String>());
+	}
 
 	// For when a user creates a new quiz
-	public Quiz(String title, String instructions, boolean isRandomPages,
+	public Quiz(String title, String instructions, User owner, boolean isRandomPages,
 			boolean isInstantCorrection, boolean canPractice, String category,
-			List<String> tags, User owner, Date timeCreated, int numPlays) {
+			List<String> tags) {
 		this.id = QuizUtils.getNextId();
 		this.title = title;
 		this.instructions = instructions;
@@ -56,7 +62,7 @@ public class Quiz {
 		this.category = category;
 		this.tags = tags;
 		this.owner = owner;
-		this.timeCreated = timeCreated;
+		this.timeCreated = new Date();
 	}
 
 	public int getId() {

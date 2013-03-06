@@ -17,11 +17,17 @@ public class UserUtils {
 		ResultSet result = MyDB.queryDatabase(query);
 		try {
 			result.next();
+			return new User(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		return new User(result);
+	}
+	
+	public static int getNumberTotalUsers() {
+		String query = "SELECT username FROM users;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		return MyDB.numberEntries(rs);
 	}
 	
 

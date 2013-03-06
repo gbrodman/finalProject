@@ -19,6 +19,20 @@ public class Message {
 	private String note;
 	private int messageID;
 
+	
+	// For initializing new messages from the UI
+	public Message(String userTo, String userFrom, boolean isChallenge, boolean isFriendRequest, boolean isNote, int quizID, int bestScore, String note) {
+		this.userTo = userTo;
+		this.userFrom = userFrom;
+		this.isViewed = false;
+		this.isChallenge = isChallenge;
+		this.isFriendRequest = isFriendRequest;
+		this.isNote = isNote;
+		this.quizID = quizID;
+		this.bestScore = bestScore;
+		this.note = note;
+	}
+
 	public Message(ResultSet rs) {
 		if (rs != null) {
 			try {

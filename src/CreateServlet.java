@@ -10,9 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import database.UserUtils;
-import database.Util_Login;
+import database.*;
 
 
 
@@ -44,7 +42,7 @@ public class CreateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if (Util_Login.addLogin(username, password)) {
+		if (LoginUtils.addLogin(username, password)) {
 			request.getSession().setAttribute("user", UserUtils.getUser(username));
 			RequestDispatcher dispatch = request.getRequestDispatcher("Homepage.jsp");
 			dispatch.forward(request, response);

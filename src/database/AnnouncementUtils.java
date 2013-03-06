@@ -9,7 +9,7 @@ import objects.Announcement;
 
 public class AnnouncementUtils {
 
-	public List<Announcement> getAnnouncements() {
+	public static List<Announcement> getAnnouncements() {
 		List<Announcement> result = new ArrayList<Announcement>();
 		String query = "SELECT * FROM announcements;";
 		ResultSet rs = MyDB.queryDatabase(query);
@@ -22,6 +22,12 @@ public class AnnouncementUtils {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public static void addAnouncement(String text, String creator) {
+		String update = "INSERT INTO announcements VALUES(\"" + text + "\",\""
+				+ creator + "\");";
+		MyDB.updateDatabase(update);
 	}
 
 	public AnnouncementUtils() {

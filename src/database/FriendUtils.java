@@ -1,8 +1,9 @@
 package database;
 
-import java.util.*;
-import objects.*;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FriendUtils {
 
@@ -36,7 +37,7 @@ public class FriendUtils {
 		return requests;
 	}
 
-	public static List<String> getRecievedRequests(String username) {
+	public static List<String> getReceivedRequests(String username) {
 		List<String> requests = new ArrayList<String>();
 		ResultSet rs = MyDB.queryDatabase("SELECT sender FROM friendsPending WHERE recipient = \"" + username + "\";");
 		try {
@@ -57,7 +58,7 @@ public class FriendUtils {
 	public static void addFriend(String user1, String user2) {
 		MyDB.updateDatabase("INSERT INTO friends VALUES (\"" + user1 + "\",\"" + user2 + "\");");		
 	}
-
+	
 	public static void removeFromFriendsPending(String user1, String user2) {
 		MyDB.updateDatabase("REMOVE FROM friendsPending WHERE sender = \"" + user1 + "\" AND recipient=\"" + user2 +"\";");
 	}
