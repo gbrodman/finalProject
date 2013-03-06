@@ -37,10 +37,10 @@ public class User {
 				privacySetting = rs.getInt("privacySetting");
 				isAdmin = rs.getInt("isAdmin") == 1;
 				photoURL = rs.getString("photoURL");
+				String achievementIDs = rs.getString("achievementIDs");
 				friends = FriendUtils.getFriends(name);
 				friendRequestsSent = FriendUtils.getSentRequests(name);
 				friendRequestsRecieved = FriendUtils.getReceivedRequests(name);
-				String achievementIDs = rs.getString("achievementIDs");
 				achievements = AchievementUtils.getAchievements(achievementIDs);
 				ownedQuizzes = QuizUtils.getQuizzesByUser(name);
 				inbox = MessageUtils.getMessagesByUserTo(name);
