@@ -9,7 +9,6 @@ import java.util.TreeMap;
 
 import objects.Quiz;
 import objects.QuizResult;
-import objects.User;
 
 public class QuizResultUtils {
 	
@@ -19,18 +18,22 @@ public class QuizResultUtils {
 		return MyDB.numberEntries(rs);
 	}
 
-	public static int numQuizzesTaken(User user) {
+	public static int numQuizzesTaken(String user) {
 		String query = "SELECT score FROM history WHERE user=\""
-				+ user.getName() + "\";";
+				+ user + "\";";
 		ResultSet rs = MyDB.queryDatabase(query);
 		return MyDB.numberEntries(rs);
 	}
 
-	public static double getAverageScore(User user) {
+	public static double getAverageScore(String user) {
+		String query = "SELECT score FROM history WHERE user=\""
+				+ user + "\";";
+		return getAverage(query);
+	}
+	
+	private static double getAverage(String query) {
 		int totalScore = 0;
 		int numQuizzes = 0;
-		String query = "SELECT score FROM history WHERE user=\""
-				+ user.getName() + "\";";
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			while (rs.next()) {
@@ -59,9 +62,37 @@ public class QuizResultUtils {
 		return 0;
 	}
 	
-	public static List<QuizResult> getRecentPerformances(User user) {
+	public static List<QuizResult> getRecentPerformances(int quizID, int numResults) {
+		String query = "SELECT * FROM history WHERE id=" + quizID + " AND TIMESTAMPDIFF(MINUTE, timeTaken, CURRENT_TIMESTAMP()) < 15 ORDER BY timeTaken DESC;";
+		return getNumberOfQuizzes(quizID, numResults, query);
+	}
+	
+	public static List<QuizResult> getTopPerformances(int quizID, int numResults) {
+		String query = "SELECT * FROM history WHERE id=" + quizID + " ORDER BY score DESC;";
+		return getNumberOfQuizzes(quizID, numResults, query);
+	}
+	
+	public static List<QuizResult> getTopRecentPerformances(int quizID, int numResults) {
+		String query = "SELECT * FROM history WHERE id=" + quizID + " AND TIMESTAMPDIFF(MINUTE, timeTaken, CURRENT_TIMESTAMP()) < 15 ORDER BY score DESC;";
+		return getNumberOfQuizzes(quizID, numResults, query);
+	}
+	
+	private static List<QuizResult> getNumberOfQuizzes(int quizID, int numResults, String query) {
 		List<QuizResult> toReturn = new ArrayList<QuizResult>();
-		String query = "SELECT * FROM history WHERE user=\"" + user.getName() + "\" ORDER BY timeTaken DESC;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		try { 
+			for (int i = 0; i < numResults && rs.next(); i++) {
+				toReturn.add(new QuizResult(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return toReturn;
+	}
+	
+	public static List<QuizResult> getRecentPerformances(String user) {
+		List<QuizResult> toReturn = new ArrayList<QuizResult>();
+		String query = "SELECT * FROM history WHERE user=\"" + user + "\" ORDER BY timeTaken DESC;";
 		ResultSet rs = MyDB.queryDatabase(query);
 		try { 
 			for (int i = 0; i < 5 && rs.next(); i++) {
@@ -100,8 +131,11 @@ public class QuizResultUtils {
 		}
 		return result;
 	}
-
-	// TODO: figure out what we'll need to do with this.
+	
+	public static double getAverageScoreOnQuiz(int quizID) {
+		String query = "SELECT * FROM hisotyr WHERE quizID=" + quizID + ";";
+		return getAverage(query);
+	}
 
 	public QuizResultUtils() {
 	}

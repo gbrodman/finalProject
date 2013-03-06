@@ -5,8 +5,8 @@ import objects.User;
 
 public class AdminUtils {
 	
-	public static void removeUserAccount(User user) {
-		String update = "DELETE FROM users WHERE username=\"" + user.getName() + "\";";
+	public static void removeUserAccount(String user) {
+		String update = "DELETE FROM users WHERE username=\"" + "\";";
 		MyDB.updateDatabase(update);
 	}
 	
