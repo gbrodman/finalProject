@@ -11,6 +11,7 @@ int index = Integer.parseInt(request.getParameter("index"));
 List<Message> inbox = (List<Message>)session.getAttribute("inbox");
 Message message = inbox.get(index);
 MessageUtils.markAsRead(message);
+session.setAttribute("currentMessage",message);
 out.println("<title>Challenge from " + message.getUserFrom() + "</title>");
 out.println("</head>");
 out.println("<body>");
