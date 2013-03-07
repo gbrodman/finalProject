@@ -39,12 +39,15 @@ public class SendMessageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String friend = request.getParameter("friend");
-		System.out.println(friend);
 		User user = (User) request.getSession().getAttribute("user");
 		String text = request.getParameter("text");
-		MessageUtils.sendNote(friend, user.getName(), text);
-		RequestDispatcher dispatch = request.getRequestDispatcher("MessageFriends.jsp");
-		dispatch.forward(request, response);
+		if (request.getParameter("messageType").equals("note")) {
+			MessageUtils.sendNote(friend, user.getName(), text);
+			RequestDispatcher dispatch = request.getRequestDispatcher("MessageFriends.jsp");
+			dispatch.forward(request, response);
+		}
+		
+		// leaves room for sending quiz challenges and such
 	}
 
 }

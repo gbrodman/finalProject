@@ -14,6 +14,7 @@ Message: <br>
 <textarea name="text" cols="40" rows="10" name="text">
 Put your message here.</textarea><br>
 <input type="submit" value="Submit" />
+<input type="hidden" name="messageType" value="note"/>
 <input type="hidden" name="friend" value="<%out.println(request.getParameter("friend"));%>" />
 </form>
 </body>
