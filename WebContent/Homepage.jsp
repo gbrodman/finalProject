@@ -12,6 +12,7 @@ out.println("<title>" + user.getName()  + "</title>");
 out.println("</head>");
 out.println("<body>");
 out.println("<a href=\"Messages.jsp\">Go to Messages</a>");
+out.println("<br><a href=\"MessageFriends.jsp\">Message Friends</a>");
 %>
 
 

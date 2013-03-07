@@ -3,6 +3,8 @@ package objects;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import database.MessageUtils;
+
 public class Message {
 	
 	private String userTo; //changed from User type
@@ -29,6 +31,7 @@ public class Message {
 		this.quizID = quizID;
 		this.bestScore = bestScore;
 		this.note = note;
+		this.messageID = MessageUtils.getNewId();
 	}
 
 	public Message(ResultSet rs) {
