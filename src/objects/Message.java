@@ -3,6 +3,8 @@ package objects;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import database.MessageUtils;
+
 public class Message {
 	
 	private String userTo; //changed from User type
@@ -29,13 +31,12 @@ public class Message {
 		this.quizID = quizID;
 		this.bestScore = bestScore;
 		this.note = note;
+		this.messageID = MessageUtils.getNewId();
 	}
 
 	public Message(ResultSet rs) {
 		if (rs != null) {
 			try {
-				//userTo = UserUtils.getUser(rs.getString("userTo"));
-				//userFrom = UserUtils.getUser(rs.getString("userFrom"));
 				userTo = rs.getString("userTo");
 				userFrom = rs.getString("userFrom");
 				isViewed = rs.getInt("isViewed") == 1;

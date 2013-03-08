@@ -34,10 +34,10 @@ public class Quiz {
 				this.isInstantCorrection = rs.getInt("isInstantCorrection") == 1;
 				this.canPractice = rs.getInt("canPractice") == 1;
 				this.category = rs.getString("category");
-				this.tags = QuizUtils.separateByNullChar(rs.getString("tags"));
-				this.owner = UserUtils.getUser(rs.getString("owner"));
 				this.timeCreated = rs.getTimestamp("timeCreated");
 				this.numPlays = rs.getInt("numPlays");
+				this.tags = QuizUtils.separateByNullChar(rs.getString("tags"));
+				this.owner = UserUtils.getUser(rs.getString("owner"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

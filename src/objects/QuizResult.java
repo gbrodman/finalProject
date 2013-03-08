@@ -20,9 +20,9 @@ public class QuizResult {
 			try {
 				quizID = rs.getInt("quizID");
 				score = rs.getInt("score");
-				user = UserUtils.getUser(rs.getString("user"));
 				timeTaken = rs.getTimestamp("timeTaken");
 				timeUsed = rs.getInt("timeUsed");
+				user = UserUtils.getUser(rs.getString("user"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

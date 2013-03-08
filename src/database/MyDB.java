@@ -74,7 +74,9 @@ public class MyDB {
 	public static boolean resultIsEmpty(ResultSet result) {
 		try {
 			result.last();
-			return result.getRow() == 0;
+			int toReturn = result.getRow();
+			result.beforeFirst();
+			return toReturn == 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return true;
@@ -84,7 +86,9 @@ public class MyDB {
 	public static int numberEntries(ResultSet result) {
 		try {
 			result.last();
-			return result.getRow();
+			int toReturn = result.getRow();
+			result.beforeFirst();
+			return toReturn;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;

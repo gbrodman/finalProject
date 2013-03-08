@@ -25,7 +25,7 @@ public class MessageUtils {
 	}
 	
 
-	public static void markAsRead(Message message) { //should be messageID field in case identical messages are sent?
+	public static void markAsRead(Message message) { 
 		if (message.isViewed()) return;
 		String update= "UPDATE messages SET isViewed=1 WHERE messageID = " + message.getMessageID() + ";";
 		MyDB.updateDatabase(update);
@@ -54,13 +54,29 @@ public class MessageUtils {
 		sendMessage(message);
 	}
 	
+	public static int getNewId() {
+		String query = "SELECT messageID FROM messages ORDER BY messageID DESC;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		if (MyDB.resultIsEmpty(rs)) return 0;
+		try {
+			rs.next();
+			int lastId = rs.getInt("messageID");
+			return lastId + 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 	private static void sendMessage(Message message) {
+		String recipient = message.getUserTo();
+		String sender = message.getUserFrom();
 		StringBuilder update = new StringBuilder();
 		update.append("INSERT INTO messages VALUES(\"");
-		update.append(message.getUserTo());
+		update.append(recipient);
 		update.append("\",\"");
-		update.append(message.getUserFrom());
-		update.append(",");
+		update.append(sender);
+		update.append("\",");
 		update.append(message.isViewed() ? 1 : 0);
 		update.append(",");
 		update.append(message.isChallenge() ? 1 : 0);
@@ -76,7 +92,7 @@ public class MessageUtils {
 		update.append(message.getNote());
 		update.append("\",");
 		update.append(message.getMessageID());
-		update.append(";");
+		update.append(");");
 		MyDB.updateDatabase(update.toString());
 	}
 	
