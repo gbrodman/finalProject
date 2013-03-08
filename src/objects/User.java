@@ -11,12 +11,7 @@ public class User {
 
 	private String name;
 	private String photoURL;
-	private List<Message> inbox;
-	private List<String> friends;
-	private List<String> friendRequestsSent;
-	private List<String> friendRequestsRecieved;
-	private List<Quiz> ownedQuizzes;
-	private List<Achievement> achievements;
+	private List<Achievement> achievements; //should probably remove?
 	private boolean isAdmin;
 	
 	// 0 is no privacy, 1 is name-only, 2 is anonymous
@@ -35,12 +30,7 @@ public class User {
 				isAdmin = rs.getInt("isAdmin") == 1;
 				photoURL = rs.getString("photoURL");
 				String achievementIDs = rs.getString("achievementIDs");
-				friends = FriendUtils.getFriends(name);
-				friendRequestsSent = FriendUtils.getSentRequests(name);
-				friendRequestsRecieved = FriendUtils.getReceivedRequests(name);
 				achievements = AchievementUtils.getAchievements(achievementIDs);
-				ownedQuizzes = QuizUtils.getQuizzesByUser(name);
-				inbox = MessageUtils.getMessagesByUserTo(name);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -63,36 +53,6 @@ public class User {
 	
 	public String getPhotoURL() {
 		return photoURL;
-	}
-
-	public List<Message> getInbox() {
-		return inbox;
-	}
-	
-	public List<Message> getUnreadMessages() {
-		List<Message> result = new ArrayList<Message>();
-		for (Message message : inbox) {
-			if (!message.isViewed()) {
-				result.add(message);
-			}
-		}
-		return result;
-	}
-
-	public List<String> getFriends() {
-		return friends;
-	}
-	
-	public List<String> getFriendRequestsSent() {
-		return friendRequestsSent;
-	}
-	
-	public List<String> getFriendRequestsRecieved() {
-		return friendRequestsRecieved;
-	}
-
-	public List<Quiz> getOwnedQuizzes() {
-		return ownedQuizzes;
 	}
 	
 	public boolean hasAchievement(Achievement inQuestion) {

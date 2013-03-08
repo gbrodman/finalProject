@@ -1,9 +1,12 @@
 package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /*
  * CS108 Student: This file will be replaced when we test your code. So, do not add any of your
@@ -32,7 +35,7 @@ public class MyDB {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://" + MYSQL_DATABASE_SERVER + "/" + MYSQL_DATABASE_NAME;
 			con = DriverManager.getConnection(url, MYSQL_USERNAME, MYSQL_PASSWORD);
-			stmt = con.createStatement();
+			//stmt = con.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("CS108 student: Update the MySQL constants to correct values!");
@@ -56,7 +59,8 @@ public class MyDB {
 	
 	public static ResultSet queryDatabase(String query)  {
 		try {
-			return stmt.executeQuery(query);
+			Statement statement = con.createStatement();
+			return statement.executeQuery(query);
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			return null;
@@ -65,9 +69,22 @@ public class MyDB {
 	
 	public static void updateDatabase(String update) {
 		try {
-			stmt.executeUpdate(update);
+			Statement statement = con.createStatement();
+			statement.executeUpdate(update);
 		} catch (SQLException ex) {
 			ex.printStackTrace();
+		}
+	}
+	
+	public static void updatePreparedTimestamp(String update, Timestamp time) {
+		PreparedStatement pstmt;
+		try {
+			pstmt = con.prepareStatement(update);
+			pstmt.setTimestamp(1, time);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
