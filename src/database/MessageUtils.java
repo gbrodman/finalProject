@@ -25,7 +25,7 @@ public class MessageUtils {
 	}
 	
 
-	public static void markAsRead(Message message) { //should be messageID field in case identical messages are sent?
+	public static void markAsRead(Message message) { 
 		if (message.isViewed()) return;
 		String update= "UPDATE messages SET isViewed=1 WHERE messageID = " + message.getMessageID() + ";";
 		MyDB.updateDatabase(update);
@@ -69,11 +69,13 @@ public class MessageUtils {
 	}
 	
 	private static void sendMessage(Message message) {
+		String recipient = message.getUserTo();
+		String sender = message.getUserFrom();
 		StringBuilder update = new StringBuilder();
 		update.append("INSERT INTO messages VALUES(\"");
-		update.append(message.getUserTo());
+		update.append(recipient);
 		update.append("\",\"");
-		update.append(message.getUserFrom());
+		update.append(sender);
 		update.append("\",");
 		update.append(message.isViewed() ? 1 : 0);
 		update.append(",");

@@ -37,8 +37,6 @@ public class Message {
 	public Message(ResultSet rs) {
 		if (rs != null) {
 			try {
-				//userTo = UserUtils.getUser(rs.getString("userTo"));
-				//userFrom = UserUtils.getUser(rs.getString("userFrom"));
 				userTo = rs.getString("userTo");
 				userFrom = rs.getString("userFrom");
 				isViewed = rs.getInt("isViewed") == 1;

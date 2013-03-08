@@ -30,7 +30,10 @@ public class UserUtils {
 		return MyDB.numberEntries(rs);
 	}
 	
-
+	public static void updatePhotoURL(User user) {
+		String update = "UPDATE users SET photoURL=\""+user.getPhotoURL()+"\" WHERE username=\""+user.getName()+"\";";
+		MyDB.updateDatabase(update);
+	}
 
 	public UserUtils() {
 		// TODO Auto-generated constructor stub

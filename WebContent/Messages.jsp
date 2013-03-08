@@ -14,6 +14,7 @@ out.println("</head>");
 out.println("<body>");
 List<Message> inbox = MessageUtils.getMessagesByUserTo(user.getName());
 session.setAttribute("inbox", inbox);
+
 //first display new messages:
 out.println("NEW MESSAGES <br><br>");
 for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first

@@ -10,9 +10,16 @@
 User user = (User)session.getAttribute("user");
 out.println("<title>" + user.getName()  + "</title>");
 out.println("</head>");
+out.println("<h1> Welcome "+ user.getName()  +"</h1>");
+out.println("<img src="+user.getPhotoURL()+" width=10% height=10% >"); 
+out.println("<br>");
 out.println("<body>");
 out.println("<a href=\"Messages.jsp\">Go to Messages</a>");
 out.println("<br><a href=\"MessageFriends.jsp\">Message Friends</a>");
+out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
+out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\">");
+out.println("<input type=\"submit\" value=\"Change photo\">");
+out.println("</form>");
 %>
 
 

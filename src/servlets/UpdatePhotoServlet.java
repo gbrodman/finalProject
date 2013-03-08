@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import objects.User;
-import database.MessageUtils;
 
 /**
- * Servlet implementation class SendMessageServlet
+ * Servlet implementation class UpdatePhotoServlet
  */
-@WebServlet("/SendMessageServlet")
-public class SendMessageServlet extends HttpServlet {
+@WebServlet("/UpdatePhotoServlet")
+public class UpdatePhotoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendMessageServlet() {
+    public UpdatePhotoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +30,18 @@ public class SendMessageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String friend = request.getParameter("friend").trim();
-		User user = (User) request.getSession().getAttribute("user");
-		String text = request.getParameter("text");
-		if (request.getParameter("messageType").equals("note")) {
-			MessageUtils.sendNote(friend, user.getName(), text);
-			RequestDispatcher dispatch = request.getRequestDispatcher("MessageFriends.jsp");
-			dispatch.forward(request, response);
-		}
-		
-		// leaves room for sending quiz challenges and such
+		String url = request.getParameter("newURL");
+		User user = (User)request.getSession().getAttribute("user");
+		user.changePhoto(url);
+		RequestDispatcher dispatch = request.getRequestDispatcher("Homepage.jsp"); 
+		dispatch.forward(request, response);
 	}
 
 }
