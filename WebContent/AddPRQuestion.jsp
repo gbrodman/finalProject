@@ -6,15 +6,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Fill-in-the-Blank Question</title>
+<title>Picture-Response Question</title>
 </head>
 <body>
 <%
-	out.println("<h1>Create new Fill-in-the-Blank Question</h1>");
+	out.println("<h1>Create new Picture-Response Question</h1>");
 
-	out.println("<form action=\"CreateFITBQuestionServlet\" method=\"post\">");
+	out.println("<form action=\"CreatePRQuestionServlet\" method=\"post\">");
 	//out.println("<p><input type=\"title\" name=\"qrquestionTitle\" value=\"Enter title of question\">"); question title?
-	out.println("<br><textarea name=\"questionBody\" rows=3 cols=30 >Enter text of question. Surround word to be left blank with brackets [ ] </textarea>");
+	out.println("<br><textarea name=\"questionBody\" rows=3 cols=30 >Enter prompt for quiz-taker.</textarea>");
+	out.println("<br><input name=\"photoURL\"> Enter URL of photo.");
+	out.println("<br><input name=\"questionAnswer\"> Enter answer to question.");
 	out.println("<br><input name=\"questionPoints\"> Enter point value of question.");
 	out.println("<br><input type=\"submit\" value=\"Create Question\">");
 	out.println("</form>");

@@ -82,7 +82,6 @@ public class MyDB {
 			pstmt = con.prepareStatement(update);
 			pstmt.setTimestamp(1, time);
 			pstmt.executeUpdate();
-			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

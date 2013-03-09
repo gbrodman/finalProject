@@ -13,16 +13,16 @@ import objects.*;
 import database.*;
 
 /**
- * Servlet implementation class SubmitAnswerServlet
+ * Servlet implementation class CreateMCQuestionServlet
  */
-@WebServlet("/SubmitAnswerServlet")
-public class SubmitAnswerServlet extends HttpServlet {
+@WebServlet("/CreateMCQuestionServlet")
+public class CreateMCQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubmitAnswerServlet() {
+    public CreateMCQuestionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +33,19 @@ public class SubmitAnswerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TakeQuiz takeQuiz = (TakeQuiz)request.getSession().getAttribute("takeQuiz");
-		Question question = takeQuiz.getCurrentQuestion();
+		String body = request.getParameter("questionBody");
+		String answerChoices = request.getParameter("answerChoices");
 		String answer = request.getParameter("answer");
-		System.out.println(answer);
-		if (question.isCorrect(answer)) System.out.println("CORRECT!");
-		else System.out.println("WRONG");
-		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
+		int points = Integer.parseInt(request.getParameter("questionPoints"));
+		Quiz quiz = (Quiz)request.getSession().getAttribute("currentQuiz");
+		MCQuestionUtils.addToDatabase(body,answer,answerChoices,points,quiz.getId(),quiz.numQuestions());
+		quiz.incrementNumQuestions();
+		RequestDispatcher dispatch = request.getRequestDispatcher("AddQuestions.jsp");
 		dispatch.forward(request, response);
 	}
 

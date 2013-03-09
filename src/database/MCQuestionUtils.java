@@ -7,15 +7,15 @@ import java.util.List;
 
 import objects.*;
 
-public class QRQuestionUtils {
+public class MCQuestionUtils {
 
 	public static List<Question> getQuestionsByQuizID(int quizID) {
 		List<Question> result = new ArrayList<Question>();
-		String query = "SELECT * FROM questionResponseQuestions WHERE quizID=\"" + quizID + "\";";
+		String query = "SELECT * FROM multipleChoiceQuestions WHERE quizID=\"" + quizID + "\";";
 		ResultSet resultSet = MyDB.queryDatabase(query);
 		try {
 			while (resultSet.next()) {
-				Question question = new QRQuestion(resultSet);
+				Question question = new MCQuestion(resultSet);
 				result.add(question);
 			}
 		} catch (SQLException e) {
@@ -24,12 +24,14 @@ public class QRQuestionUtils {
 		return result;
 	}
 	
-	public static void addToDatabase(String body, String answer, int points, int id, int order) {
+	public static void addToDatabase(String body,String answer,String choices,int points,int id, int order) {
 		StringBuilder update = new StringBuilder();
-		update.append("INSERT INTO questionResponseQuestions VALUES(\"");
+		update.append("INSERT INTO multipleChoiceQuestions VALUES(\"");
 		update.append(body);
 		update.append("\",\"");
 		update.append(answer);
+		update.append("\",\"");
+		update.append(choices);
 		update.append("\",");
 		update.append(points);
 		update.append(",");
@@ -40,12 +42,14 @@ public class QRQuestionUtils {
 		MyDB.updateDatabase(update.toString());
 	}
 	
-	public static void saveQuestionInDatabase(Question question) {
+	public static void saveQuestionInDatabase(MCQuestion question) {
 		StringBuilder update = new StringBuilder();
-		update.append("INSERT INTO questionResponseQuestions VALUES(\"");
+		update.append("INSERT INTO multipleChoiceQuestions VALUES(\"");
 		update.append(question.getBody());
 		update.append("\",\"");
 		update.append(question.getAnswers());
+		update.append("\",\"");
+		update.append(question.getAnswerChoices());
 		update.append("\",");
 		update.append(question.getPointValue());
 		update.append(",");

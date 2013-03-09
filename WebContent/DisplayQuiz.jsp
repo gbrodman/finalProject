@@ -6,22 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View question</title>
+<title>Display Quiz</title>
 </head>
-<body>
 <%
 	TakeQuiz takeQuiz = (TakeQuiz)session.getAttribute("takeQuiz");
-	Question question = takeQuiz.nextQuestion();
-
-	if (question == null) {
-		out.println("<h1>Congrats, you finished the quiz!</h1>");
-		out.println("<form action=\"ViewResults.jsp\">");
-		out.println("<br><input type=\"submit\" value=\"View Your Results!\">");
-		out.println("</form>");
-	}
-	else {
-		out.println(question.getQuestionDisplay());
-	}
+	Quiz quiz = takeQuiz.getQuiz();
+	String inst = quiz.getInstructions();
+	String title = quiz.getTitle();
+	int num = quiz.numQuestions();
+	out.println("<h1>"+title+"</h1>");
+	out.println("<body><br>"+inst);
+	out.println("<br>This quiz has "+num+" questions.");
+	out.println("<form action=\"ViewQuestion.jsp\">");
+	out.println("<br><input type=\"submit\" value=\"Start the Quiz!\">");
+	out.println("</form>");
 %>
 </body>
 </html>

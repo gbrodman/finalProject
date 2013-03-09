@@ -13,16 +13,16 @@ import objects.*;
 import database.*;
 
 /**
- * Servlet implementation class SubmitAnswerServlet
+ * Servlet implementation class CreateFITBQuestionServlet
  */
-@WebServlet("/SubmitAnswerServlet")
-public class SubmitAnswerServlet extends HttpServlet {
+@WebServlet("/CreateFITBQuestionServlet")
+public class CreateFITBQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubmitAnswerServlet() {
+    public CreateFITBQuestionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,13 +38,25 @@ public class SubmitAnswerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TakeQuiz takeQuiz = (TakeQuiz)request.getSession().getAttribute("takeQuiz");
-		Question question = takeQuiz.getCurrentQuestion();
-		String answer = request.getParameter("answer");
+		String body = request.getParameter("questionBody");
+		int start = body.indexOf('[');
+		int end = body.indexOf(']',start);
+		String answer = body.substring(start+1, end);
 		System.out.println(answer);
-		if (question.isCorrect(answer)) System.out.println("CORRECT!");
-		else System.out.println("WRONG");
-		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
+		String newBody = body.substring(0,start);
+		for (int i = 0; i < answer.length(); i++) {
+			newBody += '_';
+		}
+		if (end < body.length()-1) newBody += body.substring(end+1);
+		System.out.println(newBody);
+		
+		int points = Integer.parseInt(request.getParameter("questionPoints"));
+		Quiz quiz = (Quiz)request.getSession().getAttribute("currentQuiz");
+		Question question = new FITBQuestion(newBody,answer,points,quiz.getId(), quiz.numQuestions());
+		quiz.incrementNumQuestions();
+		QuizUtils.updateNumQuestions(quiz);
+		FITBQuestionUtils.saveQuestionInDatabase(question);
+		RequestDispatcher dispatch = request.getRequestDispatcher("AddQuestions.jsp");
 		dispatch.forward(request, response);
 	}
 

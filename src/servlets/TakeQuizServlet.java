@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import objects.*;
 import database.*;
+import objects.*;
 
 /**
- * Servlet implementation class SubmitAnswerServlet
+ * Servlet implementation class TakeQuizServlet
  */
-@WebServlet("/SubmitAnswerServlet")
-public class SubmitAnswerServlet extends HttpServlet {
+@WebServlet("/TakeQuizServlet")
+public class TakeQuizServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubmitAnswerServlet() {
+    public TakeQuizServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,13 +38,11 @@ public class SubmitAnswerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TakeQuiz takeQuiz = (TakeQuiz)request.getSession().getAttribute("takeQuiz");
-		Question question = takeQuiz.getCurrentQuestion();
-		String answer = request.getParameter("answer");
-		System.out.println(answer);
-		if (question.isCorrect(answer)) System.out.println("CORRECT!");
-		else System.out.println("WRONG");
-		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
+		int id = Integer.parseInt(request.getParameter("quiz"));
+		Quiz quiz = QuizUtils.getQuizByID(id);
+		TakeQuiz takeQuiz = new TakeQuiz(quiz);
+		request.getSession().setAttribute("takeQuiz",takeQuiz);
+		RequestDispatcher dispatch = request.getRequestDispatcher("DisplayQuiz.jsp");
 		dispatch.forward(request, response);
 	}
 

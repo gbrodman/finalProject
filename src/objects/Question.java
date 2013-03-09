@@ -1,5 +1,7 @@
 package objects;
 
+import java.util.Comparator;
+
 public interface Question {
 
 	int numAnswers();

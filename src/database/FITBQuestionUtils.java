@@ -7,15 +7,15 @@ import java.util.List;
 
 import objects.*;
 
-public class QRQuestionUtils {
-
+public class FITBQuestionUtils {
+	
 	public static List<Question> getQuestionsByQuizID(int quizID) {
 		List<Question> result = new ArrayList<Question>();
-		String query = "SELECT * FROM questionResponseQuestions WHERE quizID=\"" + quizID + "\";";
+		String query = "SELECT * FROM fillInTheBlankQuestions WHERE quizID=\"" + quizID + "\";";
 		ResultSet resultSet = MyDB.queryDatabase(query);
 		try {
 			while (resultSet.next()) {
-				Question question = new QRQuestion(resultSet);
+				Question question = new FITBQuestion(resultSet);
 				result.add(question);
 			}
 		} catch (SQLException e) {
@@ -26,7 +26,7 @@ public class QRQuestionUtils {
 	
 	public static void addToDatabase(String body, String answer, int points, int id, int order) {
 		StringBuilder update = new StringBuilder();
-		update.append("INSERT INTO questionResponseQuestions VALUES(\"");
+		update.append("INSERT INTO fillInTheBlankQuestions VALUES(\"");
 		update.append(body);
 		update.append("\",\"");
 		update.append(answer);
@@ -42,7 +42,7 @@ public class QRQuestionUtils {
 	
 	public static void saveQuestionInDatabase(Question question) {
 		StringBuilder update = new StringBuilder();
-		update.append("INSERT INTO questionResponseQuestions VALUES(\"");
+		update.append("INSERT INTO fillInTheBlankQuestions VALUES(\"");
 		update.append(question.getBody());
 		update.append("\",\"");
 		update.append(question.getAnswers());
@@ -56,3 +56,4 @@ public class QRQuestionUtils {
 		MyDB.updateDatabase(update.toString());
 	}
 }
+
