@@ -10,10 +10,10 @@
 </head>
 <body>
 <h1>Send New Message</h1><br>
-To: <%out.print(request.getParameter("friend")); %><br>
+To:  <span id="messagefriendname" ><%out.print(request.getParameter("friend")); %></span><br><br>
 Message: <br>
 <form action="SendMessageServlet" method="post">
-<textarea name="text" cols="40" rows="10" name="text">
+<textarea name="text" cols="40" rows="10" name="text" onfocus="if (this.value == 'Put your message here.') {this.value = ''}">
 Put your message here.</textarea><br>
 <input type="submit" value="Submit" />
 <input type="hidden" name="messageType" value="note"/>

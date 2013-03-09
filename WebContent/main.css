@@ -18,6 +18,11 @@ input {
     margin: 10px;
 }
 
+input[type="submit"] {
+	background-color:#0F52BA;
+	color:#ffffff;
+}
+
 .submitButton {
 	font-size:20px;
 	width: 100px;
@@ -25,6 +30,11 @@ input {
 	border-color:#0F52BA;
 	background-color:#EFEFEF;
 	left:300px;
+}
+
+#sub {
+	background-color:#EFEFEF;
+	color:#000000;
 }
 
 .buttonHolder {
@@ -126,9 +136,25 @@ a.topbarlinks {
 #friendlist ul li .friendlistitem:hover {  -moz-transform:rotate(-5deg); -moz-box-shadow:10px 10px 20px #000000;
   -webkit-transform:rotate(-5deg); -webkit-box-shadow:10px 10px 20px #000000;
   transform:rotate(-5deg); box-shadow:10px 10px 20px #000000; }
-  #friendlist ul li input {width:100px; height:50px;padding:1px;border-radius:4px; font-size:14px;background-color:#ffffff; margin-top:8px;margin-right:10px;top:0px;float:right;}
+  #friendlist ul li input {width:100px; height:50px;padding:1px;border-radius:4px; font-size:14px;background-color:#ffffff; margin-top:8px;margin-right:10px;top:0px;float:right; color:#0F52BA;}
   
+  textarea {
+    resize:none;
+  	border-radius:10px;
+  	border:5px solid #0F52BA;
+  	padding:5px;
+  	margin:5px;
+  	color:#0F52BA;
+  	background-color:#f8f8f8;
+  	font-family: 'Happy Monkey';
+  }
 
+#messagefriendname {
+	border-radius:4px;
+	background-color:#cfcfcf;
+	padding:5px;
+	margin:3px;
+}
 
 
 
