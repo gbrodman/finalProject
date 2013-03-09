@@ -110,13 +110,24 @@ a.topbarlinks {
 
 .messagebutton {
 	width:100px;
-	height:10px;
+	height:20px;
 	background-color:#0F52BA;
 	color:#FFFFFF;
 	border-radius:4px;
 	right:20px;
 }
 
+#friendlist {  }
+#friendlist ul { list-style:none; }
+#friendlist ul li { font-family:Georgia,serif,Times; font-size:22px; margin:4px; float:left; }
+#friendlist ul li .friendlistitem { display:block; width:500px; height:70px; background-color:#0F52BA; border-left:5px solid #222; border-right:5px solid #222; padding-left:10px;
+  }
+ #friendlist ul li a {text-decoration:none; color:#ffffff; float:right; margin-right:70px;margin-top:20px}
+#friendlist ul li .friendlistitem:hover {  -moz-transform:rotate(-5deg); -moz-box-shadow:10px 10px 20px #000000;
+  -webkit-transform:rotate(-5deg); -webkit-box-shadow:10px 10px 20px #000000;
+  transform:rotate(-5deg); box-shadow:10px 10px 20px #000000; }
+  #friendlist ul li input {width:100px; height:50px;padding:1px;border-radius:4px; font-size:14px;background-color:#ffffff; margin-top:8px;margin-right:10px;top:0px;float:right;}
+  
 
 
 

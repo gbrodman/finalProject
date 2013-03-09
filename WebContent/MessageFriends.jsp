@@ -12,6 +12,9 @@
 <title>Message Friends</title>
 </head>
 <h1>Message Friends</h1><br>
+<a href="Homepage.jsp" class="backtohomepage">Back to homepage</a>
+<br><br>
+<div id="friendlist">
 <ul>
 <%
 User user = (User) session.getAttribute("user");
@@ -21,21 +24,23 @@ if (friends.size() == 0) {
 }
 else {
 	for (String friend : friends) {
-		out.println("<div class=\"frienddiv\">");
+		System.out.println(user.getPhotoURL());
+		out.println("<li>");
 		out.print("<form action=\"MessageFriendServlet\" method=\"get\" display=\"inline\">");
-		out.print("<li>");
-		out.print(friend);
+		out.println("<div class=\"friendlistitem\">");
+		out.println("<img src=\"" +user.getPhotoURL()+ "\" width=\"70\" height=\"70px\" >");
 		out.print("<input type=\"hidden\" name=\"friend\" value=\"");
 		out.print(friend);
 		out.print("\">");
-		out.print("<input type=\"submit\" value=\"Message\" class=\"messagebutton\"/></form></li>");
+		out.print("<input type=\"submit\" value=\"Message\"/></form>");
+		out.println("<a href=\"google.com\">" + friend + "  </a>");
 		out.println("</div>");
+		out.println("</li>");
 	}
 }
 %>
 </ul>
-<br><br>
-<a href="Homepage.jsp">Back to homepage</a>
+</div>
 <body>
 
 </body>
