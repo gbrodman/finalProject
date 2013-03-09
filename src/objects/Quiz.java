@@ -2,6 +2,7 @@ package objects;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,8 +21,9 @@ public class Quiz {
 	private String category;
 	private List<String> tags;
 	private User owner;
-	private Date timeCreated;
+	private Timestamp timeCreated;
 	private int numPlays;
+	private int numQuestions;
 
 	// For when we retrieve from the database
 	public Quiz(ResultSet rs) {
@@ -38,6 +40,7 @@ public class Quiz {
 				this.numPlays = rs.getInt("numPlays");
 				this.tags = QuizUtils.separateByNullChar(rs.getString("tags"));
 				this.owner = UserUtils.getUser(rs.getString("owner"));
+				this.numQuestions = rs.getInt("numQuestions");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -62,9 +65,18 @@ public class Quiz {
 		this.category = category;
 		this.tags = tags;
 		this.owner = owner;
-		this.timeCreated = new Date();
+		this.timeCreated = null;
+		this.numQuestions = 0;
 	}
 
+	public void incrementNumQuestions() {
+		numQuestions++;
+	}
+	
+	public int numQuestions() {
+		return numQuestions;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -101,7 +113,7 @@ public class Quiz {
 		return owner;
 	}
 
-	public Date getTimeCreated() {
+	public Timestamp getTimeCreated() {
 		return timeCreated;
 	}
 

@@ -10,6 +10,19 @@ import objects.Quiz;
 
 
 public class QuizUtils {
+	
+	public static Quiz getQuizByID(int quizID) {
+		String query = "SELECT * FROM quizzes WHERE id=" + quizID + ";";
+		ResultSet resultSet = MyDB.queryDatabase(query);
+		try {
+			while (resultSet.next()) {
+				return(new Quiz(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return (null);
+	}
 
 	public static List<Quiz> getQuizzesByUser(String user) {
 		List<Quiz> result = new ArrayList<Quiz>();
@@ -101,6 +114,40 @@ public class QuizUtils {
 		return result;
 	}
 	
+	public static void updateNumQuestions(Quiz quiz) {
+		int n = quiz.numQuestions();
+		String update = "UPDATE quizzes SET numQuestions="+n+" WHERE id="+quiz.getId()+";";
+		MyDB.updateDatabase(update);
+	}
+	 
+	public static void saveQuizInDatabase(Quiz quiz) {
+		StringBuilder update = new StringBuilder();
+		update.append("INSERT INTO quizzes VALUES(");
+		update.append(quiz.getId());
+		update.append(",\"");
+		update.append(quiz.getTitle());
+		update.append("\",\"");
+		update.append(quiz.getInstructions());
+		update.append("\",");
+		update.append(quiz.isInstantCorrection());
+		update.append(",");
+		update.append(quiz.isRandomPages());
+		update.append(",");
+		update.append(quiz.isCanPractice());
+		update.append(",\"");
+		update.append(quiz.getCategory());
+		update.append("\",\"");
+		update.append(quiz.getTags());
+		update.append("\",\"");
+		update.append(quiz.getOwner().getName());
+		update.append("\",?,");
+		update.append(quiz.getNumPlays());
+		update.append(",");
+		update.append(quiz.numQuestions());
+		update.append(");");
+		//MyDB.updateDatabase(update.toString());
+		MyDB.updatePreparedTimestamp(update.toString(), quiz.getTimeCreated());
+	}
 
 	public QuizUtils() {
 		// TODO Auto-generated constructor stub

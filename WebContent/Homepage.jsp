@@ -31,6 +31,7 @@ out.println("<body>");
 out.println("<a href=\"Messages.jsp\">Go to Messages</a>");
 out.println("<br><a href=\"MessageFriends.jsp\">Message Friends</a>");
 out.println("<br><a href=\"CreateQuiz.jsp\">Create a Quiz</a>");
+out.println("<br><a href=\"QuizList.jsp\">Take a Quiz</a>");
 out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
 out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\" onfocus=\"if (this.value == 'Enter url of new photo') {this.value = '';}\">");
 out.println("<input type=\"submit\" value=\"Change photo\">");
