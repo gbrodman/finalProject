@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href='http://fonts.googleapis.com/css?family=Happy+Monkey' rel='stylesheet' type='text/css'>
+<link href="main.css" rel="stylesheet" type="text/css">
 <% 
 int index = Integer.parseInt(request.getParameter("index"));
 List<Message> inbox = (List<Message>)session.getAttribute("inbox");

@@ -31,3 +31,93 @@ input {
      text-align:center;   
     vertical-align:center;
 }
+
+#topbar {
+	float:top;
+	width:100%;
+	border-color:#05F0F9;
+	height: 40px;
+	background-color:#0F52BA;	
+}
+
+#homebutton {
+	width: 20px;
+	background-color: #0F52BA;
+	float:right;
+}
+
+#navbar {
+width:100%;
+height:40px;
+background-color:#0F52BA;
+}
+
+#navbar ul {
+width:70%;
+float:left;
+margin:0 auto 0 auto;
+}
+
+#navbar ul li {
+float:left;
+color:#FFFFFF;
+margin-top:5px;
+padding:0 20px 0 20px;
+border-right:1px solid #FFF;
+border-left:1px solid #FFF;
+height:40px;
+list-style:none;
+display:block;
+line-height:30px;
+text-align:center;
+cursor:pointer;
+}
+
+#navbar ul li:hover {
+background-color:#CCC;
+}
+
+#searchbar {
+	width:20%;
+	background-color:#FFFFFF;
+	color:#0F52BA;
+	height:5px;
+	margin:3px;
+	border-radius:2px;	
+}
+
+a.topbarlinks {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+.frienddiv {
+	width:100%;
+	height:80px;
+}
+
+.frienddiv li {
+	border-style:solid;
+	border-top:thick double #0F52BA;
+	margin-left:10%;
+	margin-right:10%;
+	list-style:none;
+	display:block;
+	line-height:30px;
+	text-align:center;
+	
+}
+
+.messagebutton {
+	width:100px;
+	height:10px;
+	background-color:#0F52BA;
+	color:#FFFFFF;
+	border-radius:4px;
+	right:20px;
+}
+
+
+
+
+

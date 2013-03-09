@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href='http://fonts.googleapis.com/css?family=Happy+Monkey' rel='stylesheet' type='text/css'>
+<link href="main.css" rel="stylesheet" type="text/css">
 <title>Message Friends</title>
 </head>
 <h1>Message Friends</h1><br>
@@ -19,13 +21,15 @@ if (friends.size() == 0) {
 }
 else {
 	for (String friend : friends) {
+		out.println("<div class=\"frienddiv\">");
+		out.print("<form action=\"MessageFriendServlet\" method=\"get\" display=\"inline\">");
 		out.print("<li>");
 		out.print(friend);
-		out.print("<form action=\"MessageFriendServlet\" method=\"get\">");
 		out.print("<input type=\"hidden\" name=\"friend\" value=\"");
 		out.print(friend);
 		out.print("\">");
-		out.print("<input type=\"submit\" value=\"Message\" /></form></li>");
+		out.print("<input type=\"submit\" value=\"Message\" class=\"messagebutton\"/></form></li>");
+		out.println("</div>");
 	}
 }
 %>
