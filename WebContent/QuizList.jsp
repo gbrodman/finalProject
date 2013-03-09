@@ -6,6 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href='http://fonts.googleapis.com/css?family=Happy+Monkey' rel='stylesheet' type='text/css'>
+<link href="main.css" rel="stylesheet" type="text/css">
+<title>Quiz List</title>
+<body>
+<ul>
 <% 
 	User user = (User)session.getAttribute("user");
 
@@ -21,8 +26,6 @@
 	}
 
 %>
-
-
-
+</ul>
 </body>
 </html>

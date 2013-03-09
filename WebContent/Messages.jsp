@@ -18,7 +18,7 @@ List<Message> inbox = MessageUtils.getMessagesByUserTo(user.getName());
 session.setAttribute("inbox", inbox);
 
 //first display new messages:
-out.println("NEW MESSAGES <br><br>");
+/*out.println("NEW MESSAGES <br><br>");
 for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first
 	Message message = inbox.get(index);
 	if (!message.isViewed()) {
@@ -41,10 +41,65 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 			out.println("<br>");
 		}
 	}
+}*/
+out.println("NEW MESSAGES <br><br>");
+out.println("<div id=\"inbox\">");
+out.println("<ul>");
+System.out.println(inbox.size());
+for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first
+	Message message = inbox.get(index);
+	if (!message.isFriendRequest()) {
+		out.println("<li>");
+		out.println("<div class=\"inboxmessage\">");
+		if (!message.isViewed()) {
+			System.out.println("not viewed");
+			out.println("<div class=\"newinboxmessage\">");
+		} else {
+			System.out.println("viewed");
+			out.println("<div class=\"readinboxmessage\">");
+		}
+		out.println("<div class=\"icon\">");
+		out.println("<img src=\"http://s176520660.online.de/dungeonslayers/forum/index.php?action=dlattach;attach=3848;type=avatar\" width=\"48\" height=\"48\">");
+		out.println("</div>");
+		out.println("<div class=\"icon\">");
+		out.println("<img src=\"" + UserUtils.getUser(message.getUserFrom()).getPhotoURL() + "\" width=\"48\" height=\"48\">");
+		out.println("</div>");
+		out.println("<div class=\"fromtomessage\">");
+		out.println(message.getUserFrom());
+		out.println("</div>");
+		out.println("<div class=\"fromtomessage\">");
+		out.println(message.getUserTo());
+		out.println("</div>");
+		out.println("<div class=\"messagemessage\">");
+		if (message.isChallenge()) {
+			out.println(message.getUserFrom() + " challenged you to take a quiz!");
+		} else if (message.isNote()) {
+			out.println(message.getNote());
+		}
+		out.println("</div>");
+		out.println("<div class=\"icon\">");
+		if (message.isChallenge()) {
+			out.println("<a href=\"ViewChallenge.jsp?index="+ index + "\">");
+		} else {
+			out.println("<a href=\"ViewNote.jsp?index=" + index + "\">");
+		}
+		out.println("<img src=\"http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-2/256/message-already-read-icon.png\" width=\"48\" height=\"48\">");
+		out.println("</a>");
+		out.println("</div>");
+		out.println("<div class=\"icon\">");
+		out.println("<img src=\"http://www.veryicon.com/icon/png/System/Must%20Have/Delete.png\" width=\"48\" height=\"48\">");
+		out.println("</div>");
+		
+		out.println("</div>");
+		out.println("</div>");
+		out.println("</li>");
+	}
 }
+out.println("</ul>");
+out.println("</div>");
 out.println("<br>");
 //then display read messages
-out.println("READ MESSAGES <br><br>");
+/*out.println("READ MESSAGES <br><br>");
 for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first
 	Message message = inbox.get(index);
 	if (message.isViewed()) {
@@ -67,7 +122,7 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 			out.println("<br>");
 		}
 	}
-}
+}*/
 
 %>
 

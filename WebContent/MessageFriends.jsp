@@ -1,5 +1,5 @@
 <%@page import="objects.User"%>
-<%@page import="database.FriendUtils"%>
+<%@page import="database.*"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -25,10 +25,11 @@ if (friends.size() == 0) {
 else {
 	for (String friend : friends) {
 		System.out.println(user.getPhotoURL());
+		User friend_user = UserUtils.getUser(friend);
 		out.println("<li>");
 		out.print("<form action=\"MessageFriendServlet\" method=\"get\" display=\"inline\">");
 		out.println("<div class=\"friendlistitem\">");
-		out.println("<img src=\"" +user.getPhotoURL()+ "\" width=\"70\" height=\"70px\" >");
+		out.println("<img src=\"" +friend_user.getPhotoURL()+ "\" width=\"70\" height=\"70px\" >");
 		out.print("<input type=\"hidden\" name=\"friend\" value=\"");
 		out.print(friend);
 		out.print("\">");
