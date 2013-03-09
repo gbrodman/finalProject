@@ -49,7 +49,7 @@ public class QuizResultUtils {
 	}
 	
 	public static int getBestScore(String user, int quizID) {
-		String query = "SELECT score FROM history WHERE user=\"" + user+ "\" ORDER BY score DESC;";
+		String query = "SELECT score FROM history WHERE user=\"" + user+ "\" AND quizID=" + quizID + " ORDER BY score DESC;";
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			if (rs.next()) {
@@ -133,7 +133,7 @@ public class QuizResultUtils {
 	}
 	
 	public static double getAverageScoreOnQuiz(int quizID) {
-		String query = "SELECT * FROM hisotyr WHERE quizID=" + quizID + ";";
+		String query = "SELECT * FROM history WHERE quizID=" + quizID + ";";
 		return getAverage(query);
 	}
 
