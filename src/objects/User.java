@@ -30,7 +30,7 @@ public class User {
 				isAdmin = rs.getInt("isAdmin") == 1;
 				photoURL = rs.getString("photoURL");
 				String achievementIDs = rs.getString("achievementIDs");
-				achievements = AchievementUtils.getAchievements(achievementIDs);
+				//achievements = AchievementUtils.getAchievements(achievementIDs);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
