@@ -22,7 +22,7 @@
 		out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
 		out.print(quiz.getId());
 		out.print("\">");
-		out.print("<input type=\"submit\" value=\"Take this Quiz!\" /></form></li>");
+		out.print("<input type=\"submit\" value=\"View this Quiz\" /></form></li>");
 	}
 
 %>

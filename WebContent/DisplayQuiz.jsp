@@ -12,16 +12,54 @@
 </head>
 <%
 	TakeQuiz takeQuiz = (TakeQuiz)session.getAttribute("takeQuiz");
+	User user = (User)session.getAttribute("user");	
 	Quiz quiz = takeQuiz.getQuiz();
 	String inst = quiz.getInstructions();
 	String title = quiz.getTitle();
 	int num = quiz.numQuestions();
 	out.println("<h1>"+title+"</h1>");
+	out.println("<body><br>Created by: "+quiz.getOwner().getName());
 	out.println("<body><br>"+inst);
 	out.println("<br>This quiz has "+num+" questions.");
 	out.println("<form action=\"ViewQuestion.jsp\">");
 	out.println("<br><input type=\"submit\" value=\"Start the Quiz!\">");
 	out.println("</form>");
+	out.println("<br><form action=\"Homepage.jsp\">");
+	out.println("<input type=\"submit\" value=\"Return to Homepage\">");
+	out.println("</form>");
+	
+	out.println("<br><br><h1>Past Results</h1>");
+	out.println("<br>Your past results:<br>");
+	List<QuizResult> userResults = QuizResultUtils.getPerformancesByUser(user.getName(), quiz.getId(), quiz.getNumPlays());
+	out.println("<ul>");
+	for (QuizResult result : userResults) {
+		out.println("<li>Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+	}
+	out.println("</ul>");
+	out.println("<br>All time highest performers:<br>");
+	List<QuizResult> allTimeBestResults = QuizResultUtils.getTopPerformances(quiz.getId(), 5); //can change numResults to display
+	out.println("<ul>");
+	for (QuizResult result : allTimeBestResults) {
+		String ru = result.getUser();
+		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+	}
+	out.println("</ul>");
+	out.println("<br>Recent high performers:<br>");
+	List<QuizResult> recentTopResults = QuizResultUtils.getTopRecentPerformances(quiz.getId(), 5); //can change numResults to disply
+	out.println("<ul>");
+	for (QuizResult result : recentTopResults) {
+		String ru = result.getUser();
+		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+	}
+	out.println("</ul>");
+	out.println("<br>Recent test results:<br>");
+	List<QuizResult> recentResults = QuizResultUtils.getRecentPerformances(quiz.getId(), 5); //can change numResults to disply
+	out.println("<ul>");
+	for (QuizResult result : recentResults) {
+		String ru = result.getUser();
+		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+	}
+	out.println("</ul>");
 %>
 </body>
 </html>

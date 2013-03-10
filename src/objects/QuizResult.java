@@ -8,12 +8,17 @@ import database.UserUtils;
 
 public class QuizResult {
 
+	
+	private static final long MILI_IN_SEC = 1000;
+	private static final long SEC_IN_MIN = 60;
+	
 	private int quizID;
 	private int score;
-	private User user;
+	private String user;
 	
 	private Date timeTaken;
 	private long timeUsed;
+	private String timeUsedString;
 	
 	public QuizResult(ResultSet rs) {
 		if (rs != null) {
@@ -22,11 +27,34 @@ public class QuizResult {
 				score = rs.getInt("score");
 				timeTaken = rs.getTimestamp("timeTaken");
 				timeUsed = rs.getInt("timeUsed");
-				user = UserUtils.getUser(rs.getString("user"));
+				user = rs.getString("user");
+				timeUsedString = timeUsedToString();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private String timeUsedToString() {
+		String result;
+		if (timeUsed < 1000) result = timeUsed + " ms";
+	    else if (timeUsed < 60000) {
+	    	long remainder = timeUsed%MILI_IN_SEC;
+	    	result = timeUsed/MILI_IN_SEC + " sec " + remainder + " ms";
+	    }else {
+	    	long secs = timeUsed/MILI_IN_SEC;
+	    	long remainder = secs%SEC_IN_MIN;
+	    	result = secs/SEC_IN_MIN + " min " + remainder + " sec";
+	    }
+		return result;
+	}
+
+	public String getTimeUsedString() {
+		return timeUsedString;
+	}
+	
+	public String getUser() {
+		return user;
 	}
 
 	public QuizResult() {
@@ -41,29 +69,12 @@ public class QuizResult {
 		return score;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
 	public Date getTimeTaken() {
 		return timeTaken;
 	}
 
 	public long getTimeUsed() {
 		return timeUsed;
-	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + quizID;
-		result = prime * result + score;
-		result = prime * result
-				+ ((timeTaken == null) ? 0 : timeTaken.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
 	}
 
 	@Override

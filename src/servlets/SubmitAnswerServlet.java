@@ -42,8 +42,14 @@ public class SubmitAnswerServlet extends HttpServlet {
 		Question question = takeQuiz.getCurrentQuestion();
 		String answer = request.getParameter("answer");
 		System.out.println(answer);
-		if (question.isCorrect(answer)) System.out.println("CORRECT!");
-		else System.out.println("WRONG");
+		if (question.isCorrect(answer)) {
+			takeQuiz.addScore(question.getOrderInQuiz(), question.getPointValue());
+			System.out.println("CORRECT!");
+		}
+		else {
+			takeQuiz.addScore(question.getOrderInQuiz(), 0);
+			System.out.println("WRONG");
+		}
 		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
 		dispatch.forward(request, response);
 	}

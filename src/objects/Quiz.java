@@ -69,6 +69,10 @@ public class Quiz {
 		this.numQuestions = 0;
 	}
 
+	public void incrementNumPlays() {
+		numPlays++;
+	}
+	
 	public void incrementNumQuestions() {
 		numQuestions++;
 	}

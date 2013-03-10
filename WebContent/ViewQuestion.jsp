@@ -14,6 +14,7 @@
 	Question question = takeQuiz.nextQuestion();
 
 	if (question == null) {
+		takeQuiz.quizComplete();
 		out.println("<h1>Congrats, you finished the quiz!</h1>");
 		out.println("<form action=\"ViewResults.jsp\">");
 		out.println("<br><input type=\"submit\" value=\"View Your Results!\">");

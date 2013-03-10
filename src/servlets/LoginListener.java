@@ -36,7 +36,7 @@ public class LoginListener implements ServletContextListener {
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
     public void contextDestroyed(ServletContextEvent arg0) {
-        // empty
+        MyDB.close();
     }
 	
 }

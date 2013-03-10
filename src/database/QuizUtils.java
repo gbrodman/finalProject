@@ -119,6 +119,12 @@ public class QuizUtils {
 		String update = "UPDATE quizzes SET numQuestions="+n+" WHERE id="+quiz.getId()+";";
 		MyDB.updateDatabase(update);
 	}
+	
+	public static void updateNumPlays(Quiz quiz) {
+		int n = quiz.getNumPlays();
+		String update = "UPDATE quizzes SET numPlays="+n+" WHERE id="+quiz.getId()+";";
+		MyDB.updateDatabase(update);
+	}
 	 
 	public static void saveQuizInDatabase(Quiz quiz) {
 		StringBuilder update = new StringBuilder();
