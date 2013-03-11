@@ -9,19 +9,19 @@ input {
 	font-size: 15px;
 	background-color: #EFEFEF;
     color: #0F0F0F;
-    border:none;
+    border-style:none;
 	border-radius: 10px;
 	width:300px;
-	left: 200px;
+	
 	padding: 1em;
     text-align:center;
-    margin: 10px;
+    margin-top: 10px;
 }
 
 input[type="submit"] {
 	background-color:#0F52BA;
 	color:#ffffff;
-	width:200px;
+	width:auto;
 }
 
 input[type="checkbox"] {
@@ -35,18 +35,28 @@ input[type="checkbox"] {
 	border-radius:5px;
 	border-color:#0F52BA;
 	background-color:#EFEFEF;
-	left:300px;
 }
 
 #sub {
 	background-color:#EFEFEF;
 	color:#000000;
+	float:right;
+	margin-right:0px;
+	border-style:none;
 }
 
 .buttonHolder {
      text-align:center;   
     vertical-align:center;
+    width: 25%;
+    left: 35.5%;
+    position:absolute;
 }
+
+.buttonHolder input[type="text"] {width:94%;}
+.buttonHolder input[type="password"] {width:94%;}
+
+.buttonHolder a {float:left; width:auto; padding:0em; font-size:20px;margin-bottom:5px;}
 
 #topbar {
 	float:top;
@@ -162,14 +172,20 @@ a.topbarlinks {
 	margin:3px;
 }
 
+.messagetitles {width:100%; border-bottom:4px solid #0F52BA; float:left; margin-top:5px;}
+
 #inbox {}
-#inbox ul {list-style:none;}
-#inbox ul li {display:block; margin-top:2px; margin-bottom:2px; margin-left:5%; margin-right:5%; border:25px solid #ffffff;}
-#inbox ul li .inboxmessage {display:block; float:left; width:70%; height:50px; position:absolute; color:#ffffff; margin-top:2px;}
+#inbox ul {list-style:none;float:left}
+#inbox ul li {display:block; margin-top:2px; margin-bottom:2px; margin-left:5%; margin-right:5%; border-bottom:50px solid #ffffff; }
+#inbox ul li .inboxmessage {display:block; float:left; width:90%; height:50px; position:absolute; color:#ffffff; margin-top:2px;}
+#inbox ul li .top {background-color:#ffffff; color:#0F52BA;}
 #inbox ul li .newinboxmessage {background-color:#3F82EA;width:100%; height:100%;}
 #inbox ul li .readinboxmessage {background-color:#0F52BA; width:100%; height:100%;}
-#inbox ul li .icon {width:50px; height:50px; border-right:2px solid #ffffff; float:left;}
-#inbox ul li .fromtomessage {width:12%; height:35px; float:left;border-right:2px solid #ffffff; text-align:center; display: table-cell; padding-top:15px;}
-#inbox ul li .messagemessage {width:50%; height:35px; float:left; border-right:2px solid #ffffff; text-align:center; padding-top:15px; overflow:hidden; text-overflow:ellipsis; white-space: nowrap;}
-
+#inbox ul li .icon {width:6%; height:50px; border-right:1px solid #ffffff; float:left;}
+#inbox ul li .icon img {width:100%; height:100%}
+#inbox ul li .fromtomessage {width:13%; height:35px; float:left;border-right:1px solid #ffffff; text-align:center; display: table-cell; padding-top:15px;}
+#inbox ul li .messagemessage {height:35px; border-right:1px solid #ffffff; text-align:center; padding-top:15px; overflow:hidden; text-overflow:ellipsis; white-space: nowrap;}
+#inbox ul li  .lefticon {float:left;}
+#inbox ul li .righticon {float:right;}
+#inbox ul li .blankspace {width:2%; height:50px; overflow:hidden; white:nowrap; background-color:#ffffff !important; float:left;}
 

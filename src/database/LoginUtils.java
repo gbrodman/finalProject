@@ -42,6 +42,7 @@ public class LoginUtils {
 		String hash = encrypt(password);
 		String query = "SELECT * FROM users WHERE username=\"" + username + "\" AND password=\"" + hash + "\";";
 		ResultSet result = MyDB.queryDatabase(query);
+		if (result == null) System.out.println("FUCK ME");
 		return !MyDB.resultIsEmpty(result);
 	}
 	

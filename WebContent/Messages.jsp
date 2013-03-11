@@ -42,13 +42,25 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 		}
 	}
 }*/
-out.println("NEW MESSAGES <br><br>");
+out.println("<div class=\"messagetitles\" <h2>MESSAGES</h2></div>");
 out.println("<div id=\"inbox\">");
 out.println("<ul>");
 System.out.println(inbox.size());
+out.println("<li>");
+out.println("<div class=\"inboxmessage top\">");
+out.println("<div class=\"icon\"></div>");
+out.println("<div class=\"icon\"></div>");
+out.println("<div class=\"icon righticon\"></div>");
+out.println("<div class=\"icon righticon\"></div>");
+out.println("<div class=\"fromtomessage\">From</div>");
+out.println("<div class=\"fromtomessage\">To</div>");
+out.println("<div class=\"messagemessage\">Message</div>");
+
+out.println("</div>");
 for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first
 	Message message = inbox.get(index);
 	if (!message.isFriendRequest()) {
+		System.out.println(message.getNote());
 		out.println("<li>");
 		out.println("<div class=\"inboxmessage\">");
 		if (!message.isViewed()) {
@@ -58,11 +70,23 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 			System.out.println("viewed");
 			out.println("<div class=\"readinboxmessage\">");
 		}
-		out.println("<div class=\"icon\">");
-		out.println("<img src=\"http://s176520660.online.de/dungeonslayers/forum/index.php?action=dlattach;attach=3848;type=avatar\" width=\"48\" height=\"48\">");
+		out.println("<div class=\"icon lefticon\">");
+		out.println("<img src=\"http://s176520660.online.de/dungeonslayers/forum/index.php?action=dlattach;attach=3848;type=avatar\""  + ">"); // width=\"48\" height=\"48\">");
 		out.println("</div>");
-		out.println("<div class=\"icon\">");
-		out.println("<img src=\"" + UserUtils.getUser(message.getUserFrom()).getPhotoURL() + "\" width=\"48\" height=\"48\">");
+		out.println("<div class=\"icon lefticon\">");
+		out.println("<img src=\"" + UserUtils.getUser(message.getUserFrom()).getPhotoURL() + "\">"); // + "\" width=\"48\" height=\"48\">");
+		out.println("</div>");
+		out.println("<div class=\"icon righticon\">");
+		if (message.isChallenge()) {
+			out.println("<a href=\"ViewChallenge.jsp?index="+ index + "\">");
+		} else {
+			out.println("<a href=\"ViewNote.jsp?index=" + index + "\">");
+		}
+		out.println("<img src=\"http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-2/256/message-already-read-icon.png\""  +">"); // width=\"48\" height=\"48\">");
+		out.println("</a>");
+		out.println("</div>");
+		out.println("<div class=\"icon righticon\" id=\"deletebutton\">");
+		out.println("<img src=\"http://www.veryicon.com/icon/png/System/Must%20Have/Delete.png\""  +">"); // width=\"48\" height=\"48\">");
 		out.println("</div>");
 		out.println("<div class=\"fromtomessage\">");
 		out.println(message.getUserFrom());
@@ -77,20 +101,6 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 			out.println(message.getNote());
 		}
 		out.println("</div>");
-		out.println("<div class=\"icon\">");
-		if (message.isChallenge()) {
-			out.println("<a href=\"ViewChallenge.jsp?index="+ index + "\">");
-		} else {
-			out.println("<a href=\"ViewNote.jsp?index=" + index + "\">");
-		}
-		out.println("<img src=\"http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-2/256/message-already-read-icon.png\" width=\"48\" height=\"48\">");
-		out.println("</a>");
-		out.println("</div>");
-		out.println("<div class=\"icon\">");
-		out.println("<img src=\"http://www.veryicon.com/icon/png/System/Must%20Have/Delete.png\" width=\"48\" height=\"48\">");
-		out.println("</div>");
-		
-		out.println("</div>");
 		out.println("</div>");
 		out.println("</li>");
 	}
@@ -98,6 +108,22 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 out.println("</ul>");
 out.println("</div>");
 out.println("<br>");
+
+out.println("<div id=\"friendrequests\">");
+out.println("<div class=\"messagetitles\" <h2>FRIEND REQUESTS</h2></div>");
+out.println("<ul>");
+for (int index = inbox.size() - 1; index >= 0; index--) {
+	Message message = inbox.get(index);
+	if (message.isFriendRequest()) {
+		String from = message.getUserFrom();
+		int addedlength = 15 - from.length(); // TODO: make sure that max length is 15
+		for (int i = 0; i < addedlength; i++) from += ' ';
+		System.out.println(from);
+	}
+}
+
+out.println("</ul>");
+out.println("</div>");
 //then display read messages
 /*out.println("READ MESSAGES <br><br>");
 for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first
