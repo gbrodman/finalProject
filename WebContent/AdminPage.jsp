@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="database.QuizUtils"%>
+<%@page import="database.QuizResultUtils"%>
+<%@page import="database.UserUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
         <%@ page import="objects.*" %>
@@ -24,23 +27,36 @@ out.println("<form method=\"post\" action=\"SearchServlet\">");
 out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
 out.println("</form>");
 out.println("</div>");
-out.println("<h1> Welcome "+ user.getName()  +"</h1>");
-out.println("<img src="+user.getPhotoURL()+" width=10% height=10% >"); 
 out.println("<br>");
-out.println("<body>");
-if (user.isAdmin()) {
-	out.println("<a href=\"AdminPage.jsp\">Go to Admin Page</a><br>");
-}
-out.println("<a href=\"Messages.jsp\">Go to Messages</a>");
-out.println("<br><a href=\"MessageFriends.jsp\">Message Friends</a>");
-out.println("<br><a href=\"CreateQuiz.jsp\">Create a Quiz</a>");
-out.println("<br><a href=\"QuizList.jsp\">Take a Quiz</a>");
-out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
-out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\" onfocus=\"if (this.value == 'Enter url of new photo') {this.value = '';}\">");
-out.println("<input type=\"submit\" value=\"Change photo\">");
-out.println("</form>");
 %>
-
+<body>
+<h1>Admin</h1><br>
+<h2>Statistics:</h2>
+<p>
+Number of users:  <%out.println(UserUtils.getNumberTotalUsers()); %><br></p>
+<p>Number quizzes taken: <%out.println(QuizResultUtils.totalNumQuizzesTaken()); %><br></p>
+<h2>Admin Utils:</h2>
+<ul>
+<li>
+Remove User: <br>
+<form method="post" action="RemoveUserServlet">
+<input type="text" name="userToRemove" value="User to remove" onfocus="if (this.value == 'User to remove') {this.value = '';}"/>
+<input type="submit" value="Remove"/>
+</form>
+</li><li>
+Create Announcement: <br>
+<form method="post" action="CreateAnnouncementServlet">
+<input type="text" name="announcement" value="Announcement" onfocus="if (this.value == 'Announcement') {this.value = '';}"/>
+<input type="submit" value="Create"/>
+</form>
+</li><li>
+Promote User Account to Admin: <br>
+<form method="post" action="PromoteUserServlet">
+<input type="text" name="userToPromote" value="User to promote" onfocus="if (this.value == 'User to promote') {this.value = '';}"/>
+<input type="submit" value="Promote"/>
+</form>
+</li>
+</ul>
 
 
 </body>

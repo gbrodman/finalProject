@@ -48,6 +48,7 @@ public class QuizUtils {
 		return result;
 	}
 	
+	
 	public static int getNextId() {
 		String query = "SELECT id FROM quizzes ORDER BY id DESC;";
 		ResultSet rs = MyDB.queryDatabase(query);
@@ -76,6 +77,22 @@ public class QuizUtils {
 		}
 		return result;
 	}
+	
+	public static List<Quiz> getQuizzesByTitle(String title) {
+		List<Quiz> result = new ArrayList<Quiz>();
+		String query = "SELECT * FROM quizzes WHERE title LIKE '%" + title + "%';";
+		ResultSet rs = MyDB.queryDatabase(query);
+		try {
+			while (rs.next()) {
+				Quiz quiz = new Quiz(rs);
+				result.add(quiz);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	
 	public static Map<String, List<Quiz>> getQuizzesByCategory() {
 		Map<String, List<Quiz>> result = new HashMap<String, List<Quiz>>();
@@ -153,6 +170,16 @@ public class QuizUtils {
 		update.append(");");
 		//MyDB.updateDatabase(update.toString());
 		MyDB.updatePreparedTimestamp(update.toString(), quiz.getTimeCreated());
+	}
+	
+	public static List<Quiz> searchQuizzes(String search) {
+		List<Quiz> toReturn = new ArrayList<Quiz>();
+		toReturn.addAll(getQuizzesByTag(search));
+		List<Quiz> byCategory = getQuizzesByCategory().get(search);
+		if (byCategory != null) toReturn.addAll(byCategory);
+		toReturn.addAll(getQuizzesByUser(search));
+		toReturn.addAll(getQuizzesByTitle(search));
+		return toReturn;
 	}
 
 	public QuizUtils() {

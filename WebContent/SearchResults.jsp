@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-        <%@ page import="objects.*" %>
+<%@page import="objects.Quiz"%>
+<%@page import="java.util.List"%>
+<%@page import="objects.User"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,24 +25,29 @@ out.println("<form method=\"post\" action=\"SearchServlet\">");
 out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
 out.println("</form>");
 out.println("</div>");
-out.println("<h1> Welcome "+ user.getName()  +"</h1>");
-out.println("<img src="+user.getPhotoURL()+" width=10% height=10% >"); 
-out.println("<br>");
-out.println("<body>");
-if (user.isAdmin()) {
-	out.println("<a href=\"AdminPage.jsp\">Go to Admin Page</a><br>");
-}
-out.println("<a href=\"Messages.jsp\">Go to Messages</a>");
-out.println("<br><a href=\"MessageFriends.jsp\">Message Friends</a>");
-out.println("<br><a href=\"CreateQuiz.jsp\">Create a Quiz</a>");
-out.println("<br><a href=\"QuizList.jsp\">Take a Quiz</a>");
-out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
-out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\" onfocus=\"if (this.value == 'Enter url of new photo') {this.value = '';}\">");
-out.println("<input type=\"submit\" value=\"Change photo\">");
-out.println("</form>");
 %>
-
-
+</head>
+<body>
+<h1>Search Results</h1>
+<%User resultUser = (User) request.getAttribute("userResult");
+List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizResults");
+if (resultUser != null) {
+	out.println("<h2>User Result:</h2>");
+	out.println("TODO: link to user<br>");
+}
+if (quizzes != null) {
+	out.println("<h2>Quiz Result(s):</h2>");
+	for (Quiz quiz : quizzes) {
+		out.print("<li>");
+		out.print(quiz.getTitle());
+		out.print("<form action=\"TakeQuizServlet\" method=\"post\">");
+		out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
+		out.print(quiz.getId());
+		out.print("\">");
+		out.print("<input type=\"submit\" value=\"View this Quiz\" /></form></li>");
+	}
+}
+%>
 
 </body>
 </html>
