@@ -3,8 +3,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import objects.Quiz;
 
@@ -48,6 +50,7 @@ public class QuizUtils {
 		return result;
 	}
 	
+	
 	public static int getNextId() {
 		String query = "SELECT id FROM quizzes ORDER BY id DESC;";
 		ResultSet rs = MyDB.queryDatabase(query);
@@ -76,6 +79,22 @@ public class QuizUtils {
 		}
 		return result;
 	}
+	
+	public static List<Quiz> getQuizzesByTitle(String title) {
+		List<Quiz> result = new ArrayList<Quiz>();
+		String query = "SELECT * FROM quizzes WHERE title LIKE '%" + title + "%';";
+		ResultSet rs = MyDB.queryDatabase(query);
+		try {
+			while (rs.next()) {
+				Quiz quiz = new Quiz(rs);
+				result.add(quiz);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	
 	public static Map<String, List<Quiz>> getQuizzesByCategory() {
 		Map<String, List<Quiz>> result = new HashMap<String, List<Quiz>>();
@@ -153,6 +172,33 @@ public class QuizUtils {
 		update.append(");");
 		//MyDB.updateDatabase(update.toString());
 		MyDB.updatePreparedTimestamp(update.toString(), quiz.getTimeCreated());
+	}
+	
+	public static List<Quiz> searchQuizzes(String search) {
+		Set<Quiz> toReturn = new HashSet<Quiz>();
+		toReturn.addAll(getQuizzesByTag(search));
+		List<Quiz> byCategory = getQuizzesByCategory().get(search);
+		if (byCategory != null) toReturn.addAll(byCategory);
+		toReturn.addAll(getQuizzesByUser(search));
+		toReturn.addAll(getQuizzesByTitle(search));
+		List<Quiz> result = new ArrayList<Quiz>();
+		result.addAll(toReturn);
+		return result;
+	}
+	
+	public static List<Quiz> getRecentlyCreatedQuizzes(String username) {
+		String query = "SELECT * FROM quizzes WHERE owner=" + username + " AND TIMESTAMPDIFF(MINUTE, timeCreated, CURRENT_TIMESTAMP()) < 15 ORDER BY timeTaken DESC;";
+		List<Quiz> toReturn = new ArrayList<Quiz>();
+		ResultSet rs = MyDB.queryDatabase(query);
+		try {
+			while (rs.next()) {
+				Quiz quiz = new Quiz(rs);
+				toReturn.add(quiz);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return toReturn;
 	}
 
 	public QuizUtils() {

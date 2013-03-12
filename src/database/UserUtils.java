@@ -24,6 +24,22 @@ public class UserUtils {
 		}
 	}
 	
+	public static void removeUser(String username) {
+		String update = "DELETE FROM users WHERE username=\"" + username + "\";";
+		MyDB.updateDatabase(update);
+	}
+	
+	public static void promoteUser(String username) {
+		String update = "UPDATE users SET isAdmin=1 WHERE username=\"" + username + "\";";
+		MyDB.updateDatabase(update);
+	}
+	
+	public static boolean userExists(String username) {
+		String query = "SELECT * FROM users WHERE username=\"" + username + "\";";
+		ResultSet result = MyDB.queryDatabase(query);
+		return (!MyDB.resultIsEmpty(result));
+	}
+	
 	public static int getNumberTotalUsers() {
 		String query = "SELECT username FROM users;";
 		ResultSet rs = MyDB.queryDatabase(query);

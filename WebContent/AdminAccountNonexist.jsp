@@ -24,24 +24,9 @@ out.println("<form method=\"post\" action=\"SearchServlet\">");
 out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
 out.println("</form>");
 out.println("</div>");
-out.println("<h1> Welcome "+ user.getName()  +"</h1>");
-out.println("<img src="+user.getPhotoURL()+" width=10% height=10% >"); 
-out.println("<br>");
-out.println("<body>");
-if (user.isAdmin()) {
-	out.println("<a href=\"AdminPage.jsp\">Go to Admin Page</a><br>");
-}
-out.println("<a href=\"Messages.jsp\">Go to Messages</a>");
-out.println("<br><a href=\"MessageFriends.jsp\">Message Friends</a>");
-out.println("<br><a href=\"CreateQuiz.jsp\">Create a Quiz</a>");
-out.println("<br><a href=\"QuizList.jsp\">Take a Quiz</a>");
-out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
-out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\" onfocus=\"if (this.value == 'Enter url of new photo') {this.value = '';}\">");
-out.println("<input type=\"submit\" value=\"Change photo\">");
-out.println("</form>");
 %>
-
-
-
+<body>
+That account does not exist. <br>
+<a href="AdminPage.jsp">Return to Admin Page</a>
 </body>
 </html>
