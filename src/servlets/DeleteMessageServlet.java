@@ -39,8 +39,13 @@ public class DeleteMessageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Message message = (Message)request.getSession().getAttribute("currentMessage");
-		MessageUtils.removeMessage(message);
+		
+		int messageID = Integer.parseInt(request.getParameter("messageid"));
+		if (request.getParameter("messageid") != null) {
+			MessageUtils.removeMessage(Integer.parseInt(request.getParameter("messageid")));
+		} else {
+			MessageUtils.removeMessage(((Message)request.getSession().getAttribute("currentMessage")).getMessageID());
+		}
 		RequestDispatcher dispatch = request.getRequestDispatcher("Messages.jsp");
 		dispatch.forward(request, response);
 	}

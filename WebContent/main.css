@@ -182,6 +182,7 @@ a.topbarlinks {
 #inbox ul li .newinboxmessage {background-color:#3F82EA;width:100%; height:100%;}
 #inbox ul li .readinboxmessage {background-color:#0F52BA; width:100%; height:100%;}
 #inbox ul li .icon {width:6%; height:50px; border-right:1px solid #ffffff; float:left;}
+#inbox ul li .icon input {width:100%; height:100%; padding:0em; margin-top:0em; overflow:hidden;}
 #inbox ul li .icon img {width:100%; height:100%}
 #inbox ul li .fromtomessage {width:13%; height:35px; float:left;border-right:1px solid #ffffff; text-align:center; display: table-cell; padding-top:15px;}
 #inbox ul li .messagemessage {height:35px; border-right:1px solid #ffffff; text-align:center; padding-top:15px; overflow:hidden; text-overflow:ellipsis; white-space: nowrap;}

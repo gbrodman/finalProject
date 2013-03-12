@@ -86,7 +86,12 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 		out.println("</a>");
 		out.println("</div>");
 		out.println("<div class=\"icon righticon\" id=\"deletebutton\">");
-		out.println("<img src=\"http://www.veryicon.com/icon/png/System/Must%20Have/Delete.png\""  +">"); // width=\"48\" height=\"48\">");
+		out.println("<form name = 'form3' action=\"DeleteMessageServlet\" method=\"post\" onsubmit=\"return confirm('Do you really want to delete this message')\">");
+		out.println("<input name=\"messageid\" type=\"hidden\" id=\"messageid\" value=\"" + message.getMessageID() + "\">");
+		out.println("<input type=\"image\" src=\"http://www.veryicon.com/icon/png/System/Must%20Have/Delete.png\">");
+		out.println("</form>");
+
+		//out.println("<img src=\"http://www.veryicon.com/icon/png/System/Must%20Have/Delete.png\""  +">"); // width=\"48\" height=\"48\">");
 		out.println("</div>");
 		out.println("<div class=\"fromtomessage\">");
 		out.println(message.getUserFrom());
