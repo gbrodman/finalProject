@@ -25,6 +25,7 @@
 	out.println("</ol>");
 	
 	out.println("Your total score is: " +takeQuiz.getScorePercent()+"%");
+	out.println("<br>You took " +QuizResult.timeUsedToString(takeQuiz.getTimeUsed())+" to complete this quiz.");
 	out.println("<br><br><form action=\"DisplayQuiz.jsp\">");
 	out.println("<input type=\"submit\" value=\"Return to Quiz Page\">");
 	out.println("</form>");

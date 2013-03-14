@@ -65,7 +65,7 @@ public class QuizResultUtils {
 	
 	public static List<QuizResult> getRecentPerformances(int quizID, int numResults) {
 		String query = "SELECT * FROM history WHERE quizID=" + quizID + " AND TIMESTAMPDIFF(MINUTE, timeTaken, CURRENT_TIMESTAMP()) < 15 ORDER BY timeTaken DESC;";
-		return getNumberOfQuizzes(quizID, numResults, query);
+		return getNumberOfQuizzes(quizID, numResults,  query);
 	}
 	
 	public static List<QuizResult> getTopPerformances(int quizID, int numResults) {
