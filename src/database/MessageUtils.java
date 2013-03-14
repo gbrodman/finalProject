@@ -31,8 +31,8 @@ public class MessageUtils {
 		MyDB.updateDatabase(update);
 	}
 	
-	public static void removeMessage(Message message) {
-		String update = "DELETE FROM messages WHERE messageID = " + message.getMessageID() + ";";
+	public static void removeMessage(int message) {
+		String update = "DELETE FROM messages WHERE messageID = " + message + ";";
 		MyDB.updateDatabase(update);
 	}
 

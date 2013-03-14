@@ -50,7 +50,7 @@ public class HandleFriendRequestServlet extends HttpServlet {
 			System.out.println("REJECT");
 		}
 		FriendUtils.removeFromFriendsPending(message.getUserFrom(), message.getUserTo());
-		MessageUtils.removeMessage(message);
+		MessageUtils.removeMessage(message.getMessageID());
 		RequestDispatcher dispatch = request.getRequestDispatcher("Messages.jsp");
 		dispatch.forward(request, response);
 	}
