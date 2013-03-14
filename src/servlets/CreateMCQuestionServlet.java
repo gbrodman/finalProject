@@ -43,8 +43,10 @@ public class CreateMCQuestionServlet extends HttpServlet {
 		String answer = request.getParameter("answer");
 		int points = Integer.parseInt(request.getParameter("questionPoints"));
 		Quiz quiz = (Quiz)request.getSession().getAttribute("currentQuiz");
-		MCQuestionUtils.addToDatabase(body,answer,answerChoices,points,quiz.getId(),quiz.numQuestions());
+		MCQuestion question = new MCQuestion(body,answer,answerChoices,points,quiz.getId(),quiz.numQuestions());
 		quiz.incrementNumQuestions();
+		QuizUtils.updateNumQuestions(quiz);
+		MCQuestionUtils.saveQuestionInDatabase(question);
 		RequestDispatcher dispatch = request.getRequestDispatcher("AddQuestions.jsp");
 		dispatch.forward(request, response);
 	}

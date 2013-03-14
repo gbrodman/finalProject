@@ -14,6 +14,10 @@
 <% 
 	User user = (User)session.getAttribute("user");
 
+	out.println("<br><form action=\"Homepage.jsp\">");
+	out.println("<input type=\"submit\" value=\"Return to Homepage\">");
+	out.println("</form><br>");
+	out.println("<h1>Quizzes:</h1>");
 	List<Quiz> list = QuizUtils.getAllQuizzes();
 	for (Quiz quiz : list) {
 		out.print("<li>");

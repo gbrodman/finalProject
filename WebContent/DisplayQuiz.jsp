@@ -22,13 +22,21 @@
 	out.println("<body><br>Created by: "+quiz.getOwner().getName());
 	out.println("<body><br>"+inst);
 	out.println("<br>This quiz has "+num+" questions.");
+	if (takeQuiz.isInstantCorrect()) out.println("<br>This quiz has instant correction.");
 	out.println("<form action=\"ViewQuestion.jsp\">");
 	out.println("<br><input type=\"submit\" value=\"Start the Quiz!\">");
+	out.println("</form>");
+	if (quiz.isCanPractice()) {
+		out.println("<form action=\"PracticeModeServlet\" method=post>");
+		out.println("<br><input type=\"submit\" value=\"Practice the Quiz\">");
+		out.println("</form>");
+	}
+	out.println("<br><form action=\"QuizList.jsp\">");
+	out.println("<input type=\"submit\" value=\"Return to Quizzes\">");
 	out.println("</form>");
 	out.println("<br><form action=\"Homepage.jsp\">");
 	out.println("<input type=\"submit\" value=\"Return to Homepage\">");
 	out.println("</form>");
-	
 	out.println("<br><br><h1>Past Results</h1>");
 	out.println("<br>This quiz has been taken "+QuizResultUtils.getNumberTimesQuizTaken(id)+" times with an average score of "+QuizResultUtils.getAverageScoreOnQuiz(id)+"%");
 	out.println("<br><br>Your past results:<br>");

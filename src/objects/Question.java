@@ -14,5 +14,9 @@ public interface Question {
 	int getQuizID();
 	int getOrderInQuiz();
 	boolean isCorrect(String answer);
+	public String getInstantQuestion();
+	public String getInstantCorrectResult(String ans);
+	public String getURL();
+	public String getAnswerChoices();
 	
 }

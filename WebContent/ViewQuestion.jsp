@@ -11,7 +11,9 @@
 <body>
 <%
 	TakeQuiz takeQuiz = (TakeQuiz)session.getAttribute("takeQuiz");
-	Question question = takeQuiz.nextQuestion();
+	Question question;
+	if (!takeQuiz.isRandom()) question = takeQuiz.nextQuestion();
+	else question = takeQuiz.getRandomNext();
 
 	if (question == null) {
 		takeQuiz.quizComplete();
@@ -21,7 +23,8 @@
 		out.println("</form>");
 	}
 	else {
-		out.println(question.getQuestionDisplay());
+		if (takeQuiz.isInstantCorrect()) out.println(question.getInstantQuestion());
+		else out.println(question.getQuestionDisplay());
 	}
 %>
 </body>

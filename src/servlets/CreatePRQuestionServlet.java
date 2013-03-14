@@ -43,9 +43,10 @@ public class CreatePRQuestionServlet extends HttpServlet {
 		String url = request.getParameter("photoURL");
 		int points = Integer.parseInt(request.getParameter("questionPoints"));
 		Quiz quiz = (Quiz)request.getSession().getAttribute("currentQuiz");
-		PRQuestionUtils.addToDatabase(body,answer,url,points,quiz.getId(),quiz.numQuestions());
+		PRQuestion question = new PRQuestion(body,answer,url,points,quiz.getId(),quiz.numQuestions());
 		quiz.incrementNumQuestions();
 		QuizUtils.updateNumQuestions(quiz);
+		PRQuestionUtils.saveQuestionInDatabase(question);
 		RequestDispatcher dispatch = request.getRequestDispatcher("AddQuestions.jsp");
 		dispatch.forward(request, response);
 	}

@@ -8,16 +8,34 @@ import database.*;
 public class TakeQuiz {
 	
 	private List<Question> questions;
+	private List<Question> unUsed;
+	private Random r;
 	private Quiz quiz;
 	private Question curr;
-	private List<Integer> scores;
+	private int[] scores;
 	private int total;
 	private Timestamp timeStarted;
 	private Timestamp timeCompleted;
 	private long timeUsedNum;
+	private boolean isPractice;
+	private boolean instantCorrect;
+	private boolean isRandom;
+	
+	public void initializeUnused() {
+		unUsed = new ArrayList<Question>();
+		for (Question q : questions) {
+			int type = q.getQuestionType();
+			Question newQ = null;
+			if (type == 1) newQ = new QRQuestion(q.getBody(), q.getAnswers(), q.getPointValue(), q.getQuizID(), q.getOrderInQuiz());
+			else if (type == 2) newQ = new FITBQuestion(q.getBody(), q.getAnswers(), q.getPointValue(), q.getQuizID(), q.getOrderInQuiz());
+			else if (type == 3) newQ = new MCQuestion(q.getBody(), q.getAnswers(), q.getAnswerChoices(), q.getPointValue(), q.getQuizID(), q.getOrderInQuiz());
+			else if (type == 4) newQ = new PRQuestion(q.getBody(), q.getAnswers(), q.getURL(), q.getPointValue(), q.getQuizID(), q.getOrderInQuiz());
+			unUsed.add(newQ);
+		}
+	}
 	
 	public TakeQuiz(Quiz quiz) {
-		this.scores = new ArrayList<Integer>();
+		r = new Random();
 		java.util.Date today = new java.util.Date();
 	    timeStarted = new java.sql.Timestamp(today.getTime());
 		this.quiz = quiz;
@@ -39,7 +57,27 @@ public class TakeQuiz {
 		};
 		Collections.sort(questionList, questionComparator);
 		this.questions = questionList;
+		initializeUnused();
+		this.instantCorrect = quiz.isInstantCorrection();
+		this.isRandom = quiz.isRandomPages();
 		this.curr = null;
+		this.scores = new int[quiz.numQuestions()];
+	}
+	
+	public boolean isRandom() {
+		return isRandom;
+	}
+	
+	public void setToPractice() {
+		isPractice = true;
+	}
+	
+	public boolean isPractice() {
+		return isPractice;
+	}
+	
+	public boolean isInstantCorrect() {
+		return instantCorrect;
 	}
 	
 	public void quizComplete() {
@@ -64,12 +102,12 @@ public class TakeQuiz {
 		return percent;
 	}
 	
-	public void addScore(int index, int value) {
+	public void addScore(int value, int index) {
 		total += value;
-		scores.add(value);
+		scores[index] = value;
 	}
 	
-	public List<Integer> getScores() {
+	public int[] getScores() {
 		return scores;
 	}
 	
@@ -95,6 +133,15 @@ public class TakeQuiz {
 		else index = curr.getOrderInQuiz();
 		if (index >= questions.size()-1) return null;
 		curr = questions.get(index+1);
+		return curr;
+	}
+	
+	public Question getRandomNext() {
+		if (curr != null) unUsed.remove(curr);
+		int size = unUsed.size();
+		if (size == 0) return null;
+		int i = r.nextInt(size);
+		curr = unUsed.get(i);
 		return curr;
 	}
 	

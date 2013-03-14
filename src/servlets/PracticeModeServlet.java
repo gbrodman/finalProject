@@ -8,21 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import objects.*;
 import database.*;
 
 /**
- * Servlet implementation class SubmitAnswerServlet
+ * Servlet implementation class PracticeModeServlet
  */
-@WebServlet("/SubmitAnswerServlet")
-public class SubmitAnswerServlet extends HttpServlet {
+@WebServlet("/PracticeModeServlet")
+public class PracticeModeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubmitAnswerServlet() {
+    public PracticeModeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,17 +38,7 @@ public class SubmitAnswerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		TakeQuiz takeQuiz = (TakeQuiz)request.getSession().getAttribute("takeQuiz");
-		Question question = takeQuiz.getCurrentQuestion();
-		String answer = request.getParameter("answer");
-		System.out.println(answer);
-		if (question.isCorrect(answer)) {
-			takeQuiz.addScore(question.getPointValue(), question.getOrderInQuiz());
-			System.out.println("CORRECT!");
-		}
-		else {
-			takeQuiz.addScore(0, question.getOrderInQuiz());
-			System.out.println("WRONG");
-		}
+		takeQuiz.setToPractice();
 		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
 		dispatch.forward(request, response);
 	}
