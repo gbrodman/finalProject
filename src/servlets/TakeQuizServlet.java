@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.*;
-import objects.*;
+
+import objects.Quiz;
+import objects.TakeQuiz;
+import database.QuizUtils;
 
 /**
  * Servlet implementation class TakeQuizServlet
@@ -39,6 +41,7 @@ public class TakeQuizServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("TakeQuizServlet");
 		Quiz quiz = (Quiz)request.getSession().getAttribute("quiz");
+		if (quiz == null) quiz = QuizUtils.getQuizByID(Integer.parseInt(request.getParameter("quiz")));
 		TakeQuiz takeQuiz = new TakeQuiz(quiz);
 		request.getSession().setAttribute("takeQuiz",takeQuiz);
 		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");

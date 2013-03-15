@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import objects.*;
-import database.*;
-import java.util.*;
+import objects.Quiz;
+import objects.User;
+import database.FriendUtils;
+import database.MessageUtils;
 
 /**
  * Servlet implementation class SendMessageServlet
@@ -39,13 +41,19 @@ public class SendMessageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		User user = (User) request.getSession().getAttribute("user");
-		String text = request.getParameter("text");
-		if (request.getParameter("messageType").equals("note")) {
+		String messageType = request.getParameter("messageType");
+		if (messageType.equals("note")) {
+			String text = request.getParameter("text");
 			String friend = request.getParameter("friend").trim();
 			MessageUtils.sendNote(friend, user.getName(), text);
 			RequestDispatcher dispatch = request.getRequestDispatcher("MessageFriends.jsp");
+			dispatch.forward(request, response);
+		} else if (messageType.equals("friendRequest")) {
+			String from = user.getName();
+			String to = request.getParameter("to");
+			FriendUtils.sendFriendRequest(from, to);
+			RequestDispatcher dispatch = request.getRequestDispatcher("Profile.jsp");
 			dispatch.forward(request, response);
 		}
 		if (request.getParameter("messageType").equals("challenge")) {
