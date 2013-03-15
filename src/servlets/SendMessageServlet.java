@@ -54,8 +54,8 @@ public class SendMessageServlet extends HttpServlet {
 			String to = request.getParameter("to");
 			FriendUtils.sendFriendRequest(from, to);
 			MessageUtils.sendFriendRequest(to, from);
-			System.out.println("MESSAGE GOT HERE!" + to + from + messageType);
-			RequestDispatcher dispatch = request.getRequestDispatcher("Profile.jsp");
+			String pageToOpen = request.getParameter("pageToOpen");
+			RequestDispatcher dispatch = request.getRequestDispatcher(pageToOpen);
 			dispatch.forward(request, response);
 		}
 		if (request.getParameter("messageType").equals("challenge")) {

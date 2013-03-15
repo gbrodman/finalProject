@@ -11,24 +11,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href='http://fonts.googleapis.com/css?family=Happy+Monkey' rel='stylesheet' type='text/css'>
 <link href="main.css" rel="stylesheet" type="text/css">
-<% 
-User user = (User)session.getAttribute("user");
-out.println("<title>" + user.getName()  + "</title>");
-out.println("</head>");
-out.println("<div id=\"navbar\">");
-out.println("<ul>");
-out.println("<li><a href=\"Homepage.jsp\" class=\"topbarlinks\">Home</a></li>");
-out.println("<li><a href=\"Messages.jsp\" class=\"topbarlinks\">Messages</a></li>");
-out.println("<li>Create New Quiz</li>");
-out.println("<li><a href=\"MessageFriends.jsp\" class=\"topbarlinks\">Friends</a></li>");
-out.println("<li>Take a Quiz</li>");
-out.println("</ul>");
-out.println("<form method=\"post\" action=\"SearchServlet\">");
-out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
-out.println("</form>");
-out.println("</div>");
-out.println("<br>");
-%>
 <body>
 <h1>Admin</h1><br>
 <h2>Statistics:</h2>

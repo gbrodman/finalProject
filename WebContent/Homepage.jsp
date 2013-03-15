@@ -260,14 +260,24 @@ List<NewsFeedEntry> newsFeedEntries = NewsFeedUtils.getMostRecentEntries(user.ge
 System.out.println("NUM ENTRIES: " + newsFeedEntries.size());
 out.println("<div class=\"newsfeed\">");
 out.println("<ul>");
-for (int i = newsFeedEntries.size() - 1; i >= 0; i --) {
+for (int i = 0; i < newsFeedEntries.size(); i++) {
 	NewsFeedEntry entry = newsFeedEntries.get(i);
-	out.println("<li id=\"newsfeed" + (newsFeedEntries.size() - i - 1) + "\">");
+	out.println("<li id=\"newsfeed" + (i) + "\">");
 	out.println("<div class=\"newsfeedentry\">");
 	String from = entry.getUser();
 	String text = entry.getText();
+	if (text.contains("is now friends with")) {
+		System.out.println("OKAY");
+		int index = text.indexOf("is now friends with");
+		String to = text.substring(index + "is now friends with ".length());
+		text = text.replaceFirst(to, "<a href=\"Profile.jsp?profile=" + to + "\">" + to + "</a>");
+	} else if (entry.isQuiz()) {
+		Quiz quiz = QuizUtils.getQuizByID(entry.quizID());
+		text = text.replaceFirst(quiz.getTitle(), "<a href=\"DisplayQuiz.jsp?quiz=" + quiz.getId() + "\">" + quiz.getTitle() + "</a>");
+	}
 	System.out.println("FROM: " + from + " MESSAGE: " + text);
-	text = text.replace(from, "<a href=\"Profile.jsp?profile=" + from + "\">" + from + "</a>");
+	String textToDisplay = from.equals(user.getName()) ? "You" : from;
+	text = text.replace(from, "<a href=\"Profile.jsp?profile=" + from + "\">" + textToDisplay + "</a>");
 	out.println("<div class=\"icon\">");
 	out.println("<img src=\"" + UserUtils.getUser(from).getPhotoURL() + "\">");
 	out.println("</div>");
@@ -350,11 +360,11 @@ $('.messagetopbarlinks').mouseleave(function() {
 });
 
 $('.newsfeedh2').hover(function() {
-	$('.announcementsclass').hide(800);
-	$('.recentlycreatedquizclass').hide(800);
-	$('.achievementsclass').hide(800);
-	$('.popularquizclass').hide(800);
-	$('.recentquizclass').hide(800);
+	$('.announcementsclass').hide(400);
+	$('.recentlycreatedquizclass').hide(400);
+	$('.achievementsclass').hide(400);
+	$('.popularquizclass').hide(400);
+	$('.recentquizclass').hide(400);
 	for (var i = 0; i < 2; i++) {
 		$('#newsfeed' + i).show(400);
 	}

@@ -11,14 +11,14 @@
 <title>Quiz List</title>
 <body>
 <ul>
-<% 
+<%
 	User user = (User)session.getAttribute("user");
 
 	out.println("<br><form action=\"Homepage.jsp\">");
 	out.println("<input type=\"submit\" value=\"Return to Homepage\">");
 	out.println("</form><br>");
 	out.println("<h1>Quizzes (by category):</h1>");
-	Map<String, List<Quiz>> quizzes = QuizUtils.getQuizzesByCategory();
+	Map<String, List<Quiz>> quizzes = QuizUtils.getQuizzesByCategory(user);
 	for (String category : quizzes.keySet()) {
 		System.out.println("cateogory");
 		out.println("<h2>" + category + "</h2><br>");
@@ -33,7 +33,6 @@
 		}
 		out.println("<br><br>");
 	}
-
 %>
 </ul>
 </body>

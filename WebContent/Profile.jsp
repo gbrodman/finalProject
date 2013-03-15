@@ -9,7 +9,7 @@
 <%User viewing = UserUtils.getUser(request.getParameter("profile")); 
 User self = (User) session.getAttribute("user");
 if (viewing.getPrivacyLevel() > 0 && !FriendUtils.areFriends(viewing.getName(), self.getName())) {
-	out.println("<meta http-equiv=\"refresh\" content=\"0;URL=Privacy.html\">");
+	out.println("<meta http-equiv=\"refresh\" content=\"0;URL=Privacy.jsp?otherUser=" + viewing.getName() + "\">");
 }
 %>
 <link href='http://fonts.googleapis.com/css?family=Happy+Monkey'
@@ -18,21 +18,42 @@ if (viewing.getPrivacyLevel() > 0 && !FriendUtils.areFriends(viewing.getName(), 
 <%
 List<Achievement> achievements = viewing.getAchievements();
 List<QuizResult> recentPerformances = QuizResultUtils.getRecentPerformances(viewing.getName());
-List<Quiz> ownedQuizzes = QuizUtils.getQuizzesByUser(viewing.getName());
+List<Quiz> ownedQuizzes = QuizUtils.getQuizzesByUser(viewing.getName(), self);
 List<String> friends = FriendUtils.getFriends(viewing.getName());%>
 <title><%out.print(viewing.getName()); %>'s profile</title>
 </head>
 <body>
 <h1><%out.print(viewing.getName()); %></h1>
-<table cellspacing="0" WIDTH="100%" >
-<col width="33%">
-<col width="33%">
-<col width="33%">
-<tr>
-<td  ALIGN="left">
-<img src="<%out.print(viewing.getPhotoURL());%>"  ></img>
-</td><td  ALIGN="left">
-<% if (self.getName().equals(viewing.getName())) {
+<% 
+out.println("<div class=\"profileimgfriends\">");
+out.println("<div class=\"profileimg\"><img src=\"" + viewing.getPhotoURL()+ "\"/></div>");
+out.println("<div class=\"buttonscontainer\">");
+out.println("<div class=\"friendsbutton\">");
+if (FriendUtils.getSentRequests(self.getName()).contains(viewing.getName())) {
+	out.println("<span class=\"friendspending\">Pending Friend Request</span>");
+} else if (FriendUtils.getSentRequests(viewing.getName()).contains(self.getName())){
+	out.println("<form method=\"get\" action=\"Messages.jsp\">");
+	out.println("<input type=\"submit\" value=\"Respond to friend request!\"");
+	out.println("</form");
+} else if (FriendUtils.getFriends(self.getName()).contains(viewing.getName())) {
+	out.println("<span class=\"alreadyfriends\">Friends!</span>");	
+} else {
+	out.println("<form method=\"post\" action=\"SendMessageServlet\">");
+	out.println("<input type=\"hidden\" name=\"messageType\" value=\"friendRequest\">");
+	out.println("<input type=\"hidden\" name=\"to\" value=\"" + viewing.getName() + "\">");
+	out.println("<input type=\"hidden\" name=\"profile\" value=\"" + viewing.getName() + "\">");
+	out.println("<input type=\"submit\" value=\"Add as friend\">");
+	out.println("</form>");
+}
+out.println("</div>");
+out.println("<div class=\"messagebutton\">");
+
+out.println("</div>");
+out.println("</div>");
+out.println("</div>");
+
+
+/*if (self.getName().equals(viewing.getName())) {
 	out.println("This is you!");
 }
 else if (FriendUtils.getFriends(self.getName()).contains(viewing.getName())) {
@@ -52,19 +73,18 @@ else if (FriendUtils.getFriends(self.getName()).contains(viewing.getName())) {
 	out.println("<input type=\"hidden\" name=\"messageType\" value=\"friendRequest\">");
 	out.println("<input type=\"hidden\" name=\"to\" value=\"" + viewing.getName() + "\">");
 	out.println("<input type=\"hidden\" name=\"profile\" value=\"" + viewing.getName() + "\">");
+	out.println("<input type=\"hidden\" name=\"pageToOpen\" value=\"Profile.jsp\">");
 	out.println("<input type=\"submit\" value=\"Add as friend\">");
 	out.println("</form>");
-}
+}*/
 %>
-</td><td>
-Friends: <br><br>
-<% for (String friend : friends) {
+<%/* for (String friend : friends) {
 	out.println("<form method=\"get\" action=\"Profile.jsp\">");
 	out.println("<input type=\"hidden\" name=\"profile\" value=\"" + friend + "\">");
 	out.println(friend);
 	out.println("<input type=\"submit\" value=\"View Profile\">");
 	out.println("</form><br>");
-} %>
+} */%>
 </td></tr>
 </table>
 

@@ -187,6 +187,11 @@ public class QuizResultUtils {
 		NewsFeedUtils.addQuizEntry(user + " took quiz " + quiz.getTitle(), user, quizID);
 	}
 	
+	public static void deleteResultsByUser(String username) {
+		String update = "DELETE FROM history WHERE user=\"" + username + "\";";
+		MyDB.updateDatabase(update);
+	}
+	
 	public static void deleteAllHistory(int quizID) {
 		String update = "DELETE FROM history WHERE quizID=" + quizID + ";";
 		MyDB.updateDatabase(update);

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import database.QuizResultUtils;
+import database.QuizUtils;
 import database.UserUtils;
 
 /**
@@ -38,11 +40,13 @@ public class RemoveUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("userToRemove");
-		if (!UserUtils.userExists(username)) {
+		if (!UserUtils.userExists(username, UserUtils.getUser(username))) {
 			RequestDispatcher dispatch = request.getRequestDispatcher("AdminAccountNonexist.jsp");
 			dispatch.forward(request, response);
 		} else {
 			UserUtils.removeUser(username);
+			QuizUtils.deleteQuizzesByUser(username);
+			QuizResultUtils.deleteResultsByUser(username);
 			RequestDispatcher dispatch = request.getRequestDispatcher("AdminSuccess.jsp");
 			dispatch.forward(request, response);
 		}

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import objects.Quiz;
+import objects.User;
 
 
 public class QuizUtils {
@@ -29,6 +30,23 @@ public class QuizUtils {
 		MyDB.updateDatabase(updateHistory);
 	}
 	
+	public static void deleteQuizzesByUser(String username) {
+		String query = "SELECT id FROM quizzes WHERE owner=\"" + username + "\"";
+		ResultSet rs = MyDB.queryDatabase(query);
+		List<Integer> ids = new ArrayList<Integer>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				ids.add(id);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (int id : ids) {
+			deleteQuiz(id);
+		}
+	}
+	
 	public static Quiz getQuizByID(int quizID) {
 		String query = "SELECT * FROM quizzes WHERE id=" + quizID + ";";
 		ResultSet resultSet = MyDB.queryDatabase(query);
@@ -42,8 +60,9 @@ public class QuizUtils {
 		return (null);
 	}
 
-	public static List<Quiz> getQuizzesByUser(String user) {
+	public static List<Quiz> getQuizzesByUser(String user, User curUser) {
 		List<Quiz> result = new ArrayList<Quiz>();
+		if (!UserUtils.userExists(user, curUser)) return result;
 		String query = "SELECT * FROM quizzes WHERE owner=\"" + user + "\";";
 		ResultSet resultSet = MyDB.queryDatabase(query);
 		try {
@@ -81,14 +100,16 @@ public class QuizUtils {
 		}
 	}
 	
-	public static List<Quiz> getQuizzesByTag(String tag) {
+	public static List<Quiz> getQuizzesByTag(String tag, User curUser) {
 		List<Quiz> result = new ArrayList<Quiz>();
 		String query = "SELECT * FROM quizzes WHERE tags LIKE '%" + tag + "%';";
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			while (rs.next()) {
 				Quiz quiz = new Quiz(rs);
-				result.add(quiz);
+				if (UserUtils.userExists(quiz.getOwner().getName(), curUser)) {
+					result.add(quiz);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,14 +117,16 @@ public class QuizUtils {
 		return result;
 	}
 	
-	public static List<Quiz> getQuizzesByTitle(String title) {
+	public static List<Quiz> getQuizzesByTitle(String title, User curUser) {
 		List<Quiz> result = new ArrayList<Quiz>();
 		String query = "SELECT * FROM quizzes WHERE title LIKE '%" + title + "%';";
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			while (rs.next()) {
 				Quiz quiz = new Quiz(rs);
-				result.add(quiz);
+				if (UserUtils.userExists(quiz.getOwner().getName(), curUser)) {
+					result.add(quiz);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -112,7 +135,7 @@ public class QuizUtils {
 	}
 
 	
-	public static Map<String, List<Quiz>> getQuizzesByCategory() {
+	public static Map<String, List<Quiz>> getQuizzesByCategory(User curUser) {
 		Map<String, List<Quiz>> result = new HashMap<String, List<Quiz>>();
 		String query = "SELECT * FROM quizzes ORDER BY category;";
 		ResultSet rs = MyDB.queryDatabase(query);
@@ -121,14 +144,16 @@ public class QuizUtils {
 		try {
 			while (rs.next()) {
 				Quiz quiz = new Quiz(rs);
-				if (category.isEmpty() || !category.equals(quiz.getCategory())) {
-					if (!category.isEmpty()) {
-						result.put(category, currentList);
+				if (UserUtils.userExists(quiz.getOwner().getName(), curUser)) {
+					if (category.isEmpty() || !category.equals(quiz.getCategory())) {
+						if (!category.isEmpty()) {
+							result.put(category, currentList);
+						}
+						category = quiz.getCategory();
+						currentList = new ArrayList<Quiz>();
 					}
-					category = quiz.getCategory();
-					currentList = new ArrayList<Quiz>();
+					currentList.add(quiz);
 				}
-				currentList.add(quiz);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -192,13 +217,13 @@ public class QuizUtils {
 		NewsFeedUtils.addQuizEntry(quiz.getOwner().getName() + " created quiz " + quiz.getTitle(), quiz.getOwner().getName(), quiz.getId());
 	}
 	
-	public static List<Quiz> searchQuizzes(String search) {
+	public static List<Quiz> searchQuizzes(String search, User curUser) {
 		Set<Quiz> toReturn = new HashSet<Quiz>();
-		toReturn.addAll(getQuizzesByTag(search));
-		List<Quiz> byCategory = getQuizzesByCategory().get(search);
+		toReturn.addAll(getQuizzesByTag(search, curUser));
+		List<Quiz> byCategory = getQuizzesByCategory(curUser).get(search);
 		if (byCategory != null) toReturn.addAll(byCategory);
-		toReturn.addAll(getQuizzesByUser(search));
-		toReturn.addAll(getQuizzesByTitle(search));
+		toReturn.addAll(getQuizzesByUser(search, curUser));
+		toReturn.addAll(getQuizzesByTitle(search, curUser));
 		List<Quiz> result = new ArrayList<Quiz>();
 		result.addAll(toReturn);
 		return result;
