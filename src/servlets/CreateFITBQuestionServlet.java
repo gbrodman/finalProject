@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import objects.*;
+import questions.FITBQuestion;
+import questions.Question;
 import database.*;
 
 /**

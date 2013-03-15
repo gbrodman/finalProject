@@ -1,27 +1,22 @@
 package questions;
 
-import objects.Quiz;
+import java.util.Comparator;
 
-public abstract class Question {
+public interface Question {
 
-	private int quizID;
-
-	// When reading in from database
-	public Question(int quizID) {
-		this.quizID = quizID;
-	}
-
-	// When a user is creating it
-	public Question(Quiz quiz) {
-		quizID = quiz.getId();
-	}
-
-	public int getQuizID() {
-		return quizID;
-	}
+	int numAnswers();
+	String getAnswers();
+	int getQuestionType();
+	String getQuestionTypeString();
+	String getQuestionDisplay();
+	String getBody();
+	int getPointValue();
+	int getQuizID();
+	int getOrderInQuiz();
+	boolean isCorrect(String answer);
+	public String getInstantQuestion();
+	public String getInstantCorrectResult(String ans);
+	public String getURL();
+	public String getAnswerChoices();
 	
-	protected void setQuizID(int quizID) {
-		this.quizID = quizID;
-	}
-
 }

@@ -24,6 +24,7 @@ public class MessageUtils {
 		return result;
 	}
 	
+	
 
 	public static void markAsRead(Message message) { 
 		if (message.isViewed()) return;
