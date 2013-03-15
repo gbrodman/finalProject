@@ -42,12 +42,13 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("searchtext");
+		User curUser = (User) request.getSession().getAttribute("user");
 		User user = null;
-		if (UserUtils.userExists(search)) {
+		if (UserUtils.userExists(search, curUser)) {
 			user = UserUtils.getUser(search);
 		}
 		request.setAttribute("userResult", user);
-		List<Quiz> quizzes = QuizUtils.searchQuizzes(search);
+		List<Quiz> quizzes = QuizUtils.searchQuizzes(search, curUser);
 		if (!quizzes.isEmpty()) {
 			request.setAttribute("quizResults", quizzes);
 		} else {

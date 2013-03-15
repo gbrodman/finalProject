@@ -9,7 +9,7 @@
 <%User viewing = UserUtils.getUser(request.getParameter("profile")); 
 User self = (User) session.getAttribute("user");
 if (viewing.getPrivacyLevel() > 0 && !FriendUtils.areFriends(viewing.getName(), self.getName())) {
-	out.println("<meta http-equiv=\"refresh\" content=\"0;URL=Privacy.html\">");
+	out.println("<meta http-equiv=\"refresh\" content=\"0;URL=Privacy.jsp?otherUser=" + viewing.getName() + "\">");
 }
 %>
 <link href='http://fonts.googleapis.com/css?family=Happy+Monkey'
@@ -18,7 +18,7 @@ if (viewing.getPrivacyLevel() > 0 && !FriendUtils.areFriends(viewing.getName(), 
 <%
 List<Achievement> achievements = viewing.getAchievements();
 List<QuizResult> recentPerformances = QuizResultUtils.getRecentPerformances(viewing.getName());
-List<Quiz> ownedQuizzes = QuizUtils.getQuizzesByUser(viewing.getName());
+List<Quiz> ownedQuizzes = QuizUtils.getQuizzesByUser(viewing.getName(), self);
 List<String> friends = FriendUtils.getFriends(viewing.getName());%>
 <title><%out.print(viewing.getName()); %>'s profile</title>
 </head>
@@ -73,6 +73,7 @@ else if (FriendUtils.getFriends(self.getName()).contains(viewing.getName())) {
 	out.println("<input type=\"hidden\" name=\"messageType\" value=\"friendRequest\">");
 	out.println("<input type=\"hidden\" name=\"to\" value=\"" + viewing.getName() + "\">");
 	out.println("<input type=\"hidden\" name=\"profile\" value=\"" + viewing.getName() + "\">");
+	out.println("<input type=\"hidden\" name=\"pageToOpen\" value=\"Profile.jsp\">");
 	out.println("<input type=\"submit\" value=\"Add as friend\">");
 	out.println("</form>");
 }*/

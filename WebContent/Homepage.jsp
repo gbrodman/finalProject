@@ -260,9 +260,9 @@ List<NewsFeedEntry> newsFeedEntries = NewsFeedUtils.getMostRecentEntries(user.ge
 System.out.println("NUM ENTRIES: " + newsFeedEntries.size());
 out.println("<div class=\"newsfeed\">");
 out.println("<ul>");
-for (int i = newsFeedEntries.size() - 1; i >= 0; i --) {
+for (int i = 0; i < newsFeedEntries.size(); i++) {
 	NewsFeedEntry entry = newsFeedEntries.get(i);
-	out.println("<li id=\"newsfeed" + (newsFeedEntries.size() - i - 1) + "\">");
+	out.println("<li id=\"newsfeed" + (i) + "\">");
 	out.println("<div class=\"newsfeedentry\">");
 	String from = entry.getUser();
 	String text = entry.getText();
@@ -276,7 +276,8 @@ for (int i = newsFeedEntries.size() - 1; i >= 0; i --) {
 		text = text.replaceFirst(quiz.getTitle(), "<a href=\"DisplayQuiz.jsp?quiz=" + quiz.getId() + "\">" + quiz.getTitle() + "</a>");
 	}
 	System.out.println("FROM: " + from + " MESSAGE: " + text);
-	text = text.replace(from, "<a href=\"Profile.jsp?profile=" + from + "\">" + from + "</a>");
+	String textToDisplay = from.equals(user.getName()) ? "You" : from;
+	text = text.replace(from, "<a href=\"Profile.jsp?profile=" + from + "\">" + textToDisplay + "</a>");
 	out.println("<div class=\"icon\">");
 	out.println("<img src=\"" + UserUtils.getUser(from).getPhotoURL() + "\">");
 	out.println("</div>");

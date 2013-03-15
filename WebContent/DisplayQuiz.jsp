@@ -57,7 +57,9 @@
 	out.println("<ul>");
 	for (QuizResult result : allTimeBestResults) {
 		String ru = result.getUser(user);
-		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+		if (UserUtils.userExists(ru, user)) {
+			out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+		}
 	}
 	out.println("</ul>");
 	out.println("<br>Recent high performers:<br>");
@@ -65,7 +67,9 @@
 	out.println("<ul>");
 	for (QuizResult result : recentTopResults) {
 		String ru = result.getUser(user);
-		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+		if (UserUtils.userExists(ru, user)) {
+			out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+		}
 	}
 	out.println("</ul>");
 	out.println("<br>Recent test results:<br>");
@@ -73,7 +77,9 @@
 	out.println("<ul>");
 	for (QuizResult result : recentResults) {
 		String ru = result.getUser(user);
-		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+		if (UserUtils.userExists(ru, user)) {
+			out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
+		}
 	}
 	out.println("</ul>");
 %>
