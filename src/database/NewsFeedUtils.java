@@ -19,7 +19,7 @@ public class NewsFeedUtils {
 	}
 	
 	public static List<NewsFeedEntry> getMostRecentEntries(String currentUser, int maxEntries) {
-		String query = "SELECT * FROM newsFeed;";
+		String query = "SELECT * FROM newsFeed ORDER BY time DESC;";
 		ResultSet rs = MyDB.queryDatabase(query);
 		List<NewsFeedEntry> toReturn = new ArrayList<NewsFeedEntry>();
 		try {
