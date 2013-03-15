@@ -18,6 +18,20 @@ public class QuizResultUtils {
 		ResultSet rs = MyDB.queryDatabase(query);
 		return MyDB.numberEntries(rs);
 	}
+	
+	public static List<QuizResult> getAllResultsByUser(String user) {
+		String query = "SELECT * FROM history WHERE user=\"" + user + "\";";
+		ResultSet rs = MyDB.queryDatabase(query);
+		List<QuizResult> toReturn = new ArrayList<QuizResult>();
+		try {
+			while (rs.next()) {
+				toReturn.add(new QuizResult(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return toReturn;
+	}
 
 	public static int numQuizzesTaken(String user) {
 		String query = "SELECT score FROM history WHERE user=\""
