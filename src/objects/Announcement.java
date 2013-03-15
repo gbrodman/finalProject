@@ -13,7 +13,7 @@ public class Announcement {
 	public Announcement(ResultSet rs) {
 		if (rs != null) {
 			try {
-				this.announcement = rs.getString("announcement");
+				this.announcement = rs.getString("text");
 				this.creator = UserUtils.getUser(rs.getString("creator"));
 			} catch (SQLException e) {
 				e.printStackTrace();

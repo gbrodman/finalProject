@@ -31,7 +31,7 @@
 	out.println("<br><input type=\"submit\" value=\"Add Multiple Choice Question\">");
 	out.println("</form>");
 	
-	out.println("<br><br><form action=\"Homepage.jsp\">");
+	out.println("<br><br><form action=\"QuizCreatedServlet\" method=\"post\">");
 	out.println("<input type=\"submit\" value=\"Done adding questions\">");
 	out.println("</form>");
 	

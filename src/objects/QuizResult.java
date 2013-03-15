@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import database.FriendUtils;
 import database.UserUtils;
 
 public class QuizResult {
@@ -67,8 +68,12 @@ public class QuizResult {
 		return timeUsedString;
 	}
 	
-	public String getUser() {
-		return user;
+	public String getUser(User current) {
+		if (UserUtils.getUser(user).getPrivacyLevel() == 0 || FriendUtils.areFriends(current.getName(), user)) {
+			return user;
+		} else {
+			return "Anonymous";
+		}
 	}
 
 	public QuizResult() {

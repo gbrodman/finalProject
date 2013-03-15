@@ -50,6 +50,11 @@ public class FriendUtils {
 		}
 		return requests;
 	}
+	
+	public static boolean areFriends(String userOne, String userTwo) {
+		List<String> friends = getFriends(userOne);
+		return (friends.contains(userTwo));
+	}
 
 	public static void sendFriendRequest(String sender, String reciever) {
 		MyDB.updateDatabase("INSERT INTO friendsPending VALUES (\"" + sender + "\",\"" + reciever + "\");");
