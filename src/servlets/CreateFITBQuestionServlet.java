@@ -44,7 +44,6 @@ public class CreateFITBQuestionServlet extends HttpServlet {
 		int start = body.indexOf('[');
 		int end = body.indexOf(']',start);
 		String answer = body.substring(start+1, end);
-		System.out.println(answer);
 		String newBody = body.substring(0,start);
 		for (int i = 0; i < answer.length(); i++) {
 			newBody += '_';
@@ -52,9 +51,12 @@ public class CreateFITBQuestionServlet extends HttpServlet {
 		if (end < body.length()-1) newBody += body.substring(end+1);
 		System.out.println(newBody);
 		
+		String addAns = request.getParameter("questionAnswer");
+		if (addAns == null) addAns = "";
+		String finalAns = "[" + answer + "]" + addAns;
 		int points = Integer.parseInt(request.getParameter("questionPoints"));
 		Quiz quiz = (Quiz)request.getSession().getAttribute("currentQuiz");
-		Question question = new FITBQuestion(newBody,answer,points,quiz.getId(), quiz.numQuestions());
+		Question question = new FITBQuestion(newBody,finalAns,points,quiz.getId(), quiz.numQuestions());
 		quiz.incrementNumQuestions();
 		QuizUtils.updateNumQuestions(quiz);
 		FITBQuestionUtils.saveQuestionInDatabase(question);

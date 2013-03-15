@@ -2,10 +2,13 @@ package questions;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FITBQuestion implements Question{
 	
-	private String answer;
+	private String ansString;
+	private List<String> answers;
 	private String stringDisplay;
 	private String instantQuestion;
 	private int pointValue;
@@ -36,19 +39,41 @@ public class FITBQuestion implements Question{
 		String pnts = "This question is worth "+pointValue+" points.";
 		String text = "<br><br>"+body;
 		String ans1 = "<br><br>Your answer was: "+ans;
-		String ans2 = "<br>The correct answer is: "+this.answer;
 		String res;
 		if (isCorrect(ans)) res = "<br>Congratulations, your answer was correct!";
-		else res = "<br>Sorry, your answer was incorrect. Better luck next time!";
+		else {
+			res = "<br>Sorry, your answer was incorrect. Better luck next time!";
+			res += "<br>Possible correct answers are: <ul>";
+			for (String str : answers) {
+				res += "<li>"+ str + "</li>";
+			}
+			res += "</ul>";
+			
+		}
 		String next = "<br><br><form action=\"ViewQuestion.jsp\">";
 		String submit = "<br><input type=\"submit\" value=\"Next Question\"></form>";
-		return (inst+pnts+text+ans1+ans2+res+next+submit);
+		return (inst+pnts+text+ans1+res+next+submit);
+	}
+	
+	private void parseAnswer(String answer) {
+		int end = 0;
+		int start = 0;
+		while (true) {
+			start = answer.indexOf('[',end);
+			if (start == -1) break;
+			end = answer.indexOf(']',start+1);
+			if (end == -1) break;
+			String ans = answer.substring(start+1,end);
+			this.answers.add(ans);
+		}
 	}
 	
 	public FITBQuestion(String body, String answer, int points, int quizID, int order) {
 		this.quizID = quizID;
 		this.pointValue = points;
-		this.answer = answer;
+		this.ansString = answer;
+		this.answers = new ArrayList<String>();
+		parseAnswer(answer);
 		this.body = body;
 		this.order = order;
 		this.stringDisplay = getStringDisplay();
@@ -60,7 +85,9 @@ public class FITBQuestion implements Question{
 			try {
 				this.quizID = rs.getInt("quizID");
 				this.body = rs.getString("body");
-				this.answer = rs.getString("answer");
+				this.ansString = rs.getString("answer");
+				this.answers = new ArrayList<String>();
+				parseAnswer(ansString);
 				this.pointValue = rs.getInt("points");
 				this.stringDisplay = getStringDisplay();
 				this.instantQuestion = getInstantCorrectQuestion();
@@ -80,7 +107,10 @@ public class FITBQuestion implements Question{
 	}
 	
 	public boolean isCorrect(String answer) {
-		return answer.equals(this.answer);
+		for (String a : answers) {
+			if (a.equals(answer)) return true;
+		}
+		return false;
 	}
 	
 	public int getQuizID() {
@@ -91,7 +121,7 @@ public class FITBQuestion implements Question{
 	}
 	
 	public String getAnswers() {
-		return answer;
+		return ansString;
 	}
 	
 	public String getInstantQuestion() {

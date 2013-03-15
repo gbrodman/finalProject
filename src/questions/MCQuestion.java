@@ -1,6 +1,7 @@
 package questions;
 
 import java.sql.ResultSet;
+import java.util.*;
 import java.sql.SQLException;
 
 public class MCQuestion implements Question{

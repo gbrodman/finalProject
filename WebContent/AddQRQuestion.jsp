@@ -15,10 +15,9 @@
 	out.println("<h1>Create new Question-Response Question</h1>");
 
 	out.println("<form action=\"CreateQRQuestionServlet\" method=\"post\">");
-	//out.println("<p><input type=\"title\" name=\"qrquestionTitle\" value=\"Enter title of question\">"); question title?
 	out.println("<br><textarea name=\"questionBody\" rows=3 cols=30 >Enter text of question</textarea>");
-	out.println("<br><input name=\"questionAnswer\"> Enter answer to question.");
-	out.println("<br><input name=\"questionPoints\"> Enter point value of question.");
+	out.println("<br><textarea name=\"questionAnswer\" rows=3 cols=30 >Enter possible answers with each answer surrounded by brackets</textarea>");
+	out.println("<br><input name=\"questionPoints\"> Enter point value of question (integer).");
 	out.println("<br><input type=\"submit\" value=\"Create Question\">");
 	out.println("</form>");
 	
