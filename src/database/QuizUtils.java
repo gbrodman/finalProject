@@ -125,6 +125,7 @@ public class QuizUtils {
 					if (!category.isEmpty()) {
 						result.put(category, currentList);
 					}
+					category = quiz.getCategory();
 					currentList = new ArrayList<Quiz>();
 				}
 				currentList.add(quiz);
