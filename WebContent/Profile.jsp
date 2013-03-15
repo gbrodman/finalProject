@@ -49,7 +49,7 @@ List<String> friends = FriendUtils.getFriends(viewing.getName());%>
 	out.println("<input type=\"hidden\" name=\"messageType\" value=\"friendRequest\">");
 	out.println("<input type=\"hidden\" name=\"to\" value=\"" + viewing.getName() + "\">");
 	out.println("<input type=\"hidden\" name=\"profile\" value=\"" + viewing.getName() + "\">");
-	out.println("<input type=\"submit\" value=\"Add as friend\"");
+	out.println("<input type=\"submit\" value=\"Add as friend\">");
 	out.println("</form>");
 }
 %>
