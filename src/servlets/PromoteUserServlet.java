@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import objects.User;
 import database.UserUtils;
 
 /**
@@ -38,8 +39,9 @@ public class PromoteUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("userToPromote");
+		User curUser = (User) request.getSession().getAttribute("user");
 		System.out.println(username);
-		if (!UserUtils.userExists(username)) {
+		if (!UserUtils.userExists(username, curUser)) {
 			RequestDispatcher dispatch = request.getRequestDispatcher("AdminAccountNonexist.jsp");
 			dispatch.forward(request, response);
 		} else {

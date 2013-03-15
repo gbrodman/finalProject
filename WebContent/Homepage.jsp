@@ -267,7 +267,8 @@ for (int i = newsFeedEntries.size() - 1; i >= 0; i --) {
 	String from = entry.getUser();
 	String text = entry.getText();
 	System.out.println("FROM: " + from + " MESSAGE: " + text);
-	text = text.replace(from, "<a href=\"Profile.jsp?profile=" + from + "\">" + from + "</a>");
+	String textToDisplay = from.equals(user.getName()) ? "You" : from;
+	text = text.replace(from, "<a href=\"Profile.jsp?profile=" + from + "\">" + textToDisplay + "</a>");
 	out.println("<div class=\"icon\">");
 	out.println("<img src=\"" + UserUtils.getUser(from).getPhotoURL() + "\">");
 	out.println("</div>");

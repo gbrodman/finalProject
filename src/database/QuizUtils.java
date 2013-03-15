@@ -29,6 +29,23 @@ public class QuizUtils {
 		MyDB.updateDatabase(updateHistory);
 	}
 	
+	public static void deleteQuizzesByUser(String username) {
+		String query = "SELECT id FROM quizzes WHERE owner=\"" + username + "\"";
+		ResultSet rs = MyDB.queryDatabase(query);
+		List<Integer> ids = new ArrayList<Integer>();
+		try {
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				ids.add(id);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for (int id : ids) {
+			deleteQuiz(id);
+		}
+	}
+	
 	public static Quiz getQuizByID(int quizID) {
 		String query = "SELECT * FROM quizzes WHERE id=" + quizID + ";";
 		ResultSet resultSet = MyDB.queryDatabase(query);

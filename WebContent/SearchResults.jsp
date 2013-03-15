@@ -1,3 +1,4 @@
+<%@page import="database.FriendUtils"%>
 <%@page import="objects.Quiz"%>
 <%@page import="java.util.List"%>
 <%@page import="objects.User"%>
@@ -33,9 +34,12 @@ out.println("</div>");
 List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizResults");
 if (resultUser != null) {
 	out.println("<h2>User Result:</h2>");
-	out.println(resultUser.getName());%>
-	<form action="Profile.jsp?" method="get">
+	out.println(resultUser.getName());
+	String pageToOpen = (resultUser.getPrivacyLevel() > 0 && !FriendUtils.areFriends(resultUser.getName(), user.getName())) ? "Privacy.jsp" : "Profile.jsp";
+	%>
+	<form action="<%out.print(pageToOpen); %>" method="get">
 	<input type="hidden" name="profile" value="<%out.print(resultUser.getName()); %>">
+	<input type="hidden" name="otherUser" value="<%out.print(resultUser.getName()); %>">
 	<input type="submit" value="View Profile">
 	</form>
 	<% 

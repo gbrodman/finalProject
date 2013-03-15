@@ -34,10 +34,21 @@ public class UserUtils {
 		MyDB.updateDatabase(update);
 	}
 	
-	public static boolean userExists(String username) {
+	public static boolean userExists(String username, User userViewing) {
 		String query = "SELECT * FROM users WHERE username=\"" + username + "\";";
 		ResultSet result = MyDB.queryDatabase(query);
-		return (!MyDB.resultIsEmpty(result));
+		if (MyDB.resultIsEmpty(result)) return false;
+		try {
+			result.next();
+			User user = new User(result);
+			if (!username.equals(userViewing.getName()) && user.getPrivacyLevel() == 2 && !FriendUtils.areFriends(username, userViewing.getName())) {
+				return false;
+			}
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public static int getNumberTotalUsers() {
