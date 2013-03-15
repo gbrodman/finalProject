@@ -32,7 +32,10 @@ List<String> friends = FriendUtils.getFriends(viewing.getName());%>
 <td  ALIGN="left">
 <img src="<%out.print(viewing.getPhotoURL());%>"  ></img>
 </td><td  ALIGN="left">
-<% if (FriendUtils.getFriends(self.getName()).contains(viewing.getName())) {
+<% if (self.getName().equals(viewing.getName())) {
+	out.println("This is you!");
+}
+else if (FriendUtils.getFriends(self.getName()).contains(viewing.getName())) {
 	out.println("You're already friends!<br>");
 	out.println("<form method=\"get\" action=\"MessageFriendServlet\">");
 	out.println("<input type=\"hidden\" name=\"friend\" value=\"" + viewing.getName() + "\">");

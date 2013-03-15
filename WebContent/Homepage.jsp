@@ -63,7 +63,7 @@ for (int index = announcements.size() - 1; index >= 0; index--) {
 		out.println("</div>");
 		String from = announcement.getCreator();
 		System.out.println(from);
-		out.println("<div class=\"announcementmessage\"><strong>  " + from +  " announces:  " + announcement.getAnnouncement() + "</strong></div>");
+		out.println("<div class=\"announcementmessage\"><strong>  <a href=\"Profile.jsp?profile=" + from +  "\">" + from + "</a> announces:  " + announcement.getAnnouncement() + "</strong></div>");
 		out.println("</div>");
 		out.println("</li>");
 }
