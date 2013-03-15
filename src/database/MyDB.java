@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 
 /*
  * CS108 Student: This file will be replaced when we test your code. So, do not add any of your
@@ -109,6 +109,11 @@ public class MyDB {
 			e.printStackTrace();
 			return 0;
 		}
+	}
+	
+	public static String formatDouble(double input) {
+		DecimalFormat df = new DecimalFormat("####0.00");
+		return df.format(input);
 	}
 	
 }

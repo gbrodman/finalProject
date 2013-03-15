@@ -6,11 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%User viewing = UserUtils.getUser(request.getParameter("profile")); 
+User self = (User) session.getAttribute("user");
+if (viewing.getPrivacyLevel() > 0 && !FriendUtils.areFriends(viewing.getName(), self.getName())) {
+	out.println("<meta http-equiv=\"refresh\" content=\"0;URL=Privacy.html\">");
+}
+%>
 <link href='http://fonts.googleapis.com/css?family=Happy+Monkey'
 	rel='stylesheet' type='text/css'>
 <link href="main.css" rel="stylesheet" type="text/css">
-<%User viewing = UserUtils.getUser(request.getParameter("profile")); 
-User self = (User) session.getAttribute("user");
+<%
 List<Achievement> achievements = viewing.getAchievements();
 List<QuizResult> recentPerformances = QuizResultUtils.getRecentPerformances(viewing.getName());
 List<Quiz> ownedQuizzes = QuizUtils.getQuizzesByUser(viewing.getName());

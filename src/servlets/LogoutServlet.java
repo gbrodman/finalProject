@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import objects.Quiz;
-import database.QuizUtils;
-
 /**
- * Servlet implementation class TakeQuizServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/DisplayQuizServlet")
-public class DisplayQuizServlet extends HttpServlet {
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DisplayQuizServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,11 +35,9 @@ public class DisplayQuizServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("quiz"));
-		Quiz quiz = QuizUtils.getQuizByID(id);
-		request.getSession().setAttribute("quiz", quiz);
-		RequestDispatcher dispatch = request.getRequestDispatcher("DisplayQuiz.jsp");
-		dispatch.forward(request, response);
+		request.getSession().setAttribute("user", null);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("LoggedOut.html");
+		dispatcher.forward(request, response);
 	}
 
 }

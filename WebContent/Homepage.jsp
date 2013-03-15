@@ -21,6 +21,7 @@ out.println("<li><a href=\"Messages.jsp\" class=\"topbarlinks\">Messages</a></li
 out.println("<li><a href=\"CreateQuiz.jsp\" class=\"topbarlinks\">Create a Quiz</a></li>");
 out.println("<li><a href=\"MessageFriends.jsp\" class=\"topbarlinks\">Friends</a></li>");
 out.println("<li><a href=\"QuizList.jsp\" class=\"topbarlinks\">Take a Quiz</a></li>");
+out.println("<li><a href=\"LogoutServlet\" class=\"topbarlinks\">Logout</a></li>");
 out.println("</ul>");
 out.println("<form method=\"post\" action=\"SearchServlet\">");
 out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
@@ -28,7 +29,7 @@ out.println("</form>");
 out.println("</div>");
 out.println("<div id=\"picturewelcome\">");
 out.println("<h1> Welcome "+ user.getName()  +"</h1>");
-out.println("<img src="+user.getPhotoURL()+" width=10% height=10% >"); 
+out.println("<div class=\"profileimg\"> <img src=" +user.getPhotoURL()+" id=\"profilepicture\"></div>");//width=10% height=10% >"); 
 out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
 out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\" onfocus=\"if (this.value == 'Enter url of new photo') {this.value = '';}\">");
 out.println("<input type=\"submit\" value=\"Change photo\">");
@@ -62,7 +63,7 @@ for (int i = 0; i < pop_quizzes.size(); i++) {
 	out.println(quiz.getTitle());
 	out.println("</div>");
 	out.println("<div class=\"createdby\">");
-	out.println(quiz.getOwner().getName());
+	out.println("<a href=\"Profile.jsp?profile=" + quiz.getOwner().getName() + "\" class=\"topbarlinks\">" + quiz.getOwner().getName() + "</a>");
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
 	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
@@ -115,7 +116,7 @@ for (int i = 0; i < recent_quizzes.size(); i++) {
 	out.println(quiz.getTitle());
 	out.println("</div>");
 	out.println("<div class=\"createdby\">");
-	out.println(quiz.getOwner().getName());
+	out.println("<a href=\"Profile.jsp?profile=" + quiz.getOwner().getName() + "\" class=\"topbarlinks\">" + quiz.getOwner().getName() + "</a>");
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
 	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
@@ -136,15 +137,19 @@ for (int i = 0; i < recent_quizzes.size(); i++) {
 	out.println("</div>");
 	out.println("</li>");
 }
+out.println("<form action=\"UserHistory.jsp\">");
+out.println("<input type=\"hidden\" name=\"username\" value=\"" + user.getName() + "\">");
+out.println("<input type=\"submit\" value=\"View full personal history\">");
+out.println("</form>");
 out.println("</ul>");
 out.println("</div>");
 
 
 List<Quiz> recently_created_quizzes = QuizUtils.getRecentlyCreatedQuizzes(user.getName());
 if (recently_created_quizzes.size() > 0) {
-out.println("<h2 class=\"h2bar\">Recently Created Quizzes</h2>");
+out.println("<h2 class=\"h2bar recentlycreatedquizzesh2\">Recently Created Quizzes</h2>");
 out.println("<div class=\"quizlist \">");
-out.println("<ul>");
+out.println("<ul class=\"recentlycreatedquizclass\">");
 out.println("<li>");
 out.println("<div class=\"quiz top\">");
 out.println("<div class=\"name\">Title</div>");
@@ -166,7 +171,7 @@ for (int i = 0; i < recently_created_quizzes.size(); i++) {
 	out.println(quiz.getTitle());
 	out.println("</div>");
 	out.println("<div class=\"createdby\">");
-	out.println(quiz.getOwner().getName());
+	out.println("<a href=\"Profile.jsp?profile=" + quiz.getOwner().getName() + "\" class=\"topbarlinks\">" + quiz.getOwner().getName() + "</a>");
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
 	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
@@ -214,6 +219,7 @@ for (int i = 0; i < achievements.size(); i++) {
 out.println("</ul>");
 out.println("</div>");
 
+
 out.println("<h2 class=\"h2bar\">New Messages</h2>");
 out.println("<br>");
 ;
@@ -237,18 +243,38 @@ $('.popularquizzesh2').hover(function() {
 	$('.popularquizclass').show(800);
 	$('.recentquizclass').hide(800);
 	$('.achievementsclass').hide(800);
+	$('.recentlycreatedquizclass').hide(800);
 });
 
 $('.recentquizzesh2').hover(function() {
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').show(800);
 	$('.achievementsclass').hide(800);
+	$('.recentlycreatedquizclass').hide(800);
 });
 $('.achievementsh2').hover(function() {
 	$('.achievementsclass').show(800);
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').hide(800);
+	$('.recentlycreatedquizclass').hide(800);
 });
+$('.recentlycreatedquizzesh2').hover(function() {
+	$('.recentlycreatedquizclass').show(800);
+	$('.achievementsclass').hide(800);
+	$('.popularquizclass').hide(800);
+	$('.recentquizclass').hide(800);
+});
+$('#profilepicture').mouseenter(function() {
+	//$('.profileimg').css('width', '100%');
+	//$('.profileimg').css('height', '100%');
+	$('.profileimg').animate({width:'50%', height:.5*$(window).width()}, 1500);
+});
+$('#profilepicture').mouseleave(function() {
+	//$('.profileimg').css('width', '150px');
+	//$('.profileimg').css('height', '150px');
+	$('.profileimg').animate({width:'150px', height:'150px'}, 1500);
+});
+
 
 
 
