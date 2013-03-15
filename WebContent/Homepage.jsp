@@ -28,8 +28,7 @@ out.println("</form>");
 out.println("</div>");
 out.println("<div id=\"picturewelcome\">");
 out.println("<h1> Welcome "+ user.getName()  +"</h1>");
-System.out.println(user.getPhotoURL());
-out.println("<img src="+user.getPhotoURL()+" width=10% height=10% >"); 
+out.println("<div class=\"profileimg\"> <img src=" +user.getPhotoURL()+" id=\"profilepicture\"></div>");//width=10% height=10% >"); 
 out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
 out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\" onfocus=\"if (this.value == 'Enter url of new photo') {this.value = '';}\">");
 out.println("<input type=\"submit\" value=\"Change photo\">");
@@ -259,6 +258,16 @@ $('.recentlycreatedquizzesh2').hover(function() {
 	$('.achievementsclass').hide(800);
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').hide(800);
+});
+$('#profilepicture').mouseenter(function() {
+	//$('.profileimg').css('width', '100%');
+	//$('.profileimg').css('height', '100%');
+	$('.profileimg').animate({width:'50%', height:.5*$(window).width()}, 1500);
+});
+$('#profilepicture').mouseleave(function() {
+	//$('.profileimg').css('width', '150px');
+	//$('.profileimg').css('height', '150px');
+	$('.profileimg').animate({width:'150px', height:'150px'}, 1500);
 });
 
 
