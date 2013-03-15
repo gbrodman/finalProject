@@ -260,9 +260,9 @@ List<NewsFeedEntry> newsFeedEntries = NewsFeedUtils.getMostRecentEntries(user.ge
 System.out.println("NUM ENTRIES: " + newsFeedEntries.size());
 out.println("<div class=\"newsfeed\">");
 out.println("<ul>");
-for (int i = newsFeedEntries.size() - 1; i >= 0; i --) {
+for (int i = 0; i < newsFeedEntries.size(); i++) {
 	NewsFeedEntry entry = newsFeedEntries.get(i);
-	out.println("<li id=\"newsfeed" + (newsFeedEntries.size() - i - 1) + "\">");
+	out.println("<li id=\"newsfeed" + (i) + "\">");
 	out.println("<div class=\"newsfeedentry\">");
 	String from = entry.getUser();
 	String text = entry.getText();

@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import objects.*;
-import database.*;
-import java.util.*;
+import objects.Achievement;
+import objects.Quiz;
+import objects.User;
+import database.AchievementUtils;
+import database.QuizUtils;
 
 /**
  * Servlet implementation class QuizCreatedServlet
@@ -40,7 +43,7 @@ public class QuizCreatedServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User)request.getSession().getAttribute("user");
-		List<Quiz> quizzes = QuizUtils.getQuizzesByUser(user.getName());
+		List<Quiz> quizzes = QuizUtils.getQuizzesByUser(user.getName(), user);
 		Achievement a = null;
 		int numQuizzes = quizzes.size();
 		if (numQuizzes == 1) {

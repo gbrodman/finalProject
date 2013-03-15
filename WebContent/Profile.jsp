@@ -18,7 +18,7 @@ if (viewing.getPrivacyLevel() > 0 && !FriendUtils.areFriends(viewing.getName(), 
 <%
 List<Achievement> achievements = viewing.getAchievements();
 List<QuizResult> recentPerformances = QuizResultUtils.getRecentPerformances(viewing.getName());
-List<Quiz> ownedQuizzes = QuizUtils.getQuizzesByUser(viewing.getName());
+List<Quiz> ownedQuizzes = QuizUtils.getQuizzesByUser(viewing.getName(), self);
 List<String> friends = FriendUtils.getFriends(viewing.getName());%>
 <title><%out.print(viewing.getName()); %>'s profile</title>
 </head>

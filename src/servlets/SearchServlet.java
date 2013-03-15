@@ -48,7 +48,7 @@ public class SearchServlet extends HttpServlet {
 			user = UserUtils.getUser(search);
 		}
 		request.setAttribute("userResult", user);
-		List<Quiz> quizzes = QuizUtils.searchQuizzes(search);
+		List<Quiz> quizzes = QuizUtils.searchQuizzes(search, curUser);
 		if (!quizzes.isEmpty()) {
 			request.setAttribute("quizResults", quizzes);
 		} else {
