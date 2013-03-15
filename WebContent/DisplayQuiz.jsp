@@ -36,6 +36,11 @@
 	out.println("<br><form action=\"Homepage.jsp\">");
 	out.println("<input type=\"submit\" value=\"Return to Homepage\">");
 	out.println("</form>");
+	if (user.isAdmin()) {
+		out.println("<br><form action=\"QuizAdmin.jsp\">");
+		out.println("<input type=\"submit\" value=\"Quiz Administration\">");
+		out.println("</form>");
+	}
 	out.println("<br><br><h1>Past Results</h1>");
 	out.println("<br>This quiz has been taken "+QuizResultUtils.getNumberTimesQuizTaken(id)+" times with an average score of "+QuizResultUtils.getAverageScoreOnQuiz(id)+"%");
 	out.println("<br><br>Your past results:<br>");

@@ -158,5 +158,10 @@ public class QuizResultUtils {
 		update.append(",?);");
 		MyDB.updatePreparedTimestamp(update.toString(), timeCompleted);
 	}
+	
+	public static void deleteAllHistory(int quizID) {
+		String update = "DELETE FROM history WHERE quizID=" + quizID + ";";
+		MyDB.updateDatabase(update);
+	}
 
 }
