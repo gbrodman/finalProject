@@ -49,7 +49,7 @@ public class MessageUtils {
 	
 	public static void sendChallenge(String userTo, String userFrom, int quizID) {
 		int bestScore = QuizResultUtils.getBestScore(userFrom, quizID);
-		String note = userTo + " has challenged you to a quiz! Their best score was " + bestScore + "%. Click on the link to try to beat it.";
+		String note = userFrom + " has challenged you to a quiz! Their best score was " + bestScore + "%. Click on the link to try to beat it.";
 		Message message = new Message(userTo, userFrom, true, false, false, quizID, bestScore, note);
 		sendMessage(message);
 	}
