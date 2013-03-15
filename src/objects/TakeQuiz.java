@@ -62,6 +62,7 @@ public class TakeQuiz {
 		this.isRandom = quiz.isRandomPages();
 		this.curr = null;
 		this.scores = new int[quiz.numQuestions()];
+		this.isPractice = false;
 	}
 	
 	public boolean isRandom() {

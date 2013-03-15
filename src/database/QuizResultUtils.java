@@ -54,8 +54,7 @@ public class QuizResultUtils {
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			if (rs.next()) {
-				QuizResult result = new QuizResult(rs);
-				return result.getScore();
+				return rs.getInt("score");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

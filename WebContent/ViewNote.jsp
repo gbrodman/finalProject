@@ -25,6 +25,7 @@ String note = message.getNote();
 out.println(note + "<br>");
 
 out.println("<form name = 'form3' action=\"DeleteMessageServlet\" method=\"post\">");
+out.println("<input type=\"hidden\" name=\"messageid\" value=\""+message.getMessageID()+"\"/>");
 out.println("<input type=\"submit\" value=\"Delete Message\">");
 out.println("</form>");
 

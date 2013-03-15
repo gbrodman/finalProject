@@ -11,9 +11,8 @@
 <title>Display Quiz</title>
 </head>
 <%
-	TakeQuiz takeQuiz = (TakeQuiz)session.getAttribute("takeQuiz");
+	Quiz quiz = (Quiz)session.getAttribute("quiz");
 	User user = (User)session.getAttribute("user");	
-	Quiz quiz = takeQuiz.getQuiz();
 	int id = quiz.getId();
 	String inst = quiz.getInstructions();
 	String title = quiz.getTitle();
@@ -22,8 +21,8 @@
 	out.println("<body><br>Created by: "+quiz.getOwner().getName());
 	out.println("<body><br>"+inst);
 	out.println("<br>This quiz has "+num+" questions.");
-	if (takeQuiz.isInstantCorrect()) out.println("<br>This quiz has instant correction.");
-	out.println("<form action=\"ViewQuestion.jsp\">");
+	if (quiz.isInstantCorrection()) out.println("<br>This quiz has instant correction.");
+	out.println("<form action=\"TakeQuizServlet\" method=post>");
 	out.println("<br><input type=\"submit\" value=\"Start the Quiz!\">");
 	out.println("</form>");
 	if (quiz.isCanPractice()) {

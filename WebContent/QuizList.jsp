@@ -22,7 +22,7 @@
 	for (Quiz quiz : list) {
 		out.print("<li>");
 		out.print(quiz.getTitle());
-		out.print("<form action=\"TakeQuizServlet\" method=\"post\">");
+		out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
 		out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
 		out.print(quiz.getId());
 		out.print("\">");

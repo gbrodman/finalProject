@@ -37,8 +37,11 @@ public class PracticeModeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TakeQuiz takeQuiz = (TakeQuiz)request.getSession().getAttribute("takeQuiz");
+		System.out.println("TakeQuizServlet");
+		Quiz quiz = (Quiz)request.getSession().getAttribute("quiz");
+		TakeQuiz takeQuiz = new TakeQuiz(quiz);
 		takeQuiz.setToPractice();
+		request.getSession().setAttribute("takeQuiz",takeQuiz);
 		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
 		dispatch.forward(request, response);
 	}
