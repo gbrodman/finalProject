@@ -131,11 +131,13 @@ out.println("</body>");
 <script language="JavaScript">
 	function acceptFriend() {
 		document.form1.status.value = "accept";
+		alert("accept");
 		form1.submit();
 	} 
 	
 	function rejectFriend() {
 		document.form1.status.value = "reject";
+		alert("reject");
 		form1.submit();
 	}
 	
