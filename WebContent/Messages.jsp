@@ -161,5 +161,11 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 
 %>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(document).ready(function() {
+	$(".inboxmessage").show(600);
+});
+</script>
 </body>
 </html>
