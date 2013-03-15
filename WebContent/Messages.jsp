@@ -48,10 +48,10 @@ out.println("<ul>");
 System.out.println(inbox.size());
 out.println("<li>");
 out.println("<div class=\"inboxmessage top\">");
-out.println("<div class=\"icon\"></div>");
-out.println("<div class=\"icon\"></div>");
-out.println("<div class=\"icon righticon\"></div>");
-out.println("<div class=\"icon righticon\"></div>");
+out.println("<div class=\"icon\"><img src=\"http://img6.imageshack.us/img6/4351/white3.jpg\"></div>");
+out.println("<div class=\"icon\"><img src=\"http://img6.imageshack.us/img6/4351/white3.jpg\"></div>");
+out.println("<div class=\"icon righticon\"><img src=\"http://img6.imageshack.us/img6/4351/white3.jpg\"></div>");
+out.println("<div class=\"icon righticon\"><img src=\"http://img6.imageshack.us/img6/4351/white3.jpg\"></div>");
 out.println("<div class=\"fromtomessage\">From</div>");
 out.println("<div class=\"fromtomessage\">To</div>");
 out.println("<div class=\"messagemessage\">Message</div>");
@@ -98,10 +98,10 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 		//out.println("<img src=\"http://www.veryicon.com/icon/png/System/Must%20Have/Delete.png\""  +">"); // width=\"48\" height=\"48\">");
 		out.println("</div>");
 		out.println("<div class=\"fromtomessage\">");
-		out.println(message.getUserFrom());
+		out.println("<a href=\"Profile.jsp?profile=" + message.getUserFrom() + "\" class=\"topbarlinks\">" + message.getUserFrom() + "</a>");
 		out.println("</div>");
 		out.println("<div class=\"fromtomessage\">");
-		out.println(message.getUserTo());
+		out.println("<a href=\"Profile.jsp?profile=" + message.getUserTo() + "\" class=\"topbarlinks\">" + message.getUserTo() + "</a>");
 		out.println("</div>");
 		out.println("<div class=\"messagemessage\">");
 		if (message.isChallenge()) {

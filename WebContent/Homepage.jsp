@@ -28,6 +28,7 @@ out.println("</form>");
 out.println("</div>");
 out.println("<div id=\"picturewelcome\">");
 out.println("<h1> Welcome "+ user.getName()  +"</h1>");
+System.out.println(user.getPhotoURL());
 out.println("<img src="+user.getPhotoURL()+" width=10% height=10% >"); 
 out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
 out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\" onfocus=\"if (this.value == 'Enter url of new photo') {this.value = '';}\">");
@@ -62,7 +63,7 @@ for (int i = 0; i < pop_quizzes.size(); i++) {
 	out.println(quiz.getTitle());
 	out.println("</div>");
 	out.println("<div class=\"createdby\">");
-	out.println(quiz.getOwner().getName());
+	out.println("<a href=\"Profile.jsp?profile=" + quiz.getOwner().getName() + "\" class=\"topbarlinks\">" + quiz.getOwner().getName() + "</a>");
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
 	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
@@ -115,7 +116,7 @@ for (int i = 0; i < recent_quizzes.size(); i++) {
 	out.println(quiz.getTitle());
 	out.println("</div>");
 	out.println("<div class=\"createdby\">");
-	out.println(quiz.getOwner().getName());
+	out.println("<a href=\"Profile.jsp?profile=" + quiz.getOwner().getName() + "\" class=\"topbarlinks\">" + quiz.getOwner().getName() + "</a>");
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
 	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
@@ -166,7 +167,7 @@ for (int i = 0; i < recently_created_quizzes.size(); i++) {
 	out.println(quiz.getTitle());
 	out.println("</div>");
 	out.println("<div class=\"createdby\">");
-	out.println(quiz.getOwner().getName());
+	out.println("<a href=\"Profile.jsp?profile=" + quiz.getOwner().getName() + "\" class=\"topbarlinks\">" + quiz.getOwner().getName() + "</a>");
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
 	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
@@ -214,6 +215,7 @@ for (int i = 0; i < achievements.size(); i++) {
 out.println("</ul>");
 out.println("</div>");
 
+
 out.println("<h2 class=\"h2bar\">New Messages</h2>");
 out.println("<br>");
 ;
@@ -258,6 +260,7 @@ $('.recentlycreatedquizzesh2').hover(function() {
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').hide(800);
 });
+
 
 
 
