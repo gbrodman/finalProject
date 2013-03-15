@@ -34,8 +34,7 @@ public class QuizResultUtils {
 	}
 
 	public static int numQuizzesTaken(String user) {
-		String query = "SELECT score FROM history WHERE user=\""
-				+ user + "\";";
+		String query = "SELECT score FROM history WHERE user=\""+ user + "\";";
 		ResultSet rs = MyDB.queryDatabase(query);
 		return MyDB.numberEntries(rs);
 	}
@@ -65,6 +64,19 @@ public class QuizResultUtils {
 	
 	public static int getBestScore(String user, int quizID) {
 		String query = "SELECT score FROM history WHERE user=\"" + user+ "\" AND quizID=" + quizID + " ORDER BY score DESC;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		try {
+			if (rs.next()) {
+				return rs.getInt("score");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public static int getBestScore(int quizID) {
+		String query = "SELECT score FROM history WHERE quizID=" + quizID + " ORDER BY score DESC;";
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			if (rs.next()) {

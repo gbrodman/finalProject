@@ -8,15 +8,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href='http://fonts.googleapis.com/css?family=Happy+Monkey' rel='stylesheet' type='text/css'>
 <link href="main.css" rel="stylesheet" type="text/css">
-<title>Question results</title>
+<title>Display New Achievements</title>
 </head>
 <body>
 <%
-	TakeQuiz takeQuiz = (TakeQuiz)session.getAttribute("takeQuiz");
-	Question question = takeQuiz.getCurrentQuestion();
-	String ans = (String)session.getAttribute("lastAnswer");
+	User user = (User)session.getAttribute("user");
+	String username = user.getName();	
 
-	out.println(question.getInstantCorrectResult(ans));
+	Achievement achievement = (Achievement)session.getAttribute("achievement");
+	out.println("<h1>Congratulations, you earned a new achievement!</h1>");
+
+	out.println("<br><img src=\""+achievement.getPhotoURL()+"\" width=10% height=10% >   <strong>"+achievement.getName()+" :</strong> "+achievement.getText());
+
+	out.println("<br><br><form action=\"Homepage.jsp\" >");
+	out.println("<input type=\"submit\" value=\"Continue\">");
+	out.println("</form>");
+
 %>
 </body>
 </html>
