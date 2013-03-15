@@ -42,7 +42,7 @@ public class HandleFriendRequestServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String friend_response = request.getParameter("status");
-		Message message = (Message)request.getSession().getAttribute("currentMessage");
+		Message message = MessageUtils.getMessageByID(Integer.parseInt(request.getParameter("messageID")));
 		if (friend_response.equals("accept")) {
 			System.out.println("ACCEPT");
 			FriendUtils.addFriend(message.getUserFrom(), message.getUserTo());

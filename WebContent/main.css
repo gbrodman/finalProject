@@ -176,22 +176,6 @@ a.topbarlinks {
 
 .fromtolink {}
 
-#inbox {}
-#inbox ul {list-style:none;float:left}
-#inbox ul li {display:block; margin-top:2px; margin-bottom:2px; margin-left:5%; margin-right:5%; border-bottom:50px solid #ffffff; }
-#inbox ul li .inboxmessage {display:block; float:left; width:90%; height:50px; position:absolute; color:#ffffff; margin-top:2px; display:none;}
-#inbox ul li .top {background-color:#ffffff; color:#0F52BA;}
-#inbox ul li .newinboxmessage {background-color:#3F82EA;width:100%; height:100%;}
-#inbox ul li .readinboxmessage {background-color:#0F52BA; width:100%; height:100%;}
-#inbox ul li .icon {width:6%; border-right:1px solid #ffffff; float:left; display:block;}
-#inbox ul li .icon input {width:100%; height:100%; padding:0em; margin-top:0em; overflow:hidden;}
-#inbox ul li .icon img {width:100%; height:100%}
-#inbox ul li .fromtomessage {width:13%; height:35px; float:left;border-right:1px solid #ffffff; text-align:center; display: table-cell; padding-top:15px;}
-#inbox ul li .messagemessage {height:35px; border-right:1px solid #ffffff; text-align:center; padding-top:15px; overflow:hidden; text-overflow:ellipsis; white-space: nowrap;}
-#inbox ul li  .lefticon {float:left;}
-#inbox ul li .righticon {float:right;}
-#inbox ul li .blankspace {width:2%; height:50px; overflow:hidden; white:nowrap; background-color:#ffffff !important; float:left;}
-
 .pictureWelcome {width:100%;float:left;}
 
 .h2bar {width:100%; border-bottom:5px solid #0F52BA;float:left;}
@@ -226,6 +210,38 @@ a.topbarlinks {
 .achievements ul li .icon img {width:100%; height:100%; padding:0em; overflow:hidden}
 .achievements ul li .righticon {width:10%; float:right; height:50px;}
 .achievements ul li .achievementtext {height:50px;}
+
+<<<<<<< HEAD
+#inbox {}
+#inbox ul {list-style:none;float:left}
+#inbox ul li {display:block; margin-top:2px; margin-bottom:2px; margin-left:5%; margin-right:5%; border-bottom:50px solid #ffffff; }
+#inbox ul li .inboxmessage {display:block; float:left; width:90%; height:50px; position:absolute; color:#ffffff; margin-top:2px; display:none;}
+#inbox ul li .top {background-color:#ffffff; color:#0F52BA;}
+#inbox ul li .newinboxmessage {background-color:#3F82EA;width:100%; height:100%;}
+#inbox ul li .readinboxmessage {background-color:#0F52BA; width:100%; height:100%;}
+#inbox ul li .icon {width:6%; border-right:1px solid #ffffff; float:left; display:block;}
+#inbox ul li .icon input {width:100%; height:100%; padding:0em; margin-top:0em; overflow:hidden;}
+#inbox ul li .icon img {width:100%; height:100%}
+#inbox ul li .fromtomessage {width:13%; height:35px; float:left;border-right:1px solid #ffffff; text-align:center; display: table-cell; padding-top:15px;}
+#inbox ul li .messagemessage {height:35px; border-right:1px solid #ffffff; text-align:center; padding-top:15px; overflow:hidden; text-overflow:ellipsis; white-space: nowrap;}
+#inbox ul li  .lefticon {float:left;}
+#inbox ul li .righticon {float:right;}
+#inbox ul li .blankspace {width:2%; height:50px; overflow:hidden; white:nowrap; background-color:#ffffff !important; float:left;}
+
+
+#friendrequests {}
+#friendrequests ul {list-style:none; float:left;}
+#friendrequests ul li {display:block; margin-top:5px; margin-bottom:5px; margin-left:2%;margin-right:5%; border-bottom:75px solid #000000;}
+#friendrequests ul li .friendrequest {float:left; width:80%; height: 75px; position:absolute;}
+#friendrequests ul li .icon {width:10%; height:100%; margin-top:0em; float:left; padding:0em; display:block;}
+#friendrequests ul li .icon img {width:100%; height:100%; padding:0em;}
+#friendrequests ul li .friendrequestmessage {margin-left:10px; float:left; width:40%; height:75px;padding-top:30px;}
+#friendrequests ul li .acceptreject {float:left; width:10%; height:100%; margin-right:10px;}
+#friendrequests ul li .acceptreject input {height:100%; width:100%; background-color:#0F52BA; color:#ffffff;}
+
+
+.bigblog {width:100%; height:100px; background-color:#000000; display:block;float:left;}
+
 
 .achievementAwards {width:100%; height:300px; position:absolute;}
 .achievementAwards .achievementAward {display:block;width:200px;height:300px;position:absolute;margin:100px; border-right:200px solid #ffffff;}
