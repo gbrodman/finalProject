@@ -65,7 +65,7 @@ for (int i = 0; i < pop_quizzes.size(); i++) {
 	out.println(quiz.getOwner().getName());
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
-	out.print("<form action=\"TakeQuizServlet\" method=\"post\">");
+	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
 	out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
 	out.print(quiz.getId());
 	out.print("\">");
@@ -118,7 +118,7 @@ for (int i = 0; i < recent_quizzes.size(); i++) {
 	out.println(quiz.getOwner().getName());
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
-	out.print("<form action=\"TakeQuizServlet\" method=\"post\">");
+	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
 	out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
 	out.print(quiz.getId());
 	out.print("\">");
@@ -169,7 +169,7 @@ for (int i = 0; i < recently_created_quizzes.size(); i++) {
 	out.println(quiz.getOwner().getName());
 	out.println("</div>");
 	out.println("<div class=\"takequiz\">");
-	out.print("<form action=\"TakeQuizServlet\" method=\"post\">");
+	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
 	out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
 	out.print(quiz.getId());
 	out.print("\">");
