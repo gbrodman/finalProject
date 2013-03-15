@@ -1,6 +1,7 @@
 package questions;
 
 import java.util.Comparator;
+import java.util.*;
 
 public interface Question {
 

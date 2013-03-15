@@ -74,9 +74,12 @@
 	out.println("<br><br><form action=\"ChallengeFriend.jsp\" >");
 	out.println("<input type=\"submit\" value=\"Challenge a friend to take this quiz!\">");
 	out.println("</form>");
-	out.println("<br><br><form action=\"DisplayQuiz.jsp\">");
-	out.println("<input type=\"submit\" value=\"Return to Quiz Page\">");
-	out.println("</form>");
+	out.print("<br><br><form action=\"DisplayQuiz.jsp\">");
+	out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
+	out.print(quiz.getId());
+	out.print("\">");
+	out.print("<input type=\"submit\" value=\"Return to Quiz Page\" /></form></li>");
+	
 	out.println("<br><form action=\"Homepage.jsp\">");
 	out.println("<input type=\"submit\" value=\"Return to Homepage\">");
 	out.println("</form>");
