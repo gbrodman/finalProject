@@ -37,10 +37,10 @@ out.println("</div>");
 out.println("<h2 class=\"h2bar\">Announcements</h2>");
 
 
-out.println("<h2 class=\"h2bar\">Popular Quizzes</h2>");
+out.println("<h2 class=\"h2bar popularquizzesh2\">Popular Quizzes</h2>");
 List<Quiz> pop_quizzes = QuizResultUtils.getMostPopularQuizzes(5);
 out.println("<div class=\"quizlist\">");
-out.println("<ul>");
+out.println("<ul class=\"popularquizclass\">");
 out.println("<li>");
 out.println("<div class=\"quiz top\">");
 out.println("<div class=\"name\">Title</div>");
@@ -89,10 +89,10 @@ out.println("</ul>");
 out.println("</div>");
 
 
-out.println("<h2 class=\"h2bar\">Recently Taken Quizzes</h2>");
+out.println("<h2 class=\"h2bar recentquizzesh2\">Recently Taken Quizzes</h2>");
 List<QuizResult> recent_quizzes = QuizResultUtils.getRecentPerformances(user.getName());
-out.println("<div class=\"quizlist\">");
-out.println("<ul>");
+out.println("<div class=\"quizlist\" id=\"recentquizbar\">");
+out.println("<ul class=\"recentquizclass\">");
 out.println("<li>");
 out.println("<div class=\"quiz top\">");
 out.println("<div class=\"name\">Title</div>");
@@ -143,7 +143,7 @@ out.println("</div>");
 List<Quiz> recently_created_quizzes = QuizUtils.getRecentlyCreatedQuizzes(user.getName());
 if (recently_created_quizzes.size() > 0) {
 out.println("<h2 class=\"h2bar\">Recently Created Quizzes</h2>");
-out.println("<div class=\"quizlist\">");
+out.println("<div class=\"quizlist \">");
 out.println("<ul>");
 out.println("<li>");
 out.println("<div class=\"quiz top\">");
@@ -193,10 +193,10 @@ out.println("</ul>");
 out.println("</div>");
 }
 
-out.println("<h2 class=\"h2bar\">Achievements</h2>");
+out.println("<h2 class=\"h2bar achievementsh2\">Achievements</h2>");
 List<Achievement> achievements = AchievementUtils.getAchievementsForUser(user.getName());
 out.println("<div class=\"achievements\">");
-out.println("<ul>");
+out.println("<ul class=\"achievementsclass\">");
 for (int i = 0; i < achievements.size(); i++) {
 	Achievement achievement = achievements.get(i);
 	out.println("<li>");
@@ -216,6 +216,7 @@ out.println("</div>");
 
 out.println("<h2 class=\"h2bar\">New Messages</h2>");
 out.println("<br>");
+;
 /*if (user.isAdmin()) {
 	out.println("<a href=\"AdminPage.jsp\">Go to Admin Page</a><br>");
 }
@@ -224,6 +225,33 @@ out.println("<br><a href=\"MessageFriends.jsp\">Message Friends</a>");
 out.println("<br><a href=\"CreateQuiz.jsp\">Create a Quiz</a>");
 out.println("<br><a href=\"QuizList.jsp\">Take a Quiz</a>");*/
 %>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(document).ready(function() {
+	$('div').hide(1);
+	$('div').show(800);
+	//$('.recentquizclass').show(1000);
+});
 
+$('.popularquizzesh2').hover(function() {
+	$('.popularquizclass').show(800);
+	$('.recentquizclass').hide(800);
+	$('.achievementsclass').hide(800);
+});
+
+$('.recentquizzesh2').hover(function() {
+	$('.popularquizclass').hide(800);
+	$('.recentquizclass').show(800);
+	$('.achievementsclass').hide(800);
+});
+$('.achievementsh2').hover(function() {
+	$('.achievementsclass').show(800);
+	$('.popularquizclass').hide(800);
+	$('.recentquizclass').hide(800);
+});
+
+
+
+</script>
 </body>
 </html>
