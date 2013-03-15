@@ -189,6 +189,7 @@ public class QuizUtils {
 		update.append(");");
 		//MyDB.updateDatabase(update.toString());
 		MyDB.updatePreparedTimestamp(update.toString(), quiz.getTimeCreated());
+		NewsFeedUtils.addQuizEntry(quiz.getOwner().getName() + " created quiz " + quiz.getTitle(), quiz.getOwner().getName(), quiz.getId());
 	}
 	
 	public static List<Quiz> searchQuizzes(String search) {
