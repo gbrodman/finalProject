@@ -3,6 +3,11 @@ package objects;
 import java.sql.Timestamp;
 import java.util.*;
 import objects.*;
+import questions.FITBQuestion;
+import questions.MCQuestion;
+import questions.PRQuestion;
+import questions.QRQuestion;
+import questions.Question;
 import database.*;
 
 public class TakeQuiz {

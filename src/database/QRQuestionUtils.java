@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import objects.*;
+import questions.QRQuestion;
+import questions.Question;
 
 public class QRQuestionUtils {
 

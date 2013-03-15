@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import objects.*;
+import questions.MCQuestion;
+import questions.Question;
 
 public class MCQuestionUtils {
 

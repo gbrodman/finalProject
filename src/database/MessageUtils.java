@@ -24,7 +24,24 @@ public class MessageUtils {
 		return result;
 	}
 	
-
+	public static int getNumberUnreadNotes(String user) {
+		String query = "SELECT messageID FROM messages WHERE userTo=\"" + user + "\" AND isNote=1 AND isViewed=0;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		return MyDB.numberEntries(rs);
+	}
+	
+	public static int getNumberUnreadChallenges(String user) {
+		String query = "SELECT messageID FROM messages WHERE userTo=\"" + user + "\" AND isChallenge=1 AND isViewed=0;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		return MyDB.numberEntries(rs);
+	}
+	
+	public static int getNumberFriendRequests(String user) {
+		String query = "SELECT messageID FROM messages WHERE userTo=\"" + user + "\" AND isFriendRequest=1;";
+		ResultSet rs = MyDB.queryDatabase(query);
+		return MyDB.numberEntries(rs);
+	}
+	
 	public static void markAsRead(Message message) { 
 		if (message.isViewed()) return;
 		String update= "UPDATE messages SET isViewed=1 WHERE messageID = " + message.getMessageID() + ";";

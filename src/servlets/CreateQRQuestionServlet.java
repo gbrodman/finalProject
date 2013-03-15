@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import objects.*;
+import questions.QRQuestion;
+import questions.Question;
 import database.*;
 
 /**
