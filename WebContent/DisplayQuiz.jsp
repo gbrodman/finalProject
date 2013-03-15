@@ -11,14 +11,16 @@
 <title>Display Quiz</title>
 </head>
 <%
-	Quiz quiz = (Quiz)session.getAttribute("quiz");
+	int id = Integer.parseInt(request.getParameter("quiz"));
+	Quiz quiz = QuizUtils.getQuizByID(id);
+	request.getSession().setAttribute("quiz", quiz);
 	User user = (User)session.getAttribute("user");	
-	int id = quiz.getId();
 	String inst = quiz.getInstructions();
 	String title = quiz.getTitle();
 	int num = quiz.numQuestions();
 	out.println("<h1>"+title+"</h1>");
-	out.println("<body><br>Created by: "+quiz.getOwner().getName());
+	out.println("<body><br>Created by: ");
+	out.println("<a href=\"Profile.jsp?profile=" + user.getName()+ "\">" + user.getName() + "</a>");
 	out.println("<body><br>"+inst);
 	out.println("<br>This quiz has "+num+" questions.");
 	if (quiz.isInstantCorrection()) out.println("<br>This quiz has instant correction.");

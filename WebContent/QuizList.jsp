@@ -25,7 +25,7 @@
 		for (Quiz quiz : quizzes.get(category)) {
 			out.print("<li>");
 			out.print(quiz.getTitle());
-			out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
+			out.print("<form action=\"DisplayQuiz.jsp\">");
 			out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
 			out.print(quiz.getId());
 			out.print("\">");
