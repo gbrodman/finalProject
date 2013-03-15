@@ -17,31 +17,6 @@ out.println("<body>");
 List<Message> inbox = MessageUtils.getMessagesByUserTo(user.getName());
 session.setAttribute("inbox", inbox);
 
-//first display new messages:
-/*out.println("NEW MESSAGES <br><br>");
-for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first
-	Message message = inbox.get(index);
-	if (!message.isViewed()) {
-		if (message.isChallenge()) {
-			out.println("<a href=\"ViewChallenge.jsp?index="+ index + "\">CHALLENGE from " + message.getUserFrom() + "</a><br>");
-			out.println("    QuizID: " + message.getQuizID() + "<br>");
-			out.println("    High Score: " + message.getBestScore() + "<br>");
-			String note = message.getNote();
-			if (note.length() != 0) out.println("    Note: " + note + "<br>");
-			out.println("<br>");
-		} else if (message.isNote()) {
-			out.println("<a href=\"ViewNote.jsp?index=" + index + "\">NOTE from " + message.getUserFrom() + "</a><br>");
-			out.println("     Note: " + message.getNote() + "<br><br>");
-		} else { // is friend request
-			out.println("<a href=\"ViewFriendRequest.jsp?index=" + index + "\">FRIEND REQUEST from " + message.getUserFrom() + "</a><br>");
-			String note = message.getNote();
-			if (note.length() != 0) {
-				out.println("     Note: " + note + "<br>");
-			}
-			out.println("<br>");
-		}
-	}
-}*/
 out.println("<div class=\"messagetitles\" <h2>MESSAGES</h2></div>");
 out.println("<div id=\"inbox\">");
 out.println("<ul>");
@@ -55,8 +30,7 @@ out.println("<div class=\"icon righticon\"><img src=\"http://img6.imageshack.us/
 out.println("<div class=\"fromtomessage\">From</div>");
 out.println("<div class=\"fromtomessage\">To</div>");
 out.println("<div class=\"messagemessage\">Message</div>");
-
-out.println("</div>");
+out.println("</div></li>");
 for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first
 	Message message = inbox.get(index);
 	if (!message.isFriendRequest()) {
@@ -118,53 +92,60 @@ out.println("</ul>");
 out.println("</div>");
 out.println("<br>");
 
-out.println("<div id=\"friendrequests\">");
 out.println("<div class=\"messagetitles\" <h2>FRIEND REQUESTS</h2></div>");
+//out.println("<div class=\"bigblog\"></div>");
+out.println("<div id=\"friendrequests\">");
 out.println("<ul>");
 for (int index = inbox.size() - 1; index >= 0; index--) {
 	Message message = inbox.get(index);
 	if (message.isFriendRequest()) {
+		out.println("<li>");
+		out.println("<div class=\"friendrequest\">");
+		out.println("<div class=\"icon\">");
+		out.println("<img src=\"" + UserUtils.getUser(message.getUserFrom()).getPhotoURL() + "\">");
+		out.println("</div>");
 		String from = message.getUserFrom();
-		int addedlength = 15 - from.length(); // TODO: make sure that max length is 15
-		for (int i = 0; i < addedlength; i++) from += ' ';
 		System.out.println(from);
+		out.println("<div class=\"friendrequestmessage\">  " + from + " wants to be your friend!</div>");
+		out.println("<form name='form1' action=\"HandleFriendRequestServlet\" method=\"post\">");
+		out.println("<input type=\"hidden\" name=\"status\">");
+		out.println("<input type=\"hidden\" name=\"messageID\" value=\"" + message.getMessageID() + "\">");
+		out.println("<div class=\"acceptreject\">");
+		out.println("<input type=\"button\" value=\"Accept\" onclick=\"acceptFriend()\">");
+		out.println("</div>");
+		out.println("<div class=\"acceptreject\">");
+		out.println("<input type=\"button\" value=\"Reject\" onclick=\"rejectFriend()\">");
+		out.println("</div>");
+		out.println("</form>");
+		out.println("</div>");
+		out.println("</li>");
 	}
 }
-
 out.println("</ul>");
 out.println("</div>");
-//then display read messages
-/*out.println("READ MESSAGES <br><br>");
-for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse order shows newest messages first
-	Message message = inbox.get(index);
-	if (message.isViewed()) {
-		if (message.isChallenge()) {
-			out.println("<a href=\"ViewChallenge.jsp?index="+ index + "\">CHALLENGE from " + message.getUserFrom() + "</a><br>");
-			out.println("    QuizID: " + message.getQuizID() + "<br>");
-			out.println("    High Score: " + message.getBestScore() + "<br>");
-			String note = message.getNote();
-			if (note.length() != 0) out.println("    Note: " + note + "<br>");
-			out.println("<br>");
-		} else if (message.isNote()) {
-			out.println("<a href=\"ViewNote.jsp?index=" + index + "\">NOTE from " + message.getUserFrom() + "</a><br>");
-			out.println("     Note: " + message.getNote() + "<br><br>");
-		} else { // is friend request
-			out.println("<a href=\"ViewFriendRequest.jsp?index=" + index + "\">FRIEND REQUEST from " + message.getUserFrom() + "</a><br>");
-			String note = message.getNote();
-			if (note.length() != 0) {
-				out.println("     Note: " + note + "<br>");
-			}
-			out.println("<br>");
-		}
-	}
-}*/
-
+out.println("</body>");
 %>
+
+
+
+<script language="JavaScript">
+	function acceptFriend() {
+		document.form1.status.value = "accept";
+		form1.submit();
+	} 
+	
+	function rejectFriend() {
+		document.form1.status.value = "reject";
+		form1.submit();
+	}
+	
+</script>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function() {
 	$(".inboxmessage").show(600);
+	//$(".bigblog").show(600);
 });
 </script>
 </body>

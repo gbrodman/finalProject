@@ -68,6 +68,19 @@ public class MessageUtils {
 		}
 	}
 	
+	public static Message getMessageByID(int messageID) {
+		String query = "SELECT * FROM messages WHERE messageID=" + messageID + ";";
+		ResultSet rs = MyDB.queryDatabase(query);
+		if (MyDB.resultIsEmpty(rs)) return null;
+		try {
+			rs.next();
+			return new Message(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	private static void sendMessage(Message message) {
 		String recipient = message.getUserTo();
 		String sender = message.getUserFrom();
