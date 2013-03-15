@@ -273,3 +273,10 @@ a.topbarlinks {
 
 .numNotifications {background-color:#ff0011; color:#ffffff; border-radius:6px; padding:3px; margin-left:4px;margin-right:0px;}
 .messagenotification {display:block; display:none; width:100px; height:100px; background-color:#CCC; border-radius:5px;color:#0F52BA}
+
+.buttonscontainer {float:left; height:90px; width:150px; background-color:#ff0000;text-align:center;padding-top:30px;padding-bottom:30px;}
+.friendsbutton {height:60px; width:90%;}
+.friendsbutton .friendspending {}
+.friendsbutton .alreadyfriends {width: 70px; background-color:#10f310; color:#ffffff; padding:5px; border-radius:5px; margin:3px; margin-top:40px;position:relative;}
+.profileimgfriends {height:150px; width:50%; float:left; position:absolute;}
+.profileimgfriends .profileimg {float:left;width:150px;}
