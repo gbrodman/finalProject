@@ -54,7 +54,7 @@
 	List<QuizResult> allTimeBestResults = QuizResultUtils.getTopPerformances(id, 5); //can change numResults to display
 	out.println("<ul>");
 	for (QuizResult result : allTimeBestResults) {
-		String ru = result.getUser();
+		String ru = result.getUser(user);
 		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
 	}
 	out.println("</ul>");
@@ -62,7 +62,7 @@
 	List<QuizResult> recentTopResults = QuizResultUtils.getTopRecentPerformances(id, 5); //can change numResults to disply
 	out.println("<ul>");
 	for (QuizResult result : recentTopResults) {
-		String ru = result.getUser();
+		String ru = result.getUser(user);
 		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
 	}
 	out.println("</ul>");
@@ -70,7 +70,7 @@
 	List<QuizResult> recentResults = QuizResultUtils.getRecentPerformances(id, 5); //can change numResults to disply
 	out.println("<ul>");
 	for (QuizResult result : recentResults) {
-		String ru = result.getUser();
+		String ru = result.getUser(user);
 		out.println("<li>User: "+ru+", Completed at: "+result.getTimeTaken()+", Time Used: "+result.getTimeUsedString()+", Score: "+result.getScore()+"%</li>");
 	}
 	out.println("</ul>");
