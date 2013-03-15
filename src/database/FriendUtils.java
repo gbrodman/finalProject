@@ -62,16 +62,16 @@ public class FriendUtils {
 
 	public static void addFriend(String from, String to) {
 		NewsFeedUtils.addEntry(to + " is now friends with " + from, to);
-		MyDB.updateDatabase("INSERT INTO friends VALUES (\"" + from + "\",\"" + to + "\");");		
+		MyDB.updateDatabase("INSERT INTO friends VALUES (\"" + from + "\",\"" + to + "\", default);");		
 	}
 	
 	public static void removeFromFriendsPending(String user1, String user2) {
-		MyDB.updateDatabase("REMOVE FROM friendsPending WHERE sender = \"" + user1 + "\" AND recipient=\"" + user2 +"\";");
+		MyDB.updateDatabase("DELETE FROM friendsPending WHERE sender = \"" + user1 + "\" AND recipient=\"" + user2 +"\";");
 	}
 	
 	public static void removeFriend(String user, String otherUser) {
-		MyDB.updateDatabase("REMOVE FROM friends VALUES (\"" + user + "\",\"" + otherUser + "\");");
-		MyDB.updateDatabase("REMOVE FROM friends VALUES (\"" + otherUser + "\",\"" + user + "\");");
+		MyDB.updateDatabase("DELETE FROM friends VALUES (\"" + user + "\",\"" + otherUser + "\");");
+		MyDB.updateDatabase("DELETE FROM friends VALUES (\"" + otherUser + "\",\"" + user + "\");");
 	}
 	
 }
