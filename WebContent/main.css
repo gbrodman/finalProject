@@ -211,7 +211,7 @@ a.topbarlinks {
 .achievements ul li .righticon {width:10%; float:right; height:50px;}
 .achievements ul li .achievementtext {height:50px;}
 
-<<<<<<< HEAD
+
 #inbox {}
 #inbox ul {list-style:none;float:left}
 #inbox ul li {display:block; margin-top:2px; margin-bottom:2px; margin-left:5%; margin-right:5%; border-bottom:50px solid #ffffff; }
@@ -249,4 +249,11 @@ a.topbarlinks {
 .achievementAwards .icon img {width:100%;height:50%;padding:0em;overflow:hidden}
 .achievementAwards .text {text-align:center}
 
+.announcements {}
+.announcements ul {list-style:none; float:left; display:none;}
+.announcements ul li {display:block; margin-top:5px; margin-bottom:5px; margin-left:2%;margin-right:5%; border-bottom:75px solid #000000;}
+.announcements ul li .announcement {float:left; width:60%; height: 75px; position:absolute;}
+.announcements ul li .icon {width:10%; height:100%; margin-top:0em; float:left; padding:0em; }
+.announcements ul li .icon img {width:100%; height:100%; padding:0em;}
+.announcements ul li .announcementmessage {margin-left:10px; float:left; width:80%; height:75px;padding-top:30px;}
 

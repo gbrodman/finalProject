@@ -35,7 +35,30 @@ out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new ph
 out.println("<input type=\"submit\" value=\"Change photo\">");
 out.println("</form>");
 out.println("</div>");
-out.println("<h2 class=\"h2bar\">Announcements</h2>");
+
+out.println("<h2 class=\"h2bar announcementsh2\">Announcements</h2>");
+List<Announcement> announcements = AnnouncementUtils.getAnnouncements();
+if (announcements.size() != 0) {
+out.println("<div class=\"announcements\">");
+out.println("<ul class=\"announcementsclass\">");
+for (int index = announcements.size() - 1; index >= 0; index--) {
+	Announcement announcement = announcements.get(index);
+		out.println("<li>");
+		out.println("<div class=\"announcement\">");
+		out.println("<div class=\"icon\">");
+		out.println("<img src=\"" + announcement.getCreator().getPhotoURL() + "\">");
+		out.println("</div>");
+		String from = announcement.getCreator().getName();
+		System.out.println(from);
+		out.println("<div class=\"announcementmessage\"><strong>  " + from +  " announces:  " + announcement.getAnnouncement() + "</strong></div>");
+		out.println("</div>");
+		out.println("</li>");
+}
+out.println("</ul>");
+
+out.println("</div>");
+}
+
 
 
 out.println("<h2 class=\"h2bar popularquizzesh2\">Popular Quizzes</h2>");
@@ -244,6 +267,7 @@ $('.popularquizzesh2').hover(function() {
 	$('.recentquizclass').hide(800);
 	$('.achievementsclass').hide(800);
 	$('.recentlycreatedquizclass').hide(800);
+	$('.announcementsclass').hide(800);
 });
 
 $('.recentquizzesh2').hover(function() {
@@ -251,27 +275,33 @@ $('.recentquizzesh2').hover(function() {
 	$('.recentquizclass').show(800);
 	$('.achievementsclass').hide(800);
 	$('.recentlycreatedquizclass').hide(800);
+	$('.announcementsclass').hide(800);
 });
 $('.achievementsh2').hover(function() {
 	$('.achievementsclass').show(800);
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').hide(800);
 	$('.recentlycreatedquizclass').hide(800);
+	$('.announcementsclass').hide(800);
 });
 $('.recentlycreatedquizzesh2').hover(function() {
 	$('.recentlycreatedquizclass').show(800);
 	$('.achievementsclass').hide(800);
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').hide(800);
+	$('.announcementsclass').hide(800);
+});
+$('.announcementsh2').hover(function() {
+	$('.announcementsclass').show(800);
+	$('.recentlycreatedquizclass').hide(800);
+	$('.achievementsclass').hide(800);
+	$('.popularquizclass').hide(800);
+	$('.recentquizclass').hide(800);
 });
 $('#profilepicture').mouseenter(function() {
-	//$('.profileimg').css('width', '100%');
-	//$('.profileimg').css('height', '100%');
 	$('.profileimg').animate({width:'50%', height:.5*$(window).width()}, 1500);
 });
 $('#profilepicture').mouseleave(function() {
-	//$('.profileimg').css('width', '150px');
-	//$('.profileimg').css('height', '150px');
 	$('.profileimg').animate({width:'150px', height:'150px'}, 1500);
 });
 
