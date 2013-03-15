@@ -14,8 +14,7 @@
 <body>
 
 <%
-	TakeQuiz takeQuiz = (TakeQuiz)session.getAttribute("takeQuiz");
-	Quiz quiz = takeQuiz.getQuiz();
+	Quiz quiz = (Quiz)session.getAttribute("quiz");
 	String title = quiz.getTitle();
 	out.println("<h1>Admin Utils for " + title + "</h1>");
 	out.println("<br><form action=\"QuizAdminServlet\" method=\"post\">");
