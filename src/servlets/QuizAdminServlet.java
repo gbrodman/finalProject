@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import objects.TakeQuiz;
-import database.QuizResultUtils;
-import database.QuizUtils;
+import objects.*;
+import database.*;
 
 /**
  * Servlet implementation class QuizAdminServlet
@@ -40,8 +39,8 @@ public class QuizAdminServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		TakeQuiz takeQuiz = (TakeQuiz) request.getSession().getAttribute("takeQuiz");
-		int quizID = takeQuiz.getQuiz().getId();
+		int quizID = Integer.parseInt(request.getParameter("quiz"));
+		
 		RequestDispatcher dispatcher = null;
 		if (action.equals("deleteHistory")) {
 			QuizResultUtils.deleteAllHistory(quizID);

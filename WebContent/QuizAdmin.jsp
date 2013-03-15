@@ -22,8 +22,18 @@
 	%>
 	<input type="hidden" name="action" value="deleteHistory"/></form>
 	<% 
+	/*
+	out.print("<form action=\"QuizAdminServlet.jsp\" method=\"post\">");
+	out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
+	out.print(quiz.getId());
+	out.print("\">");
+	out.print("<input type=\"submit\" value=\"Delete this quiz\" /></form>");
+	*/
 	out.println("<br><form action=\"QuizAdminServlet\" method=\"post\">");
-	out.println("<input type=\"submit\" value=\"Delete this quiz\">");
+    out.println("<input type=\"submit\" value=\"Delete this quiz\">");
+    out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
+	out.print(quiz.getId());
+	out.print("\">");
 	%>
 	<input type="hidden" name="action" value="deleteQuiz"/></form><br>
 	<form action="DisplayQuiz.jsp" method="get">
