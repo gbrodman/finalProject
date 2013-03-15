@@ -22,12 +22,14 @@ public class QuizUtils {
 		String updateQR = "DELETE FROM questionResponseQuestions WHERE quizID="+quizID+";";
 		String updatePR = "DELETE FROM pictureResponseQuestions WHERE quizID="+quizID+";";
 		String updateHistory = "DELETE FROM history WHERE quizID="+quizID+";";
+		String updateFeed = "DELETE FROM newsFeed WHERE quizID=" + quizID + ";";
 		MyDB.updateDatabase(updateQuiz);
 		MyDB.updateDatabase(updateFITB);
 		MyDB.updateDatabase(updateMC);
 		MyDB.updateDatabase(updateQR);
 		MyDB.updateDatabase(updatePR);
 		MyDB.updateDatabase(updateHistory);
+		MyDB.updateDatabase(updateFeed);
 	}
 	
 	public static void deleteQuizzesByUser(String username) {
