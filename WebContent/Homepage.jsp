@@ -142,9 +142,9 @@ out.println("</div>");
 
 List<Quiz> recently_created_quizzes = QuizUtils.getRecentlyCreatedQuizzes(user.getName());
 if (recently_created_quizzes.size() > 0) {
-out.println("<h2 class=\"h2bar\">Recently Created Quizzes</h2>");
+out.println("<h2 class=\"h2bar recentlycreatedquizzesh2\">Recently Created Quizzes</h2>");
 out.println("<div class=\"quizlist \">");
-out.println("<ul>");
+out.println("<ul class=\"recentlycreatedquizclass\">");
 out.println("<li>");
 out.println("<div class=\"quiz top\">");
 out.println("<div class=\"name\">Title</div>");
@@ -237,15 +237,24 @@ $('.popularquizzesh2').hover(function() {
 	$('.popularquizclass').show(800);
 	$('.recentquizclass').hide(800);
 	$('.achievementsclass').hide(800);
+	$('.recentlycreatedquizclass').hide(800);
 });
 
 $('.recentquizzesh2').hover(function() {
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').show(800);
 	$('.achievementsclass').hide(800);
+	$('.recentlycreatedquizclass').hide(800);
 });
 $('.achievementsh2').hover(function() {
 	$('.achievementsclass').show(800);
+	$('.popularquizclass').hide(800);
+	$('.recentquizclass').hide(800);
+	$('.recentlycreatedquizclass').hide(800);
+});
+$('.recentlycreatedquizzesh2').hover(function() {
+	$('.recentlycreatedquizclass').show(800);
+	$('.achievementsclass').hide(800);
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').hide(800);
 });
