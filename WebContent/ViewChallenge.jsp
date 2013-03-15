@@ -24,7 +24,11 @@ out.println("<p>");
 String note = message.getNote();
 if (note.length() != 0) out.println(note + "<br>");
 out.println(message.getUserFrom() + "'s High Score: " + message.getBestScore());
-out.println("TODO: quizid: " + message.getQuizID());
+out.println("<br>");
+out.println("<form action=\"DisplayQuizServlet\">");
+out.println("<input type=\"submit\" value=\"Go to quiz\">");
+out.println("<input type=\"hidden\" name=\"quiz\" value=\"" + message.getQuizID() + "\">");
+out.println("</form><br>");
 
 out.println("<form name = 'form3' action=\"DeleteMessageServlet\" method=\"post\">");
 out.println("<input type=\"hidden\" name=\"messageid\" value=\""+message.getMessageID()+"\"/>");

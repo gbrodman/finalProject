@@ -21,6 +21,7 @@ out.println("<li><a href=\"Messages.jsp\" class=\"topbarlinks\">Messages</a></li
 out.println("<li><a href=\"CreateQuiz.jsp\" class=\"topbarlinks\">Create a Quiz</a></li>");
 out.println("<li><a href=\"MessageFriends.jsp\" class=\"topbarlinks\">Friends</a></li>");
 out.println("<li><a href=\"QuizList.jsp\" class=\"topbarlinks\">Take a Quiz</a></li>");
+out.println("<li><a href=\"LogoutServlet\" class=\"topbarlinks\">Logout</a></li>");
 out.println("</ul>");
 out.println("<form method=\"post\" action=\"SearchServlet\">");
 out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
@@ -136,6 +137,10 @@ for (int i = 0; i < recent_quizzes.size(); i++) {
 	out.println("</div>");
 	out.println("</li>");
 }
+out.println("<form action=\"UserHistory.jsp\">");
+out.println("<input type=\"hidden\" name=\"username\" value=\"" + user.getName() + "\">");
+out.println("<input type=\"submit\" value=\"View full personal history\">");
+out.println("</form>");
 out.println("</ul>");
 out.println("</div>");
 
