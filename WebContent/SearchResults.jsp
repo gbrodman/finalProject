@@ -33,7 +33,12 @@ out.println("</div>");
 List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizResults");
 if (resultUser != null) {
 	out.println("<h2>User Result:</h2>");
-	out.println("TODO: link to user<br>");
+	out.println(resultUser.getName());%>
+	<form action="Profile.jsp?" method="get">
+	<input type="hidden" name="profile" value="<%out.print(resultUser.getName()); %>">
+	<input type="submit" value="View Profile">
+	</form>
+	<% 
 }
 if (quizzes != null) {
 	out.println("<h2>Quiz Result(s):</h2>");

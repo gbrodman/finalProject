@@ -13,6 +13,22 @@ import objects.Quiz;
 
 public class QuizUtils {
 	
+	public static void deleteQuiz(int quizID) {
+		String updateQuiz = "DELETE FROM quizzes WHERE id="+quizID+";";
+		//can't just delete quiz and leave questions/history or they appear on later quizzes assigned this id
+		String updateFITB = "DELETE FROM fillInTheBlankQuestions WHERE quizID="+quizID+";";
+		String updateMC = "DELETE FROM multipleChoiceQuestions WHERE quizID="+quizID+";";
+		String updateQR = "DELETE FROM questionResponseQuestions WHERE quizID="+quizID+";";
+		String updatePR = "DELETE FROM pictureResponseQuestions WHERE quizID="+quizID+";";
+		String updateHistory = "DELETE FROM history WHERE quizID="+quizID+";";
+		MyDB.updateDatabase(updateQuiz);
+		MyDB.updateDatabase(updateFITB);
+		MyDB.updateDatabase(updateMC);
+		MyDB.updateDatabase(updateQR);
+		MyDB.updateDatabase(updatePR);
+		MyDB.updateDatabase(updateHistory);
+	}
+	
 	public static Quiz getQuizByID(int quizID) {
 		String query = "SELECT * FROM quizzes WHERE id=" + quizID + ";";
 		ResultSet resultSet = MyDB.queryDatabase(query);

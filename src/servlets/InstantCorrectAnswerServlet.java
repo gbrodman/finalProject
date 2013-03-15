@@ -8,20 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.*;
-import objects.*;
+
+import objects.Question;
+import objects.TakeQuiz;
 
 /**
- * Servlet implementation class TakeQuizServlet
+ * Servlet implementation class InstantCorrectAnswerServlet
  */
-@WebServlet("/TakeQuizServlet")
-public class TakeQuizServlet extends HttpServlet {
+@WebServlet("/InstantCorrectAnswerServlet")
+public class InstantCorrectAnswerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TakeQuizServlet() {
+    public InstantCorrectAnswerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,11 +38,20 @@ public class TakeQuizServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("TakeQuizServlet");
-		Quiz quiz = (Quiz)request.getSession().getAttribute("quiz");
-		TakeQuiz takeQuiz = new TakeQuiz(quiz);
-		request.getSession().setAttribute("takeQuiz",takeQuiz);
-		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
+		TakeQuiz takeQuiz = (TakeQuiz)request.getSession().getAttribute("takeQuiz");
+		Question question = takeQuiz.getCurrentQuestion();
+		String answer = request.getParameter("answer");
+		request.getSession().setAttribute("lastAnswer",answer);
+		System.out.println(answer);
+		if (question.isCorrect(answer)) {
+			takeQuiz.addScore(question.getPointValue(), question.getOrderInQuiz());
+			System.out.println("CORRECT!");
+		}
+		else {
+			takeQuiz.addScore(0, question.getOrderInQuiz());
+			System.out.println("WRONG");
+		}
+		RequestDispatcher dispatch = request.getRequestDispatcher("ViewInstantCorrection.jsp");
 		dispatch.forward(request, response);
 	}
 

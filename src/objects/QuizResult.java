@@ -35,6 +35,20 @@ public class QuizResult {
 		}
 	}
 	
+	public static String timeUsedToString(long time) {
+		String result;
+		if (time < 1000) result = time + " ms";
+	    else if (time < 60000) {
+	    	long remainder = time%MILI_IN_SEC;
+	    	result = time/MILI_IN_SEC + " sec " + remainder + " ms";
+	    }else {
+	    	long secs = time/MILI_IN_SEC;
+	    	long remainder = secs%SEC_IN_MIN;
+	    	result = secs/SEC_IN_MIN + " min " + remainder + " sec";
+	    }
+		return result;
+	}
+	
 	private String timeUsedToString() {
 		String result;
 		if (timeUsed < 1000) result = timeUsed + " ms";

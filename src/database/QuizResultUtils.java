@@ -54,8 +54,7 @@ public class QuizResultUtils {
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			if (rs.next()) {
-				QuizResult result = new QuizResult(rs);
-				return result.getScore();
+				return rs.getInt("score");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,7 +64,7 @@ public class QuizResultUtils {
 	
 	public static List<QuizResult> getRecentPerformances(int quizID, int numResults) {
 		String query = "SELECT * FROM history WHERE quizID=" + quizID + " AND TIMESTAMPDIFF(MINUTE, timeTaken, CURRENT_TIMESTAMP()) < 15 ORDER BY timeTaken DESC;";
-		return getNumberOfQuizzes(quizID, numResults, query);
+		return getNumberOfQuizzes(quizID, numResults,  query);
 	}
 	
 	public static List<QuizResult> getTopPerformances(int quizID, int numResults) {
@@ -158,6 +157,11 @@ public class QuizResultUtils {
 		update.append(timeUsed);
 		update.append(",?);");
 		MyDB.updatePreparedTimestamp(update.toString(), timeCompleted);
+	}
+	
+	public static void deleteAllHistory(int quizID) {
+		String update = "DELETE FROM history WHERE quizID=" + quizID + ";";
+		MyDB.updateDatabase(update);
 	}
 
 }

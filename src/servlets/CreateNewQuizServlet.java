@@ -55,9 +55,9 @@ public class CreateNewQuizServlet extends HttpServlet {
 		String instructions = request.getParameter("quizInstructions");
 		String category = request.getParameter("quizCategory");
 		List<String> tags = StringToList(request.getParameter("quizTags"));
-		boolean isRandom = Boolean.parseBoolean(request.getParameter("isRandomPages"));
-		boolean isInstant = Boolean.parseBoolean(request.getParameter("isInstantCorrection"));
-		boolean canPractice = Boolean.parseBoolean(request.getParameter("canPractice"));
+		boolean isRandom = request.getParameter("isRandomPages") != null;
+		boolean isInstant = request.getParameter("isInstantCorrection") != null;
+		boolean canPractice = request.getParameter("canPractice") != null;
 		Quiz quiz = new Quiz(title, instructions, (User)request.getSession().getAttribute("user"), isRandom, isInstant, canPractice, category, tags);
 		QuizUtils.saveQuizInDatabase(quiz);
 		request.getSession().setAttribute("currentQuiz", quiz);

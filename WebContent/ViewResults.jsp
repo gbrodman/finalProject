@@ -14,17 +14,22 @@
 	User user = (User)session.getAttribute("user");
 	
 	out.println("<h1>Results:</h1>");
-	
+	if (takeQuiz.isPractice()) out.println("Don't worry, this was just a practice!");
 	List<Question> questions = takeQuiz.getQuestions();
-	QuizResultUtils.saveResultInDatabase(user.getName(), takeQuiz.getQuiz().getId(),takeQuiz.getScorePercent(),takeQuiz.getTimeUsed(), takeQuiz.getTimeCompleted());
-	List<Integer> scores = takeQuiz.getScores();
+	if (!takeQuiz.isPractice())
+		QuizResultUtils.saveResultInDatabase(user.getName(), takeQuiz.getQuiz().getId(),takeQuiz.getScorePercent(),takeQuiz.getTimeUsed(), takeQuiz.getTimeCompleted());
+	int[] scores = takeQuiz.getScores();
 	out.println("<br><ol>");
-	for (int i = 0; i < scores.size(); i++) {
-		out.println("<li>Score: "+scores.get(i)+"/"+questions.get(i).getPointValue()+"</li>");
+	for (int i = 0; i < scores.length; i++) {
+		out.println("<li>Score: "+scores[i]+"/"+questions.get(i).getPointValue()+"</li>");
 	}
 	out.println("</ol>");
 	
 	out.println("Your total score is: " +takeQuiz.getScorePercent()+"%");
+	out.println("<br>You took " +QuizResult.timeUsedToString(takeQuiz.getTimeUsed())+" to complete this quiz.");
+	out.println("<br><br><form action=\"ChallengeFriend.jsp\" >");
+	out.println("<input type=\"submit\" value=\"Challenge a friend to take this quiz!\">");
+	out.println("</form>");
 	out.println("<br><br><form action=\"DisplayQuiz.jsp\">");
 	out.println("<input type=\"submit\" value=\"Return to Quiz Page\">");
 	out.println("</form>");

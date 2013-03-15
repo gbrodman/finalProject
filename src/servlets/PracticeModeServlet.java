@@ -8,20 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.*;
 import objects.*;
+import database.*;
 
 /**
- * Servlet implementation class TakeQuizServlet
+ * Servlet implementation class PracticeModeServlet
  */
-@WebServlet("/TakeQuizServlet")
-public class TakeQuizServlet extends HttpServlet {
+@WebServlet("/PracticeModeServlet")
+public class PracticeModeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TakeQuizServlet() {
+    public PracticeModeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,6 +40,7 @@ public class TakeQuizServlet extends HttpServlet {
 		System.out.println("TakeQuizServlet");
 		Quiz quiz = (Quiz)request.getSession().getAttribute("quiz");
 		TakeQuiz takeQuiz = new TakeQuiz(quiz);
+		takeQuiz.setToPractice();
 		request.getSession().setAttribute("takeQuiz",takeQuiz);
 		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
 		dispatch.forward(request, response);

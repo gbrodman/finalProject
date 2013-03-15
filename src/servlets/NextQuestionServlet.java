@@ -8,20 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.*;
-import objects.*;
 
 /**
- * Servlet implementation class TakeQuizServlet
+ * Servlet implementation class NextQuestionServlet
  */
-@WebServlet("/TakeQuizServlet")
-public class TakeQuizServlet extends HttpServlet {
+@WebServlet("/NextQuestionServlet")
+public class NextQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TakeQuizServlet() {
+    public NextQuestionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,10 +35,6 @@ public class TakeQuizServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("TakeQuizServlet");
-		Quiz quiz = (Quiz)request.getSession().getAttribute("quiz");
-		TakeQuiz takeQuiz = new TakeQuiz(quiz);
-		request.getSession().setAttribute("takeQuiz",takeQuiz);
 		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
 		dispatch.forward(request, response);
 	}

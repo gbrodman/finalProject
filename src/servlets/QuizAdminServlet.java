@@ -8,20 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.*;
-import objects.*;
+
+import objects.TakeQuiz;
+import database.QuizResultUtils;
+import database.QuizUtils;
 
 /**
- * Servlet implementation class TakeQuizServlet
+ * Servlet implementation class QuizAdminServlet
  */
-@WebServlet("/TakeQuizServlet")
-public class TakeQuizServlet extends HttpServlet {
+@WebServlet("/QuizAdminServlet")
+public class QuizAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TakeQuizServlet() {
+    public QuizAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +32,25 @@ public class TakeQuizServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("TakeQuizServlet");
-		Quiz quiz = (Quiz)request.getSession().getAttribute("quiz");
-		TakeQuiz takeQuiz = new TakeQuiz(quiz);
-		request.getSession().setAttribute("takeQuiz",takeQuiz);
-		RequestDispatcher dispatch = request.getRequestDispatcher("ViewQuestion.jsp");
-		dispatch.forward(request, response);
+		String action = request.getParameter("action");
+		TakeQuiz takeQuiz = (TakeQuiz) request.getSession().getAttribute("takeQuiz");
+		int quizID = takeQuiz.getQuiz().getId();
+		RequestDispatcher dispatcher = null;
+		if (action.equals("deleteHistory")) {
+			QuizResultUtils.deleteAllHistory(quizID);
+			dispatcher = request.getRequestDispatcher("DisplayQuiz.jsp");
+		} else if (action.equals("deleteQuiz")) {
+			QuizUtils.deleteQuiz(quizID);
+			dispatcher = request.getRequestDispatcher("QuizList.jsp");
+		}
+		dispatcher.forward(request, response);
 	}
 
 }

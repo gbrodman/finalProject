@@ -27,6 +27,7 @@ out.println(message.getUserFrom() + "'s High Score: " + message.getBestScore());
 out.println("TODO: quizid: " + message.getQuizID());
 
 out.println("<form name = 'form3' action=\"DeleteMessageServlet\" method=\"post\">");
+out.println("<input type=\"hidden\" name=\"messageid\" value=\""+message.getMessageID()+"\"/>");
 out.println("<input type=\"submit\" value=\"Delete Message\">");
 out.println("</form>");
 

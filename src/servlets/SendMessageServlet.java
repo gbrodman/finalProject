@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import objects.User;
-import database.MessageUtils;
+import objects.*;
+import database.*;
+import java.util.*;
 
 /**
  * Servlet implementation class SendMessageServlet
@@ -38,15 +39,28 @@ public class SendMessageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String friend = request.getParameter("friend").trim();
+		
 		User user = (User) request.getSession().getAttribute("user");
 		String text = request.getParameter("text");
 		if (request.getParameter("messageType").equals("note")) {
+			String friend = request.getParameter("friend").trim();
 			MessageUtils.sendNote(friend, user.getName(), text);
 			RequestDispatcher dispatch = request.getRequestDispatcher("MessageFriends.jsp");
 			dispatch.forward(request, response);
 		}
-		
+		if (request.getParameter("messageType").equals("challenge")) {
+			List<String> friends = FriendUtils.getFriends(user.getName());
+			Quiz quiz = (Quiz)request.getSession().getAttribute("quiz");
+			for (String friend : friends) {
+				System.out.println(friend);
+				if (request.getParameter(friend) != null) {
+					System.out.println(friend);
+					MessageUtils.sendChallenge(friend, user.getName(), quiz.getId());
+				}
+			}
+			RequestDispatcher dispatch = request.getRequestDispatcher("ViewResults.jsp");
+			dispatch.forward(request, response);
+		}
 		// leaves room for sending quiz challenges and such
 	}
 
