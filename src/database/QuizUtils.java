@@ -187,9 +187,10 @@ public class QuizUtils {
 	}
 	
 	public static List<Quiz> getRecentlyCreatedQuizzes(String username) {
-		String query = "SELECT * FROM quizzes WHERE owner=" + username + " AND TIMESTAMPDIFF(MINUTE, timeCreated, CURRENT_TIMESTAMP()) < 15 ORDER BY timeTaken DESC;";
+		String query = "SELECT * FROM quizzes WHERE owner=\"" + username + "\" AND TIMESTAMPDIFF(MINUTE, timeCreated, CURRENT_TIMESTAMP()) < 15 ORDER BY timeCreated DESC;";
 		List<Quiz> toReturn = new ArrayList<Quiz>();
 		ResultSet rs = MyDB.queryDatabase(query);
+		if (rs == null) System.out.println("NULL");
 		try {
 			while (rs.next()) {
 				Quiz quiz = new Quiz(rs);

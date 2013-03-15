@@ -71,7 +71,11 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 			out.println("<div class=\"readinboxmessage\">");
 		}
 		out.println("<div class=\"icon lefticon\">");
-		out.println("<img src=\"http://s176520660.online.de/dungeonslayers/forum/index.php?action=dlattach;attach=3848;type=avatar\""  + ">"); // width=\"48\" height=\"48\">");
+		if (message.isChallenge()) {// http://s176520660.online.de/dungeonslayers/forum/index.php?action=dlattach;attach=3848;type=avatar
+			out.println("<img src=\"QuizMePictures/Untitled.png\">"); // 
+		} else {
+			out.println("<img src=\"http://www.clker.com/cliparts/s/V/x/x/P/H/mail-message-new-md.png\">");
+		}
 		out.println("</div>");
 		out.println("<div class=\"icon lefticon\">");
 		out.println("<img src=\"" + UserUtils.getUser(message.getUserFrom()).getPhotoURL() + "\">"); // + "\" width=\"48\" height=\"48\">");

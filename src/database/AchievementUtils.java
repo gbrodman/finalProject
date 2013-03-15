@@ -24,6 +24,23 @@ public class AchievementUtils {
 		return result;
 	}
 	
+	public static List<Achievement> getAchievementsForUser(String user) {
+		List<Achievement> achievements = new ArrayList<Achievement>();
+		String query = "SELECT * FROM achievementEvents WHERE user=\"" + user + "\";";
+		ResultSet result = MyDB.queryDatabase(query);
+		try {
+			result.beforeFirst();
+			while (result.next()) {
+				int type = result.getInt("type");
+				achievements.add(getAchievement(type));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return achievements;
+		}
+		return achievements;
+	}
+	
 	public static Achievement getAchievement(int achievementID) {
 		String query = "SELECT * FROM achievements WHERE achievementID=\"" + achievementID + "\";";
 		ResultSet result = MyDB.queryDatabase(query);

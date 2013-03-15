@@ -8,6 +8,7 @@ public class Achievement {
 	private int ID;
 	private String name;
 	private String text;
+	private String photoURL;
 	
 	public Achievement() {
 		this(null);
@@ -19,6 +20,7 @@ public class Achievement {
 				this.ID = rs.getInt("achievementID");
 				this.name = rs.getString("name");
 				this.text = rs.getString("text");
+				this.photoURL = rs.getString("url");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -35,6 +37,10 @@ public class Achievement {
 
 	public String getText() {
 		return text;
+	}
+	
+	public String getPhotoURL() {
+		return photoURL;
 	}
 	
 	@Override
