@@ -64,6 +64,7 @@ $('.messagetopbarlinks').mouseleave(function() {
 	out.println("<h1>Admin Utils for " + title + "</h1>");
 	out.println("<br><form action=\"QuizAdminServlet\" method=\"post\">");
 	out.println("<input type=\"submit\" value=\"Delete history\">");
+	out.println("<input type=\"hidden\" name=\"quiz\" value=\"" + quiz.getId() + "\">");
 	%>
 	<input type="hidden" name="action" value="deleteHistory"/></form>
 	<% 

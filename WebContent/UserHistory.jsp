@@ -62,7 +62,7 @@ $('.messagetopbarlinks').mouseleave(function() {
 	$('.messagenotification').hide(400);
 });
 </script>
-<h2>Basic Stats: </h2><br>
+<h2>Basic Stats: </h2>
 <%
 out.println("Number of quizzes taken: " + numQuizzesTaken + "<br>");
 out.println("Average score: " + MyDB.formatDouble(averageScore) + "<br>");
