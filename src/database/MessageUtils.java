@@ -38,7 +38,7 @@ public class MessageUtils {
 
 		
 	public static void sendFriendRequest(String userTo, String userFrom) {
-		Message message = new Message(userTo, userFrom, false, true, false, -1, -1, userTo + " wants to be friends with you!");
+		Message message = new Message(userTo, userFrom, false, true, false, -1, -1, userFrom + " wants to be friends with you!");
 		sendMessage(message);
 	}
 	

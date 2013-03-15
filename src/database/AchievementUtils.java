@@ -44,6 +44,8 @@ public class AchievementUtils {
 	public static void addAchievement(String user, int achievementID) {
 		String update = "INSERT INTO achievementEvents VALUES(\""+user+"\", "+achievementID+", default)";
 		MyDB.updateDatabase(update);
+		Achievement achievement = getAchievement(achievementID);
+		NewsFeedUtils.addEntry(user + " earned achievement " + achievement.getName(), user);
 	}
 	
 	public static Achievement getAchievement(int achievementID) {

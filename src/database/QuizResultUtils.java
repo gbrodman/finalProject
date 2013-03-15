@@ -183,6 +183,8 @@ public class QuizResultUtils {
 		update.append(timeUsed);
 		update.append(",?);");
 		MyDB.updatePreparedTimestamp(update.toString(), timeCompleted);
+		Quiz quiz = QuizUtils.getQuizByID(quizID);
+		NewsFeedUtils.addQuizEntry(user + " took quiz " + quiz.getTitle(), user, quizID);
 	}
 	
 	public static void deleteAllHistory(int quizID) {

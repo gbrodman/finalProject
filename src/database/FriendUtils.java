@@ -60,8 +60,9 @@ public class FriendUtils {
 		MyDB.updateDatabase("INSERT INTO friendsPending VALUES (\"" + sender + "\",\"" + reciever + "\");");
 	}
 
-	public static void addFriend(String user1, String user2) {
-		MyDB.updateDatabase("INSERT INTO friends VALUES (\"" + user1 + "\",\"" + user2 + "\");");		
+	public static void addFriend(String from, String to) {
+		NewsFeedUtils.addEntry(to + " is now friends with " + from, to);
+		MyDB.updateDatabase("INSERT INTO friends VALUES (\"" + from + "\",\"" + to + "\");");		
 	}
 	
 	public static void removeFromFriendsPending(String user1, String user2) {
