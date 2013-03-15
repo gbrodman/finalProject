@@ -20,7 +20,7 @@ out.println("<li><a href=\"Homepage.jsp\" class=\"topbarlinks\">Home</a></li>");
 out.println("<li><a href=\"Messages.jsp\" class=\"topbarlinks\">Messages</a></li>");
 out.println("<li><a href=\"CreateQuiz.jsp\" class=\"topbarlinks\">Create a Quiz</a></li>");
 out.println("<li><a href=\"MessageFriends.jsp\" class=\"topbarlinks\">Friends</a></li>");
-out.println("<li>Take a Quiz</li>");
+out.println("<li><a href=\"QuizList.jsp\" class=\"topbarlinks\">Take a Quiz</a></li>");
 out.println("</ul>");
 out.println("<form method=\"post\" action=\"SearchServlet\">");
 out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
