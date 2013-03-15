@@ -14,10 +14,14 @@ User user = (User)session.getAttribute("user");
 out.println("<title>" + user.getName()  + "</title>");
 out.println("</head>");
 out.println("<body>");
+int num_notes = MessageUtils.getNumberUnreadNotes(user.getName());
+int num_friend_requests = MessageUtils.getNumberFriendRequests(user.getName());
+int num_challenges = MessageUtils.getNumberUnreadChallenges(user.getName());
+int total_num = num_notes + num_friend_requests + num_challenges;
 out.println("<div id=\"navbar\">");
 out.println("<ul>");
 out.println("<li><a href=\"Homepage.jsp\" class=\"topbarlinks\">Home</a></li>");
-out.println("<li><a href=\"Messages.jsp\" class=\"topbarlinks\">Messages</a></li>");
+out.println("<li><a href=\"Messages.jsp\" class=\"topbarlinks messagetopbarlinks\">Messages  </a><span class=\"numNotifications\">" + total_num + "</span></li>");
 out.println("<li><a href=\"CreateQuiz.jsp\" class=\"topbarlinks\">Create a Quiz</a></li>");
 out.println("<li><a href=\"MessageFriends.jsp\" class=\"topbarlinks\">Friends</a></li>");
 out.println("<li><a href=\"QuizList.jsp\" class=\"topbarlinks\">Take a Quiz</a></li>");
@@ -27,6 +31,15 @@ out.println("<form method=\"post\" action=\"SearchServlet\">");
 out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
 out.println("</form>");
 out.println("</div>");
+
+out.println("<div class=\"messagenotification\">");
+out.println("Notes: " + num_notes);
+out.println("<br>");
+out.println("Friend Requests: " + num_friend_requests);
+out.println("<br>");
+out.println("Challenges: " + num_challenges);
+out.println("</div>");
+
 out.println("<div id=\"picturewelcome\">");
 out.println("<h1> Welcome "+ user.getName()  +"</h1>");
 out.println("<div class=\"profileimg\"> <img src=" +user.getPhotoURL()+" id=\"profilepicture\"></div>");//width=10% height=10% >"); 
@@ -46,9 +59,9 @@ for (int index = announcements.size() - 1; index >= 0; index--) {
 		out.println("<li>");
 		out.println("<div class=\"announcement\">");
 		out.println("<div class=\"icon\">");
-		out.println("<img src=\"" + announcement.getCreator().getPhotoURL() + "\">");
+		out.println("<img src=\"" + UserUtils.getUser(announcement.getCreator()).getPhotoURL() + "\">");
 		out.println("</div>");
-		String from = announcement.getCreator().getName();
+		String from = announcement.getCreator();
 		System.out.println(from);
 		out.println("<div class=\"announcementmessage\"><strong>  " + from +  " announces:  " + announcement.getAnnouncement() + "</strong></div>");
 		out.println("</div>");
@@ -242,10 +255,32 @@ for (int i = 0; i < achievements.size(); i++) {
 out.println("</ul>");
 out.println("</div>");
 
-
-out.println("<h2 class=\"h2bar\">New Messages</h2>");
-out.println("<br>");
-;
+out.println("<h2 class=\"h2bar newsfeedh2\">News Feed</h2>");
+List<NewsFeedEntry> newsFeedEntries = NewsFeedUtils.getMostRecentEntries(user.getName(), 1000);
+System.out.println("NUM ENTRIES: " + newsFeedEntries.size());
+out.println("<div class=\"newsfeed\">");
+out.println("<ul>");
+for (int i = newsFeedEntries.size() - 1; i >= 0; i --) {
+	NewsFeedEntry entry = newsFeedEntries.get(i);
+	out.println("<li id=\"newsfeed" + (newsFeedEntries.size() - i - 1) + "\">");
+	out.println("<div class=\"newsfeedentry\">");
+	String from = entry.getUser();
+	String text = entry.getText();
+	System.out.println("FROM: " + from + " MESSAGE: " + text);
+	text = text.replace(from, "<a href=\"Profile.jsp?profile=" + from + "\">" + from + "</a>");
+	out.println("<div class=\"icon\">");
+	out.println("<img src=\"" + UserUtils.getUser(from).getPhotoURL() + "\">");
+	out.println("</div>");
+	out.println("<div class=\"text\">");
+	out.println(text);
+	out.println("</div>");
+	
+	out.println("</div>");
+	out.println("</li>");
+}
+out.println("</ul>");
+out.println("</div>");
+out.println("<div class=\"seemore\">See More...</div>");
 /*if (user.isAdmin()) {
 	out.println("<a href=\"AdminPage.jsp\">Go to Admin Page</a><br>");
 }
@@ -259,7 +294,7 @@ out.println("<br><a href=\"QuizList.jsp\">Take a Quiz</a>");*/
 $(document).ready(function() {
 	$('div').hide(1);
 	$('div').show(800);
-	//$('.recentquizclass').show(1000);
+	$('.messagenotification').hide();
 });
 
 $('.popularquizzesh2').hover(function() {
@@ -304,7 +339,37 @@ $('#profilepicture').mouseenter(function() {
 $('#profilepicture').mouseleave(function() {
 	$('.profileimg').animate({width:'150px', height:'150px'}, 1500);
 });
+$('.messagetopbarlinks').mouseenter(function() {
+	$('.messagenotification').css("width",$('.messagetopbarlinks').width() + 110 + "px");
+	$('.messagenotification').css("left", $('.messagetopbarlinks').offset().left - 55 + "px");
+	$('.messagenotification').css('position', 'absolute');
+	$('.messagenotification').show(400);
+});
+$('.messagetopbarlinks').mouseleave(function() {
+	$('.messagenotification').hide(400);
+});
 
+$('.newsfeedh2').hover(function() {
+	$('.announcementsclass').hide(800);
+	$('.recentlycreatedquizclass').hide(800);
+	$('.achievementsclass').hide(800);
+	$('.popularquizclass').hide(800);
+	$('.recentquizclass').hide(800);
+	for (var i = 0; i < 2; i++) {
+		$('#newsfeed' + i).show(400);
+	}
+});
+
+$('.seemore').mouseenter(function() {
+	var begin_index = 0;
+	for (;begin_index < 20; begin_index ++) {
+		if (!$('#newsfeed' + begin_index).is(":visible")) break;
+	}
+	for (var i = 0; i < 2; i++) {
+		var index = begin_index + i;
+		$('#newsfeed' + index).show(400);
+	}
+});
 
 
 
