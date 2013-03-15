@@ -41,6 +41,11 @@ public class AchievementUtils {
 		return achievements;
 	}
 	
+	public static void addAchievement(String user, int achievementID) {
+		String update = "INSERT INTO achievementEvents VALUES(\""+user+"\", "+achievementID+", default)";
+		MyDB.updateDatabase(update);
+	}
+	
 	public static Achievement getAchievement(int achievementID) {
 		String query = "SELECT * FROM achievements WHERE achievementID=\"" + achievementID + "\";";
 		ResultSet result = MyDB.queryDatabase(query);

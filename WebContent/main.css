@@ -221,3 +221,12 @@ a.topbarlinks {
 .achievements ul li .icon img {width:100%; height:100%; padding:0em; overflow:hidden}
 .achievements ul li .righticon {width:10%; float:right; height:50px;}
 .achievements ul li .achievementtext {height:50px;}
+
+.achievementAwards {width:100%; height:300px; position:absolute;}
+.achievementAwards .achievementAward {display:block;width:200px;height:300px;position:absolute;margin:100px; border-right:200px solid #ffffff;}
+.achievementAwards .icon {width:100%; float:left;padding:0em;margin-top:0em;overflow:hidden}
+.achievementAwards .icon img {width:100%;height:50%;padding:0em;overflow:hidden}
+.achievementAwards .text {text-align:center}
+
+
+
