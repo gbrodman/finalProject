@@ -30,9 +30,22 @@ out.println("<form method=\"post\" action=\"SearchServlet\">");
 out.println("<input type=\"text\" name=\"searchtext\" value=\"Search\" id=\"searchbar\" onfocus=\"if (this.value == 'Search') {this.value = '';}\">");
 out.println("</form>");
 out.println("</div>");
+
+out.println("<div class=\"messagenotification\">");
+out.println("Notes: " + num_notes);
+out.println("<br>");
+out.println("Friend Requests: " + num_friend_requests);
+out.println("<br>");
+out.println("Challenges: " + num_challenges);
+out.println("</div>");
 %>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
+$(document).ready(function() {
+	$('div').hide(1);
+	$('div').show(800);
+	$('.messagenotification').hide();
+});
 $('.messagetopbarlinks').mouseenter(function() {
 	$('.messagenotification').css("width",$('.messagetopbarlinks').width() + 110 + "px");
 	$('.messagenotification').css("left", $('.messagetopbarlinks').offset().left - 55 + "px");
@@ -43,6 +56,7 @@ $('.messagetopbarlinks').mouseleave(function() {
 	$('.messagenotification').hide(400);
 });
 </script>
+
 <%
 	int id = Integer.parseInt(request.getParameter("quiz"));
 	Quiz quiz = QuizUtils.getQuizByID(id);
@@ -115,5 +129,6 @@ $('.messagetopbarlinks').mouseleave(function() {
 	}
 	out.println("</ul>");
 %>
+
 </body>
 </html>
