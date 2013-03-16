@@ -11,6 +11,7 @@ public class User {
 	private String name;
 	private String photoURL;
 	private String aboutMe;
+	private String status;
 	private List<Achievement> achievements; //should probably remove?
 	private boolean isAdmin;
 	
@@ -87,6 +88,14 @@ public class User {
 	
 	public void setAboutMe(String aboutMe) {
 		this.aboutMe = aboutMe;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public String getStatus() {
+		return status;
 	}
 
 	@Override
