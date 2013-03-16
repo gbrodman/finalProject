@@ -92,7 +92,7 @@ if (FriendUtils.getSentRequests(self.getName()).contains(viewing.getName())) {
 }
 out.println("</div>");
 out.println("<div class=\"messagebutton\">");
-out.println("<")
+out.println("<");
 out.println("</div>");
 out.println("</div>");
 out.println("</div>");
