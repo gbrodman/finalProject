@@ -347,11 +347,16 @@ $('.announcementsh2').hover(function() {
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').hide(800);
 });
-$('#profilepicture').mouseenter(function() {
+/*$('#profilepicture').mouseenter(function() {
 	$('.profileimg').animate({width:'50%', height:.5*$(window).width()}, 1500);
-});
-$('#profilepicture').mouseleave(function() {
-	$('.profileimg').animate({width:'150px', height:'150px'}, 1500);
+});*/
+$('#profilepicture').click(function() {
+	var width = $('.profileimg').css('width');
+	if (width == '150px') {
+		$('.profileimg').animate({width:'50%', height:.5*$(window).width()}, 1500);
+	} else {
+		$('.profileimg').animate({width:'150px', height:'150px'}, 1500);	
+	}
 });
 $('.messagetopbarlinks').mouseenter(function() {
 	$('.messagenotification').css("width",$('.messagetopbarlinks').width() + 110 + "px");

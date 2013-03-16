@@ -79,7 +79,7 @@ else {
 		out.print(friend);
 		out.print("\">");
 		out.print("<input type=\"submit\" value=\"Message\"/></form>");
-		out.println("<a href=\"google.com\">" + friend + "  </a>");
+		out.println("<a href=\"Profile.jsp?profile=" + friend + "\">" + friend + "</a>");
 		out.println("</div>");
 		out.println("</li>");
 	}

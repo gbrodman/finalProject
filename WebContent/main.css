@@ -149,7 +149,7 @@ a.topbarlinks {
 }
 
 #friendlist {  }
-#friendlist ul { list-style:none; }
+#friendlist ul { list-style:none; margin-top:30px;}
 #friendlist ul li { font-family:Georgia,serif,Times; font-size:22px; margin:4px; float:left; }
 #friendlist ul li .friendlistitem { display:block; width:500px; height:70px; background-color:#0F52BA; border-left:5px solid #222; border-right:5px solid #222; padding-left:10px;
   }
@@ -302,4 +302,4 @@ a.topbarlinks {
 
 .profileimgfriends .statusarea {background-color:#CCC; width:60%; height:20%; padding-top:5%;padding-bottom:5%; text-align:center; border: 2px solid #0F52BA;float:left;}
 
-.aboutmeclass {float:left;border: 2px solid #0F52BA; }
+.aboutmeclass {float:left;}
