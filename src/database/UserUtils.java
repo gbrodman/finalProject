@@ -61,6 +61,16 @@ public class UserUtils {
 		String update = "UPDATE users SET photoURL=\""+user.getPhotoURL()+"\" WHERE username=\""+user.getName()+"\";";
 		MyDB.updateDatabase(update);
 	}
+	
+	public static void setPrivacySetting(User user) {
+		String update = "UPDATE users SET privacySetting=" + user.getPrivacyLevel() + " WHERE username=\"" + user.getName() + "\";";
+		MyDB.updateDatabase(update);
+	}
+	
+	public static void setAboutMe(User user) {
+		String update = "UPDATE users SET aboutMe=" + user.getAboutMe() + " WHERE username=\"" + user.getName() + "\";";
+		MyDB.updateDatabase(update);
+	}
 
 	public UserUtils() {
 		// TODO Auto-generated constructor stub

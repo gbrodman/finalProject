@@ -202,6 +202,19 @@ a.topbarlinks {
 .quizlist ul li .numplays {width:8%; height:50px; padding-top: 15px;  border-left:1px solid #ffffff; border-right:1px solid #ffffff; float:right;text-align:center;}
 .quizlist ul li .highscore {width:8%; height:50px; padding-top: 15px; border-right:1px solid #ffffff; float:right;text-align:center; }
 
+.quizlista {float:left; }
+.quizlista ul {list-style:none; float:left; display:none;}
+.quizlista ul .recentlytakenquizzesclass {display:none;}
+.quizlista ul .recentlycreatedquizzesclass {display:none;}
+.quizlista ul li {margin-top: 2px; margin-bottom:2px; margin-left:5%; border-bottom:50px solid #ffffff;}
+.quizlista ul li .quiz {float:left; width:85%; height:50px; position:absolute; color:#ffffff;background-color:#0F52BA; margin-top:2px;}
+.quizlista ul li .top {background-color:#ffffff; color:#0F52BA;}
+.quizlista ul li .name {width:20%; height:50px; padding-top: 15px; border-right:1px solid #ffffff; float:left;text-align:center; }
+.quizlista ul li .createdby {width:20%; height:50px; padding-top: 15px; border-right:1px solid #ffffff; float:left;text-align:center;}
+.quizlista ul li .category {height:50px; padding-top: 15px; border-right:1px solid #ffffff; text-align:center;}
+.quizlista ul li .takequiz {background-color:#ffffff; color:#0F52BA; width:20%; height:50px; padding:1px; float:right; text-align:center; overflow:hidden;}
+.quizlista ul li .takequiz input {width:70%; height:70%; padding:0em;padding-top:5%; margin-top:1%; overflow:hidden;}
+.quizlista ul li .highscore {width:8%; height:50px; padding-top: 15px; border-right:1px solid #ffffff; float:right;text-align:center; }
 #recentquizbar {}
 
 .profileimg {width:150px; height:150px;}

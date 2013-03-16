@@ -10,6 +10,7 @@ public class User {
 
 	private String name;
 	private String photoURL;
+	private String aboutMe;
 	private List<Achievement> achievements; //should probably remove?
 	private boolean isAdmin;
 	
@@ -28,8 +29,7 @@ public class User {
 				privacySetting = rs.getInt("privacySetting");
 				isAdmin = rs.getInt("isAdmin") == 1;
 				photoURL = rs.getString("photoURL");
-				String achievementIDs = rs.getString("achievementIDs");
-				//achievements = AchievementUtils.getAchievements(achievementIDs);
+				aboutMe = rs.getString("aboutMe");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -79,6 +79,14 @@ public class User {
 	
 	public void setPrivacyLevel(int setting) {
 		privacySetting = setting;
+	}
+	
+	public String getAboutMe() {
+		return aboutMe;
+	}
+	
+	public void setAboutMe(String aboutMe) {
+		this.aboutMe = aboutMe;
 	}
 
 	@Override

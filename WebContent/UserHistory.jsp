@@ -12,7 +12,6 @@
 <%String username = request.getParameter("username"); 
 int numQuizzesTaken = QuizResultUtils.numQuizzesTaken(username);
 double averageScore = QuizResultUtils.getAverageScore(username);
-List<QuizResult> results = QuizResultUtils.getAllResultsByUser(username);
 %>
 <title>User History for <%out.print(username); %></title>
 </head>
@@ -45,6 +44,61 @@ out.println("<br>");
 out.println("Challenges: " + num_challenges);
 out.println("</div>");
 %>
+
+<h2>Basic Stats: </h2>
+<%
+out.println("Number of quizzes taken: " + numQuizzesTaken + "<br>");
+out.println("Average score: " + MyDB.formatDouble(averageScore) + "<br>");
+
+out.println("<h2 class=\"h2bar recentquizzesh2\">All Results for "+ username + "</h2>");
+List<QuizResult> quizResults = QuizResultUtils.getAllResultsByUser(username);
+out.println("<div class=\"quizlista\" id=\"recentquizbar\">");
+out.println("<ul class=\"recentquizclass\">");
+out.println("<li>");
+out.println("<div class=\"quiz top\">");
+out.println("<div class=\"name\">Title</div>");
+out.println("<div class=\"createdby\">Created By</div>");
+out.println("<div class=\"takequiz\">");
+out.println("Take Quiz");
+out.println("</div>");
+out.println("<div class=\"highscore\">Your Score</div>");
+out.println("<div class=\"category\">Category</div>");
+out.println("</div>");
+out.println("</li>");
+for (int i = 0; i < quizResults.size(); i++) {
+	QuizResult result = quizResults.get(i);
+	Quiz quiz = QuizUtils.getQuizByID(result.getQuizID());
+	out.println("<li>");
+	out.println("<div class=\"quiz\">");
+	out.println("<div class=\"name\">");
+	out.println(quiz.getTitle());
+	out.println("</div>");
+	out.println("<div class=\"createdby\">");
+	out.println("<a href=\"Profile.jsp?profile=" + quiz.getOwner().getName() + "\" class=\"topbarlinks\">" + quiz.getOwner().getName() + "</a>");
+	out.println("</div>");
+	out.println("<div class=\"takequiz\">");
+	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
+	out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
+	out.print(quiz.getId());
+	out.print("\">");
+	out.print("<input type=\"image\" src=\"QuizMePictures/QuizMe.png\"/></form>");
+	out.println("</div>");
+	out.println("<div class=\"highscore\">");
+	out.println(result.getScore());
+	out.println("</div>");
+	out.println("<div class=\"category\">");
+	out.println(quiz.getCategory());
+	out.println("</div>");
+	out.println("</div>");
+	out.println("</li>");
+}
+out.println("<form action=\"UserHistory.jsp\">");
+out.println("<input type=\"hidden\" name=\"username\" value=\"" + user.getName() + "\">");
+out.println("<input type=\"submit\" value=\"View full personal history\">");
+out.println("</form>");
+out.println("</ul>");
+out.println("</div>");
+%>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function() {
@@ -61,13 +115,13 @@ $('.messagetopbarlinks').mouseenter(function() {
 $('.messagetopbarlinks').mouseleave(function() {
 	$('.messagenotification').hide(400);
 });
+$('.recentquizzesh2').hover(function() {
+	$('.popularquizclass').hide(800);
+	$('.recentquizclass').show(800);
+	$('.achievementsclass').hide(800);
+	$('.recentlycreatedquizclass').hide(800);
+	$('.announcementsclass').hide(800);
+});
 </script>
-<h2>Basic Stats: </h2>
-<%
-out.println("Number of quizzes taken: " + numQuizzesTaken + "<br>");
-out.println("Average score: " + MyDB.formatDouble(averageScore) + "<br>");
-
-%>
-
 </body>
 </html>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import objects.User;
+import database.UserUtils;
 
 /**
  * Servlet implementation class ChangePrivacyServlet
@@ -40,6 +41,7 @@ public class ChangePrivacyServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		int setting = Integer.parseInt(request.getParameter("setting"));
 		user.setPrivacyLevel(setting);
+		UserUtils.setPrivacySetting(user);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("UserUtilities.jsp");
 		dispatcher.forward(request, response);
 	}
