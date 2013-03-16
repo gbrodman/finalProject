@@ -59,33 +59,31 @@ $('.messagetopbarlinks').mouseleave(function() {
 	$('.messagenotification').hide(400);
 });
 </script>
-<h1>Admin</h1><br>
-<h2>Statistics:</h2>
-<p>
-Number of users:  <%out.println(UserUtils.getNumberTotalUsers()); %><br></p>
-<p>Number quizzes taken: <%out.println(QuizResultUtils.totalNumQuizzesTaken()); %><br></p>
-<h2>Admin Utils:</h2>
-<ul>
-<li>
-Remove User: <br>
-<form method="post" action="RemoveUserServlet">
-<input type="text" name="userToRemove" value="User to remove" onfocus="if (this.value == 'User to remove') {this.value = '';}"/>
-<input type="submit" value="Remove"/>
-</form>
-</li><li>
-Create Announcement: <br>
-<form method="post" action="CreateAnnouncementServlet">
-<input type="text" name="announcement" value="Announcement" onfocus="if (this.value == 'Announcement') {this.value = '';}"/>
-<input type="submit" value="Create"/>
-</form>
-</li><li>
-Promote User Account to Admin: <br>
-<form method="post" action="PromoteUserServlet">
-<input type="text" name="userToPromote" value="User to promote" onfocus="if (this.value == 'User to promote') {this.value = '';}"/>
-<input type="submit" value="Promote"/>
-</form>
-</li>
-</ul>
+
+<% if (user.isAdmin()) {
+	out.println("<h1>Admin</h1>");
+	out.println("<h2>Statistics:</h2>");
+	out.println("<p>");
+	out.println("Number of users: " + UserUtils.getNumberTotalUsers() + " <br></p>");
+	out.println("<p>Number quizzes taken: " + QuizResultUtils.totalNumQuizzesTaken() + "<br></p>");
+	out.println("<h2>Admin Utils:</h2>");
+	out.println("<ul><li>Remove User: <br>");
+	out.println("<form method=\"post\" action=\"RemoveUserServlet\">");
+	out.println("<input type=\"text\" name=\"userToRemove\" value=\"User to remove\" onfocus=\"if (this.value == 'User to remove') {this.value = '';}\"/>");
+	out.println("<input type=\"submit\" value=\"Remove\"/>");
+	out.println("</form></li><li>Create Announcement: <br>");
+	out.println("<form method=\"post\" action=\"CreateAnnouncementServlet\">");
+	out.println("<input type=\"text\" name=\"announcement\" value=\"Announcement\" onfocus=\"if (this.value == 'Announcement') {this.value = '';}\"/>");
+	out.println("<input type=\"submit\" value=\"Create\"/>");
+	out.println("</form>");
+	out.println("</li><li>");
+	out.println("Promote User Account to Admin: <br>");
+	out.println("<form method=\"post\" action=\"PromoteUserServlet\">");
+	out.println("<input type=\"text\" name=\"userToPromote\" value=\"User to promote\" onfocus=\"if (this.value == 'User to promote') {this.value = '';}\"/>");
+	out.println("<input type=\"submit\" value=\"Promote\"/>");
+	out.println("</form></li></ul>");
+}
+%>
 
 
 </body>

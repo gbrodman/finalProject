@@ -5,10 +5,6 @@ import objects.User;
 
 public class AdminUtils {
 	
-	public static void removeUserAccount(String user) {
-		String update = "DELETE FROM users WHERE username=\"" + "\";";
-		MyDB.updateDatabase(update);
-	}
 	
 	public static void removeQuiz(Quiz quiz) {
 		String update = "DELETE FROM quizzes WHERE id=" + quiz.getId() + ";";

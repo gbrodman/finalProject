@@ -55,7 +55,8 @@ $('.messagetopbarlinks').mouseleave(function() {
 	$('.messagenotification').hide(400);
 });
 </script>
+<br>
 Admin operation performed successfully. <br>
-<a href="AdminPage.jsp">Return to Admin Page</a>
+<a href="UserUtilities.jsp">Return to Admin Page</a>
 </body>
 </html>

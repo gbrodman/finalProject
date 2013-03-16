@@ -49,6 +49,9 @@ out.println("<input type=\"submit\" value=\"Change photo\">");
 out.println("</form>");
 out.println("</div>");
 
+// REMOVE THIS
+out.println("<a href=\"UserUtilities.jsp\">User Utilities</a>");
+
 out.println("<h2 class=\"h2bar announcementsh2\">Announcements</h2>");
 List<Announcement> announcements = AnnouncementUtils.getAnnouncements();
 if (announcements.size() != 0) {
@@ -247,7 +250,7 @@ for (int i = 0; i < achievements.size(); i++) {
 	out.println("</div>");
 	out.println("<div class=\"blankright\">  </div>");
 	out.println("<div class=\"achievementtext\">");
-	out.println("<strong>" + achievement.getName() + "</strong>   " + achievement.getText());
+	out.println("<strong>" + achievement.getName() + ": </strong>   " + achievement.getText());
 	out.println("</div>");
 	out.println("</div>");
 	out.println("</li>");
