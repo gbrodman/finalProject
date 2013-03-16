@@ -92,10 +92,31 @@ if (FriendUtils.getSentRequests(self.getName()).contains(viewing.getName())) {
 }
 out.println("</div>");
 out.println("<div class=\"messagebutton\">");
-out.println("<")
+out.print("<form action=\"MessageFriendServlet\" method=\"get\" display=\"inline\">");
+out.print("<input type=\"hidden\" name=\"friend\" value=\"");
+out.print(viewing.getName());
+out.print("\">");
+out.print("<input type=\"submit\" value=\"Message\"/></form>");
 out.println("</div>");
 out.println("</div>");
+out.println("<div class=\"statusarea\">");
+out.println("<strong>How I am Feeling Today:</strong>");
+out.println("<em>To be, or not to be...");
 out.println("</div>");
+out.println("</div>");
+
+out.println("");
+
+out.println("<h2 class=\"h2bar aboutmeh2\">About Me</h2>");
+
+out.println("<div class=\"aboutmeclass\">");
+out.println("<strong>About me:</strong><br>");
+out.println();
+out.println("<strong>Date Added: </strong>");
+out.println("");
+
+out.println("</div>");
+
 
 
 /*if (self.getName().equals(viewing.getName())) {
