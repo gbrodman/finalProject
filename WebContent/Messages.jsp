@@ -152,15 +152,15 @@ for (int index = inbox.size() - 1; index >= 0; index--) {
 		String from = message.getUserFrom();
 		System.out.println(from);
 		out.println("<div class=\"friendrequestmessage\">  " + from + " wants to be your friend!</div>");
-		out.println("<form name='form1' action=\"HandleFriendRequestServlet\" method=\"post\">");
-		out.println("<input type=\"hidden\" name=\"status\">");
+		out.println("<form action=\"AcceptFriendRequestServlet\" method=\"post\">");
+		out.println("<input type=\"hidden\" name=\"userFrom\" value=\"" + from + "\">");
 		out.println("<input type=\"hidden\" name=\"messageID\" value=\"" + message.getMessageID() + "\">");
-		out.println("<div class=\"acceptreject\">");
-		out.println("<input type=\"button\" value=\"Accept\" onclick=\"acceptFriend()\">");
-		out.println("</div>");
-		out.println("<div class=\"acceptreject\">");
-		out.println("<input type=\"button\" value=\"Reject\" onclick=\"rejectFriend()\">");
-		out.println("</div>");
+		out.println("<input type=\"submit\" value=\"Accept\">");
+		out.println("</form>");
+		out.println("<form action=\"RejectFriendRequestServlet\" method=\"post\">");
+		out.println("<input type=\"hidden\" name=\"userFrom\" value=\"" + from + "\">");
+		out.println("<input type=\"hidden\" name=\"messageID\" value=\"" + message.getMessageID() + "\">");
+		out.println("<input type=\"submit\" value=\"Reject\">");
 		out.println("</form>");
 		out.println("</div>");
 		out.println("</li>");
@@ -171,22 +171,6 @@ out.println("</div>");
 out.println("</body>");
 %>
 
-
-
-<script language="JavaScript">
-	function acceptFriend() {
-		document.form1.status.value = "accept";
-		alert("accept");
-		form1.submit();
-	} 
-	
-	function rejectFriend() {
-		document.form1.status.value = "reject";
-		alert("reject");
-		form1.submit();
-	}
-	
-</script>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
