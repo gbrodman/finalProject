@@ -92,10 +92,6 @@ for (int i = 0; i < quizResults.size(); i++) {
 	out.println("</div>");
 	out.println("</li>");
 }
-out.println("<form action=\"UserHistory.jsp\">");
-out.println("<input type=\"hidden\" name=\"username\" value=\"" + user.getName() + "\">");
-out.println("<input type=\"submit\" value=\"View full personal history\">");
-out.println("</form>");
 out.println("</ul>");
 out.println("</div>");
 %>

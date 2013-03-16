@@ -31,6 +31,9 @@ public class User {
 				isAdmin = rs.getInt("isAdmin") == 1;
 				photoURL = rs.getString("photoURL");
 				aboutMe = rs.getString("aboutMe");
+				if (aboutMe == null) aboutMe = "";
+				status = rs.getString("status");
+				if (status == null) status = "";
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

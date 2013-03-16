@@ -73,7 +73,7 @@ public class UserUtils {
 	}
 	
 	public static void setStatus(User user) {
-		String update = "UPDATE users SET status=" + user.getStatus() + " WHERE username=\"" + user.getName() + "\";";
+		String update = "UPDATE users SET status=\"" + user.getStatus() + "\" WHERE username=\"" + user.getName() + "\";";
 		MyDB.updateDatabase(update);
 	}
 

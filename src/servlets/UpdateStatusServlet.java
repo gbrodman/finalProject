@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import objects.User;
+import database.UserUtils;
 
 /**
- * Servlet implementation class UpdatePhotoServlet
+ * Servlet implementation class UpdateStatusServlet
  */
-@WebServlet("/UpdatePhotoServlet")
-public class UpdatePhotoServlet extends HttpServlet {
+@WebServlet("/UpdateStatusServlet")
+public class UpdateStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatePhotoServlet() {
+    public UpdateStatusServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +31,19 @@ public class UpdatePhotoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = request.getParameter("newURL");
-		User user = (User)request.getSession().getAttribute("user");
-		user.changePhoto(url);
-		RequestDispatcher dispatch = request.getRequestDispatcher("UserUtilities.jsp"); 
-		dispatch.forward(request, response);
+		User user = (User) request.getSession().getAttribute("user");
+		String status = request.getParameter("status");
+		user.setStatus(status);
+		UserUtils.setStatus(user);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Homepage.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

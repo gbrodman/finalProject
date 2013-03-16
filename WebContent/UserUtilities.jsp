@@ -61,6 +61,19 @@ $('.messagetopbarlinks').mouseleave(function() {
 </script>
 
 <h1>Settings</h1>
+<h3>User Info</h3>
+<% 
+out.println("<div class=\"profileimg\"> <img src=" +user.getPhotoURL()+" id=\"profilepicture\"></div>");//width=10% height=10% >"); 
+out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
+out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter new photo URL\" onfocus=\"if (this.value == 'Enter new photo URL') {this.value = '';}\">");
+out.println("<input type=\"submit\" value=\"Change photo URL\">");
+out.println("</form><br>");
+out.println("About Me is currently: " + user.getAboutMe());
+out.println("<form action=\"UpdateAboutMeServlet\" method=\"post\">");
+out.println("<p><input type=\"text\" name=\"aboutMe\" value=\"Enter your new description\" onfocus=\"if (this.value == 'Enter your new description') {this.value = '';}\">");
+out.println("<input type=\"submit\" value=\"Change About Me\">");
+out.println("</form><br>");
+%>
 <h3>Privacy</h3>
 Friends will always be able to see all your activity and your profile.<br>
 <form action="ChangePrivacyServlet" method="post">

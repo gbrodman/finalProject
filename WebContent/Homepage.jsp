@@ -43,9 +43,10 @@ out.println("</div>");
 out.println("<div id=\"picturewelcome\">");
 out.println("<h1> Welcome "+ user.getName()  +"</h1>");
 out.println("<div class=\"profileimg\"> <img src=" +user.getPhotoURL()+" id=\"profilepicture\"></div>");//width=10% height=10% >"); 
-out.println("<form action=\"UpdatePhotoServlet\" method=\"post\">");
-out.println("<p><input type=\"text\" name=\"newURL\" value=\"Enter url of new photo\" onfocus=\"if (this.value == 'Enter url of new photo') {this.value = '';}\">");
-out.println("<input type=\"submit\" value=\"Change photo\">");
+out.println("Status: " + user.getStatus() + "<br>");
+out.println("<form action=\"UpdateStatusServlet\" method=\"post\">");
+out.println("<p><input type=\"text\" name=\"status\" value=\"Enter new status\" onfocus=\"if (this.value == 'Enter new status') {this.value = '';}\">");
+out.println("<input type=\"submit\" value=\"Change status\">");
 out.println("</form>");
 out.println("</div>");
 
@@ -346,11 +347,16 @@ $('.announcementsh2').hover(function() {
 	$('.popularquizclass').hide(800);
 	$('.recentquizclass').hide(800);
 });
-$('#profilepicture').mouseenter(function() {
+/*$('#profilepicture').mouseenter(function() {
 	$('.profileimg').animate({width:'50%', height:.5*$(window).width()}, 1500);
-});
-$('#profilepicture').mouseleave(function() {
-	$('.profileimg').animate({width:'150px', height:'150px'}, 1500);
+});*/
+$('#profilepicture').click(function() {
+	var width = $('.profileimg').css('width');
+	if (width == '150px') {
+		$('.profileimg').animate({width:'50%', height:.5*$(window).width()}, 1500);
+	} else {
+		$('.profileimg').animate({width:'150px', height:'150px'}, 1500);	
+	}
 });
 $('.messagetopbarlinks').mouseenter(function() {
 	$('.messagenotification').css("width",$('.messagetopbarlinks').width() + 110 + "px");
