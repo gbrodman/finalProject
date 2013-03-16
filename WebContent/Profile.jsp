@@ -74,6 +74,7 @@ $('.messagetopbarlinks').mouseleave(function() {
 	out.println("<div class=\"profileimgfriends\">");
 out.println("<div class=\"profileimg\"><img src=\"" + viewing.getPhotoURL()+ "\"/></div>");
 out.println("<div class=\"buttonscontainer\">");
+if (!user.getName().equals(viewing.getName())) {
 out.println("<div class=\"friendsbutton\">");
 if (FriendUtils.getSentRequests(self.getName()).contains(viewing.getName())) {
 	out.println("<span class=\"friendspending\">Pending Friend Request</span>");
@@ -102,6 +103,7 @@ out.print("\">");
 out.print("<input type=\"submit\" value=\"Message\"/></form>");
 
 out.println("</div>");
+}
 out.println("</div>");
 out.println("<div class=\"statusarea\">");
 out.println("<strong>How I am Feeling Today:</strong>");
@@ -149,65 +151,66 @@ else {
 		}
 	}
 
+
 	out.println("</ul>");
 	out.println("</div>");
-
-	out.println("<h2 class=\"h2bar recentquizzesh2\">Recently Taken Quizzes</h2>");
-	out.println("<div class=\"quizlist\" id=\"recentquizbar\">");
-	out.println("<ul class=\"recentquizclass\">");
+out.println("<h2 class=\"h2bar recentquizzesh2\">Recently Taken Quizzes</h2>");
+out.println("<div class=\"quizlist\" id=\"recentquizbar\">");
+out.println("<ul class=\"recentquizclass\">");
+if (recent_quizzes.size() == 0) {
+	out.println("<li>" + viewing.getName() +" has not recently taken any quizzes!</li>");
+} else {
+out.println("<li>");
+out.println("<div class=\"quiz top\">");
+out.println("<div class=\"name\">Title</div>");
+out.println("<div class=\"createdby\">Created By</div>");
+out.println("<div class=\"takequiz\">");
+out.println("Take Quiz");
+out.println("</div>");
+out.println("<div class=\"highscore\">Your Score</div>");
+out.println("<div class=\"numplays\">Number of Plays</div>");
+out.println("<div class=\"category\">Category</div>");
+out.println("</div>");
+out.println("</li>");
+System.out.println(recent_quizzes.size());
+for (int i = 0; i < recent_quizzes.size(); i++) {
+	QuizResult result = recent_quizzes.get(i);
+	Quiz quiz = QuizUtils.getQuizByID(result.getQuizID());
 	out.println("<li>");
-	out.println("<div class=\"quiz top\">");
-	out.println("<div class=\"name\">Title</div>");
-	out.println("<div class=\"createdby\">Created By</div>");
-	out.println("<div class=\"takequiz\">");
-	out.println("Take Quiz");
+	out.println("<div class=\"quiz\">");
+	out.println("<div class=\"name\">");
+	out.println(quiz.getTitle());
 	out.println("</div>");
-	out.println("<div class=\"highscore\">Your Score</div>");
-	out.println("<div class=\"numplays\">Number of Plays</div>");
-	out.println("<div class=\"category\">Category</div>");
+	out.println("<div class=\"createdby\">");
+	out.println("<a href=\"Profile.jsp?profile=" + quiz.getOwner().getName() + "\" class=\"topbarlinks\">" + quiz.getOwner().getName() + "</a>");
+	out.println("</div>");
+	out.println("<div class=\"takequiz\">");
+	out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
+	out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
+	out.print(quiz.getId());
+	out.print("\">");
+	out.print("<input type=\"image\" src=\"QuizMePictures/QuizMe.png\"/></form>");
+	out.println("</div>");
+	out.println("<div class=\"highscore\">");
+	out.println(result.getScore());
+	out.println("</div>");
+	out.println("<div class=\"numplays\">");
+	out.println(quiz.getNumPlays());
+	out.println("</div>");
+	out.println("<div class=\"category\">");
+	out.println(quiz.getCategory());
+	out.println("</div>");
 	out.println("</div>");
 	out.println("</li>");
-	System.out.println(recent_quizzes.size());
-	for (int i = 0; i < recent_quizzes.size(); i++) {
-		QuizResult result = recent_quizzes.get(i);
-		Quiz quiz = QuizUtils.getQuizByID(result.getQuizID());
-		out.println("<li>");
-		out.println("<div class=\"quiz\">");
-		out.println("<div class=\"name\">");
-		out.println(quiz.getTitle());
-		out.println("</div>");
-		out.println("<div class=\"createdby\">");
-		out.println("<a href=\"Profile.jsp?profile="
-				+ quiz.getOwner().getName()
-				+ "\" class=\"topbarlinks\">"
-				+ quiz.getOwner().getName() + "</a>");
-		out.println("</div>");
-		out.println("<div class=\"takequiz\">");
-		out.print("<form action=\"DisplayQuizServlet\" method=\"post\">");
-		out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
-		out.print(quiz.getId());
-		out.print("\">");
-		out.print("<input type=\"image\" src=\"QuizMePictures/QuizMe.png\"/></form>");
-		out.println("</div>");
-		out.println("<div class=\"highscore\">");
-		out.println(result.getScore());
-		out.println("</div>");
-		out.println("<div class=\"numplays\">");
-		out.println(quiz.getNumPlays());
-		out.println("</div>");
-		out.println("<div class=\"category\">");
-		out.println(quiz.getCategory());
-		out.println("</div>");
-		out.println("</div>");
-		out.println("</li>");
-	}
-	out.println("<form action=\"UserHistory.jsp\">");
-	out.println("<input type=\"hidden\" name=\"username\" value=\""
-			+ viewing.getName() + "\">");
-	out.println("<input type=\"submit\" value=\"View full personal history\">");
-	out.println("</form>");
-	out.println("</ul>");
-	out.println("</div>");
+}
+out.println("<form action=\"UserHistory.jsp\">");
+out.println("<input type=\"hidden\" name=\"username\" value=\"" + viewing.getName() + "\">");
+out.println("<input type=\"submit\" value=\"View full personal history\">");
+out.println("</form>");
+}
+out.println("</ul>");
+out.println("</div>");
+
 
 	System.out.println(recently_created_quizzes.size());
 	if (recently_created_quizzes.size() > 0) {
