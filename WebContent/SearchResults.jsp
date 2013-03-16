@@ -64,7 +64,7 @@ List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizResults");
 if (resultUser != null) {
 	out.println("<h2>User Result:</h2>");
 	out.println(resultUser.getName());
-	String pageToOpen = (resultUser.getPrivacyLevel() > 0 && !FriendUtils.areFriends(resultUser.getName(), user.getName())) ? "Privacy.jsp" : "Profile.jsp";
+	String pageToOpen = (!resultUser.getName().equals(user.getName()) && resultUser.getPrivacyLevel() > 0 && !FriendUtils.areFriends(resultUser.getName(), user.getName())) ? "Privacy.jsp" : "Profile.jsp";
 	%>
 	<form action="<%out.print(pageToOpen); %>" method="get">
 	<input type="hidden" name="profile" value="<%out.print(resultUser.getName()); %>">
