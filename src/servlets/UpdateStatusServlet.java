@@ -13,16 +13,16 @@ import objects.User;
 import database.UserUtils;
 
 /**
- * Servlet implementation class ChangePrivacyServlet
+ * Servlet implementation class UpdateStatusServlet
  */
-@WebServlet("/ChangePrivacyServlet")
-public class ChangePrivacyServlet extends HttpServlet {
+@WebServlet("/UpdateStatusServlet")
+public class UpdateStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangePrivacyServlet() {
+    public UpdateStatusServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,10 +39,10 @@ public class ChangePrivacyServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
-		int setting = Integer.parseInt(request.getParameter("setting"));
-		user.setPrivacyLevel(setting);
-		UserUtils.setPrivacySetting(user);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("UserUtilities.jsp");
+		String status = request.getParameter("status");
+		user.setStatus(status);
+		UserUtils.setStatus(user);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Homepage.jsp");
 		dispatcher.forward(request, response);
 	}
 
