@@ -56,7 +56,7 @@ $('.messagetopbarlinks').mouseenter(function() {
 $('.messagetopbarlinks').mouseleave(function() {
 	$('.messagenotification').hide(400);
 });
-</script>
+</script><br>
 You must be friends with this person to view their profile.<br>
 <%
 User otherUser = UserUtils.getUser(request.getParameter("otherUser"));

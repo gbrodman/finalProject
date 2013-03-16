@@ -60,6 +60,16 @@ $('.messagetopbarlinks').mouseleave(function() {
 });
 </script>
 
+<h1>Settings</h1>
+<h3>Privacy</h3>
+Friends will always be able to see all your activity and your profile.<br>
+<form action="ChangePrivacyServlet" method="post">
+<input type="radio" name="setting" value="0"> All users can see everything about you.<br>
+<input type="radio" name="setting" value="1"> Non-friends cannot see your profile, you show up as Anonymous on results.<br>
+<input type="radio" name="setting" value="2"> Your presence is invisible to non-friends.<br>
+<input type="submit" value="Change privacy setting"><br>
+</form>
+
 <% if (user.isAdmin()) {
 	out.println("<h1>Admin</h1>");
 	out.println("<h2>Statistics:</h2>");

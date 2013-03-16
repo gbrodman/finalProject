@@ -2,10 +2,9 @@ package objects;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import database.*;
+import database.UserUtils;
 
 public class User {
 
@@ -76,6 +75,10 @@ public class User {
 
 	public int getPrivacyLevel() {
 		return privacySetting;
+	}
+	
+	public void setPrivacyLevel(int setting) {
+		privacySetting = setting;
 	}
 
 	@Override
