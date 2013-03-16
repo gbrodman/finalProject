@@ -64,9 +64,10 @@ $('.messagetopbarlinks').mouseleave(function() {
 	String inst = quiz.getInstructions();
 	String title = quiz.getTitle();
 	int num = quiz.numQuestions();
+	String creator = quiz.getOwner().getName();
 	out.println("<h1>"+title+"</h1>");
 	out.println("<br>Created by: ");
-	out.println("<a href=\"Profile.jsp?profile=" + user.getName()+ "\">" + user.getName() + "</a>");
+	out.println("<a href=\"Profile.jsp?profile=" + creator + "\">" + creator + "</a>");
 	out.println("<body><br>"+inst);
 	out.println("<br>This quiz has "+num+" questions.");
 	if (quiz.isInstantCorrection()) out.println("<br>This quiz has instant correction.");
