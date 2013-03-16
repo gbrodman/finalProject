@@ -54,6 +54,7 @@ out.println("</div>");
 $(document).ready(function() {
 	$('div').hide(1);
 	$('div').show(800);
+	$('.aboutmeclass').hide();
 	$('.messagenotification').hide();
 });
 $('.messagetopbarlinks').mouseenter(function() {
@@ -75,9 +76,9 @@ out.println("<div class=\"friendsbutton\">");
 if (FriendUtils.getSentRequests(self.getName()).contains(viewing.getName())) {
 	out.println("<span class=\"friendspending\">Pending Friend Request</span>");
 } else if (FriendUtils.getSentRequests(viewing.getName()).contains(self.getName())){
-	out.println("<form method=\"get\" action=\"Messages.jsp\">");
-	out.println("<input type=\"submit\" value=\"Respond to friend request!\"");
-	out.println("</form");
+	out.println("<form method=\"post\" action=\"Messages.jsp\">");
+	out.println("<input type=\"submit\" value=\"Respond to friend request!\">");
+	out.println("</form>");
 } else if (FriendUtils.getFriends(self.getName()).contains(viewing.getName())) {
 	out.println("<span class=\"alreadyfriends\">Friends!</span>");	
 } else {
@@ -85,6 +86,7 @@ if (FriendUtils.getSentRequests(self.getName()).contains(viewing.getName())) {
 	out.println("<input type=\"hidden\" name=\"messageType\" value=\"friendRequest\">");
 	out.println("<input type=\"hidden\" name=\"to\" value=\"" + viewing.getName() + "\">");
 	out.println("<input type=\"hidden\" name=\"profile\" value=\"" + viewing.getName() + "\">");
+	out.println("<input type=\"hidden\" name=\"pageToOpen\" value=\"Profile.jsp?profile=" + viewing.getName() + "\">");
 	out.println("<input type=\"submit\" value=\"Add as friend\">");
 	out.println("</form>");
 }
