@@ -72,6 +72,7 @@ $('.messagetopbarlinks').mouseleave(function() {
 out.println("<div class=\"profileimgfriends\">");
 out.println("<div class=\"profileimg\"><img src=\"" + viewing.getPhotoURL()+ "\"/></div>");
 out.println("<div class=\"buttonscontainer\">");
+if (!user.getName().equals(viewing.getName())) {
 out.println("<div class=\"friendsbutton\">");
 if (FriendUtils.getSentRequests(self.getName()).contains(viewing.getName())) {
 	out.println("<span class=\"friendspending\">Pending Friend Request</span>");
@@ -100,6 +101,7 @@ out.print("\">");
 out.print("<input type=\"submit\" value=\"Message\"/></form>");
 
 out.println("</div>");
+}
 out.println("</div>");
 out.println("<div class=\"statusarea\">");
 out.println("<strong>How I am Feeling Today:</strong>");
