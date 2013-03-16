@@ -18,6 +18,8 @@ input {
     margin-top: 10px;
 }
 
+.createnewaccount {margin-top:10px;border-radius:5px;margin-left:5px; text-align:center;padding:5px;position:absolute; left:14%; background-color:#30f530;}
+
 input[type="button"]:hover{background-color:#3F82DA;}
 input[type="submit"]:hover{background-color:#3F82DA;}
 
@@ -45,7 +47,8 @@ input[type='radio']{margin-top:2px;width:15px;height:15px; padding:2px;}
 #sub {
 	background-color:#EFEFEF;
 	color:#000000;
-	float:right;
+	position:absolute;
+	left:37%;
 	margin-right:0px;
 	border-style:none;
 }
