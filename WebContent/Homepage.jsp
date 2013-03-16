@@ -45,7 +45,7 @@ out.println("<h1> Welcome "+ user.getName()  +"</h1>");
 out.println("<div class=\"profileimg\"> <img src=" +user.getPhotoURL()+" id=\"profilepicture\"></div>");//width=10% height=10% >"); 
 out.println("Status: " + user.getStatus() + "<br>");
 out.println("<form action=\"UpdateStatusServlet\" method=\"post\">");
-out.println("<p><input type=\"text\" name=\"status\" value=\"Enter new status\"if (this.value == 'Enter new status') {this.value = '';}\">");
+out.println("<p><input type=\"text\" name=\"status\" value=\"Enter new status\" onfocus=\"if (this.value == 'Enter new status') {this.value = '';}\">");
 out.println("<input type=\"submit\" value=\"Change status\">");
 out.println("</form>");
 out.println("</div>");

@@ -63,7 +63,7 @@ public class QuizResultUtils {
 	}
 	
 	public static int getBestScore(String user, int quizID) {
-		String query = "SELECT score FROM history WHERE user=\"" + user+ "\" AND quizID=" + quizID + " ORDER BY score DESC;";
+		String query = "SELECT score FROM history WHERE user=\"" + user+ "\" AND quizID=" + quizID + " ORDER BY score DESC, timeUsed ASC;";
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			if (rs.next()) {
@@ -76,7 +76,7 @@ public class QuizResultUtils {
 	}
 	
 	public static int getBestScore(int quizID) {
-		String query = "SELECT score FROM history WHERE quizID=" + quizID + " ORDER BY score DESC;";
+		String query = "SELECT score FROM history WHERE quizID=" + quizID + " ORDER BY score DESC, timeUsed ASC;";
 		ResultSet rs = MyDB.queryDatabase(query);
 		try {
 			if (rs.next()) {
@@ -94,7 +94,7 @@ public class QuizResultUtils {
 	}
 	
 	public static List<QuizResult> getTopPerformances(int quizID, int numResults) {
-		String query = "SELECT * FROM history WHERE quizID=" + quizID + " ORDER BY score DESC;";
+		String query = "SELECT * FROM history WHERE quizID=" + quizID + " ORDER BY score DESC, timeUsed ASC;";
 		return getNumberOfQuizzes(quizID, numResults, query);
 	}
 	
@@ -104,7 +104,7 @@ public class QuizResultUtils {
 	}
 	
 	public static List<QuizResult> getTopRecentPerformances(int quizID, int numResults) {
-		String query = "SELECT * FROM history WHERE quizID=" + quizID + " AND TIMESTAMPDIFF(MINUTE, timeTaken, CURRENT_TIMESTAMP()) < 15 ORDER BY score DESC;";
+		String query = "SELECT * FROM history WHERE quizID=" + quizID + " AND TIMESTAMPDIFF(MINUTE, timeTaken, CURRENT_TIMESTAMP()) < 15 ORDER BY score DESC, timeUsed ASC;";
 		return getNumberOfQuizzes(quizID, numResults, query);
 	}
 	
