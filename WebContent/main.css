@@ -40,6 +40,8 @@ input[type="checkbox"] {
 	background-color:#EFEFEF;
 }
 
+input[type='radio']{margin-top:2px;width:15px;height:15px; padding:2px;}
+
 #sub {
 	background-color:#EFEFEF;
 	color:#000000;
