@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href='http://fonts.googleapis.com/css?family=Happy+Monkey' rel='stylesheet' type='text/css'>
 <link href="main.css" rel="stylesheet" type="text/css">
-<title>View question</title>
+<title>Quiz Results</title>
 </head>
 <body>
 <% 

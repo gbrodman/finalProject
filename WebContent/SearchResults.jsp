@@ -79,7 +79,7 @@ if (quizzes != null) {
 		out.print("<li>");
 		out.print(quiz.getTitle());
 		out.print(", by " + quiz.getOwner().getName());
-		out.print("<form action=\"TakeQuizServlet\" method=\"post\">");
+		out.print("<form action=\"DisplayQuiz.jsp\" method=\"post\">");
 		out.print("<input type=\"hidden\" name=\"quiz\" value=\"");
 		out.print(quiz.getId());
 		out.print("\">");

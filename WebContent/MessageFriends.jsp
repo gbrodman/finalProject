@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href='http://fonts.googleapis.com/css?family=Happy+Monkey' rel='stylesheet' type='text/css'>
 <link href="main.css" rel="stylesheet" type="text/css">
-<title>Message Friends</title>
+<title>Friends</title>
 </head>
 <body>
 <% 
@@ -57,7 +57,7 @@ $('.messagetopbarlinks').mouseleave(function() {
 	$('.messagenotification').hide(400);
 });
 </script>
-<h1>Message Friends</h1><br>
+<h1>Friends</h1><br>
 <a href="Homepage.jsp" class="backtohomepage">Back to homepage</a>
 <br><br>
 <div id="friendlist">
