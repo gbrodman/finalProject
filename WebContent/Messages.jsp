@@ -66,6 +66,9 @@ out.println("<div class=\"messagetitles\" <h2>MESSAGES</h2></div>");
 out.println("<div id=\"inbox\">");
 out.println("<ul>");
 System.out.println(inbox.size());
+if (inbox.size() == 0) {
+	out.println("<li>You have no new messages</li>");
+} else {
 out.println("<li>");
 out.println("<div class=\"inboxmessage top\">");
 out.println("<div class=\"icon\"><img src=\"http://img6.imageshack.us/img6/4351/white3.jpg\"></div>");
@@ -133,6 +136,7 @@ for (int index = inbox.size() - 1; index >= 0; index--) { //display in reverse o
 		out.println("</li>");
 	}
 }
+}
 out.println("</ul>");
 out.println("</div>");
 out.println("<br>");
@@ -152,16 +156,20 @@ for (int index = inbox.size() - 1; index >= 0; index--) {
 		String from = message.getUserFrom();
 		System.out.println(from);
 		out.println("<div class=\"friendrequestmessage\">  " + from + " wants to be your friend!</div>");
+		out.println("<div class=\"acceptrejectclass\">");
 		out.println("<form action=\"AcceptFriendRequestServlet\" method=\"post\">");
 		out.println("<input type=\"hidden\" name=\"userFrom\" value=\"" + from + "\">");
 		out.println("<input type=\"hidden\" name=\"messageID\" value=\"" + message.getMessageID() + "\">");
 		out.println("<input type=\"submit\" value=\"Accept\">");
 		out.println("</form>");
+		out.println("</div>");
+		out.println("<div class=\"acceptrejectclass\">");
 		out.println("<form action=\"RejectFriendRequestServlet\" method=\"post\">");
 		out.println("<input type=\"hidden\" name=\"userFrom\" value=\"" + from + "\">");
 		out.println("<input type=\"hidden\" name=\"messageID\" value=\"" + message.getMessageID() + "\">");
 		out.println("<input type=\"submit\" value=\"Reject\">");
 		out.println("</form>");
+		out.println("</div>");
 		out.println("</div>");
 		out.println("</li>");
 	}

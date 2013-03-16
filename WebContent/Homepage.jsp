@@ -134,6 +134,10 @@ out.println("<h2 class=\"h2bar recentquizzesh2\">Recently Taken Quizzes</h2>");
 List<QuizResult> recent_quizzes = QuizResultUtils.getRecentPerformances(user.getName());
 out.println("<div class=\"quizlist\" id=\"recentquizbar\">");
 out.println("<ul class=\"recentquizclass\">");
+if(recent_quizzes.size() == 0) {
+	out.println("<li>You have not taken any quizzes recently</li>");
+} else {
+
 out.println("<li>");
 out.println("<div class=\"quiz top\">");
 out.println("<div class=\"name\">Title</div>");
@@ -181,6 +185,7 @@ out.println("<form action=\"UserHistory.jsp\">");
 out.println("<input type=\"hidden\" name=\"username\" value=\"" + user.getName() + "\">");
 out.println("<input type=\"submit\" value=\"View full personal history\">");
 out.println("</form>");
+}
 out.println("</ul>");
 out.println("</div>");
 

@@ -150,6 +150,9 @@ out.println("</div>");
 out.println("<h2 class=\"h2bar recentquizzesh2\">Recently Taken Quizzes</h2>");
 out.println("<div class=\"quizlist\" id=\"recentquizbar\">");
 out.println("<ul class=\"recentquizclass\">");
+if (recent_quizzes.size() == 0) {
+	out.println("<li>" + viewing.getName() +" has not recently taken any quizzes!</li>");
+} else {
 out.println("<li>");
 out.println("<div class=\"quiz top\">");
 out.println("<div class=\"name\">Title</div>");
@@ -197,6 +200,7 @@ out.println("<form action=\"UserHistory.jsp\">");
 out.println("<input type=\"hidden\" name=\"username\" value=\"" + viewing.getName() + "\">");
 out.println("<input type=\"submit\" value=\"View full personal history\">");
 out.println("</form>");
+}
 out.println("</ul>");
 out.println("</div>");
 
